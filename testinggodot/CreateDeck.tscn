@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://54ht0y57mics"]
+[gd_scene load_steps=4 format=3 uid="uid://54ht0y57mics"]
 
-[ext_resource type="Theme" uid="uid://d3pis5jvba6vf" path="res://PracticeButton.tres" id="2_suqsn"]
+[ext_resource type="Theme" uid="uid://cta3fyluiaeg0" path="res://OrangeButton.tres" id="1_ako7k"]
+[ext_resource type="Script" path="res://scripts/CreateDeck.gd" id="2_eoeb7"]
+[ext_resource type="Theme" uid="uid://d3pis5jvba6vf" path="res://GreenButton.tres" id="2_suqsn"]
 
 [node name="CreateDeck" type="Control"]
 layout_mode = 3
@@ -39,6 +41,13 @@ auto_translate_mode = 1
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer"]
 layout_mode = 2
 text = "                                                                                                                                                                                                                           "
+
+[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme = ExtResource("1_ako7k")
+text = "Go Back"
+script = ExtResource("2_eoeb7")
 
 [node name="PanelContainer2" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -110,3 +119,5 @@ custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 theme = ExtResource("2_suqsn")
 text = "Finish Deck"
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/Button" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/Button" method="_go_back_on_pressed"]
