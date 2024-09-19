@@ -1,6 +1,5 @@
-[gd_scene load_steps=6 format=3 uid="uid://doyhddmdle2cu"]
+[gd_scene load_steps=5 format=3 uid="uid://doyhddmdle2cu"]
 
-[ext_resource type="Script" path="res://scripts/MainMenu.gd" id="1_wm6du"]
 [ext_resource type="Script" path="res://scripts/EditDecks.gd" id="2_2nqyn"]
 [ext_resource type="Theme" uid="uid://4xs2hn1w2or8" path="res://FlashCardTheme.tres" id="2_oqcrp"]
 [ext_resource type="Theme" uid="uid://cta3fyluiaeg0" path="res://OrangeButton.tres" id="4_ihy8x"]
@@ -77,21 +76,21 @@ layout_mode = 2
 theme = ExtResource("2_oqcrp")
 text = "Deck 1"
 autowrap_mode = 2
-script = ExtResource("1_wm6du")
+script = ExtResource("2_2nqyn")
 
 [node name="Deck2" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/GridContainer"]
 custom_minimum_size = Vector2(250, 160)
 layout_mode = 2
 theme = ExtResource("2_oqcrp")
 text = "Deck 2"
-script = ExtResource("1_wm6du")
+script = ExtResource("2_2nqyn")
 
 [node name="Deck3" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/GridContainer"]
 custom_minimum_size = Vector2(250, 160)
 layout_mode = 2
 theme = ExtResource("2_oqcrp")
 text = "Deck 3"
-script = ExtResource("1_wm6du")
+script = ExtResource("2_2nqyn")
 
 [node name="Deck4" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/GridContainer"]
 custom_minimum_size = Vector2(250, 160)
@@ -99,7 +98,7 @@ layout_mode = 2
 theme = ExtResource("2_oqcrp")
 text = "Deck 4"
 icon_alignment = 1
-script = ExtResource("1_wm6du")
+script = ExtResource("2_2nqyn")
 
 [node name="Deck5" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/GridContainer"]
 custom_minimum_size = Vector2(250, 160)
@@ -107,7 +106,7 @@ layout_mode = 2
 theme = ExtResource("2_oqcrp")
 text = "Deck 5"
 icon_alignment = 1
-script = ExtResource("1_wm6du")
+script = ExtResource("2_2nqyn")
 
 [node name="Deck6" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/GridContainer"]
 custom_minimum_size = Vector2(250, 160)
@@ -115,7 +114,7 @@ layout_mode = 2
 theme = ExtResource("2_oqcrp")
 text = "Deck 6"
 icon_alignment = 1
-script = ExtResource("1_wm6du")
+script = ExtResource("2_2nqyn")
 
 [node name="PanelContainer3" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -133,9 +132,3 @@ layout_mode = 2
 text = "Choose Deck to Edit"
 
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/Button" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/Button" method="_go_back_on_pressed"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/GridContainer/Deck1" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/Button" method="_on_deck_1_pressed"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/GridContainer/Deck2" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/Button" method="_on_deck_2_pressed"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/GridContainer/Deck3" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/Button" method="_on_deck_3_pressed"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/GridContainer/Deck4" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/Button" method="_on_deck_4_pressed"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/GridContainer/Deck5" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/Button" method="_on_deck_5_pressed"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/GridContainer/Deck6" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/Button" method="_on_deck_6_pressed"]
