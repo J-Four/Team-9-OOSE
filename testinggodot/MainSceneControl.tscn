@@ -74,7 +74,8 @@ columns = 4
 custom_minimum_size = Vector2(250, 160)
 layout_mode = 2
 theme = ExtResource("1_0pdxg")
-text = "Deck 1"
+text = "Calc Exam 1
+Lvl1"
 autowrap_mode = 2
 script = ExtResource("1_k07xd")
 
@@ -82,21 +83,27 @@ script = ExtResource("1_k07xd")
 custom_minimum_size = Vector2(250, 160)
 layout_mode = 2
 theme = ExtResource("1_0pdxg")
-text = "Deck 2"
+text = "OS
+Lvl 2"
+autowrap_mode = 3
 script = ExtResource("1_k07xd")
 
 [node name="Deck3" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/GridContainer"]
 custom_minimum_size = Vector2(250, 160)
 layout_mode = 2
 theme = ExtResource("1_0pdxg")
-text = "Deck 3"
+text = "Theroetical
+Lvl 1"
+autowrap_mode = 3
 script = ExtResource("1_k07xd")
 
 [node name="Deck4" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/GridContainer"]
 custom_minimum_size = Vector2(250, 160)
 layout_mode = 2
 theme = ExtResource("1_0pdxg")
-text = "Deck 4"
+text = "History
+Lvl 0"
+autowrap_mode = 3
 icon_alignment = 1
 script = ExtResource("1_k07xd")
 
@@ -104,7 +111,9 @@ script = ExtResource("1_k07xd")
 custom_minimum_size = Vector2(250, 160)
 layout_mode = 2
 theme = ExtResource("1_0pdxg")
-text = "Deck 5"
+text = "Comms
+Lvl 2"
+autowrap_mode = 3
 icon_alignment = 1
 script = ExtResource("1_k07xd")
 
@@ -112,7 +121,8 @@ script = ExtResource("1_k07xd")
 custom_minimum_size = Vector2(250, 160)
 layout_mode = 2
 theme = ExtResource("1_0pdxg")
-text = "Deck 6"
+text = "Algebra
+Lvl 3"
 icon_alignment = 1
 script = ExtResource("1_k07xd")
 

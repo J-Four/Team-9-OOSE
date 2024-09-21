@@ -11,6 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("2_tfjuy")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 0
@@ -141,11 +142,12 @@ text = "
 
 "
 
-[node name="Button2" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer/VBoxContainer2"]
+[node name="NextArrow" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(80, 100)
 layout_mode = 2
 theme = ExtResource("2_juosl")
 text = ">"
+script = ExtResource("2_tfjuy")
 
 [node name="Label4" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer"]
 layout_mode = 2
@@ -176,4 +178,7 @@ text = "                     "
 layout_mode = 2
 text = "Time Here"
 
+[node name="Timer" type="Timer" parent="PanelContainer/VBoxContainer/PanelContainer3/HBoxContainer/Label3"]
+
 [connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer/HBoxContainer/Button" to="PanelContainer/VBoxContainer/PanelContainer/HBoxContainer/Button" method="_Exit_deck_on_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer/VBoxContainer2/NextArrow" to="." method="_on_next_arrow_pressed"]
