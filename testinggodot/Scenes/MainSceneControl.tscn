@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dsc738sk6q3i5"]
+[gd_scene load_steps=7 format=3 uid="uid://dsc738sk6q3i5"]
 
 [ext_resource type="Script" path="res://scripts/MainMenu.gd" id="1_ts7yt"]
 [ext_resource type="Theme" uid="uid://d3pis5jvba6vf" path="res://Assets/Themes/GreenButton.tres" id="2_6c7lq"]
 [ext_resource type="Theme" uid="uid://4xs2hn1w2or8" path="res://Assets/Themes/FlashCardTheme.tres" id="3_vfhj2"]
 [ext_resource type="Theme" uid="uid://cta3fyluiaeg0" path="res://Assets/Themes/OrangeButton.tres" id="4_1gt6r"]
+[ext_resource type="Script" path="res://scripts/button_hover_size_changer.gd" id="4_st3fq"]
 
 [sub_resource type="Theme" id="Theme_ri2bp"]
 
@@ -76,52 +77,70 @@ layout_mode = 2
 [node name="Deck1" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer"]
 custom_minimum_size = Vector2(250, 160)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme = ExtResource("3_vfhj2")
 text = "Calc Exam 1
 Lvl1"
 autowrap_mode = 2
+script = ExtResource("4_st3fq")
 
 [node name="Deck2" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer"]
 custom_minimum_size = Vector2(250, 160)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme = ExtResource("3_vfhj2")
 text = "OS
 Lvl 2"
 autowrap_mode = 3
+script = ExtResource("4_st3fq")
 
 [node name="Deck3" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer"]
 custom_minimum_size = Vector2(250, 160)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme = ExtResource("3_vfhj2")
 text = "Theroetical
 Lvl 1"
 autowrap_mode = 3
+script = ExtResource("4_st3fq")
 
 [node name="Deck4" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer"]
 custom_minimum_size = Vector2(250, 160)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme = ExtResource("3_vfhj2")
 text = "History
 Lvl 0"
 autowrap_mode = 3
 icon_alignment = 1
+script = ExtResource("4_st3fq")
 
 [node name="Deck5" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer"]
 custom_minimum_size = Vector2(250, 160)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme = ExtResource("3_vfhj2")
 text = "Comms
 Lvl 2"
 autowrap_mode = 3
 icon_alignment = 1
+script = ExtResource("4_st3fq")
 
 [node name="Deck6" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer"]
 custom_minimum_size = Vector2(250, 160)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme = ExtResource("3_vfhj2")
 text = "Algebra
 Lvl 3"
 icon_alignment = 1
+script = ExtResource("4_st3fq")
 
 [node name="PanelContainer3" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -137,10 +156,22 @@ theme = ExtResource("4_1gt6r")
 text = "Edit Decks"
 
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/CreateDeckButton" to="." method="_on_create_deck_button_pressed"]
+[connection signal="mouse_entered" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck1" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck1" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck1" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck1" method="_on_mouse_exited"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck1" to="." method="_on_deck_1_pressed"]
+[connection signal="mouse_entered" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck2" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck2" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck2" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck2" method="_on_mouse_exited"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck2" to="." method="_on_deck_2_pressed"]
+[connection signal="mouse_entered" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck3" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck3" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck3" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck3" method="_on_mouse_exited"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck3" to="." method="_on_deck_3_pressed"]
+[connection signal="mouse_entered" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck4" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck4" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck4" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck4" method="_on_mouse_exited"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck4" to="." method="_on_deck_4_pressed"]
+[connection signal="mouse_entered" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck5" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck5" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck5" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck5" method="_on_mouse_exited"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck5" to="." method="_on_deck_5_pressed"]
+[connection signal="mouse_entered" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck6" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck6" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck6" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck6" method="_on_mouse_exited"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck6" to="." method="_on_deck_6_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer3/HBoxContainer/EditButton" to="." method="_on_edit_button_pressed"]

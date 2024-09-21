@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://doyhddmdle2cu"]
+[gd_scene load_steps=6 format=3 uid="uid://doyhddmdle2cu"]
 
 [ext_resource type="Script" path="res://scripts/EditDecks.gd" id="1_tt15f"]
 [ext_resource type="Theme" uid="uid://cta3fyluiaeg0" path="res://Assets/Themes/OrangeButton.tres" id="2_edcop"]
 [ext_resource type="Theme" uid="uid://4xs2hn1w2or8" path="res://Assets/Themes/FlashCardTheme.tres" id="3_hfnbx"]
+[ext_resource type="Script" path="res://scripts/button_hover_size_changer.gd" id="4_kcnew"]
 
 [sub_resource type="Theme" id="Theme_ri2bp"]
 
@@ -76,42 +77,60 @@ layout_mode = 2
 [node name="Deck1" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer"]
 custom_minimum_size = Vector2(250, 160)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme = ExtResource("3_hfnbx")
 text = "Deck 1"
 autowrap_mode = 2
+script = ExtResource("4_kcnew")
 
 [node name="Deck2" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer"]
 custom_minimum_size = Vector2(250, 160)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme = ExtResource("3_hfnbx")
 text = "Deck 2"
+script = ExtResource("4_kcnew")
 
 [node name="Deck3" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer"]
 custom_minimum_size = Vector2(250, 160)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme = ExtResource("3_hfnbx")
 text = "Deck 3"
+script = ExtResource("4_kcnew")
 
 [node name="Deck4" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer"]
 custom_minimum_size = Vector2(250, 160)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme = ExtResource("3_hfnbx")
 text = "Deck 4"
 icon_alignment = 1
+script = ExtResource("4_kcnew")
 
 [node name="Deck5" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer"]
 custom_minimum_size = Vector2(250, 160)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme = ExtResource("3_hfnbx")
 text = "Deck 5"
 icon_alignment = 1
+script = ExtResource("4_kcnew")
 
 [node name="Deck6" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer"]
 custom_minimum_size = Vector2(250, 160)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme = ExtResource("3_hfnbx")
 text = "Deck 6"
 icon_alignment = 1
+script = ExtResource("4_kcnew")
 
 [node name="PanelContainer3" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
@@ -124,3 +143,15 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="mouse_entered" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck1" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck1" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck1" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck1" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck2" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck2" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck2" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck2" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck3" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck3" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck3" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck3" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck4" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck4" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck4" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck4" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck5" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck5" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck5" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck5" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck6" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck6" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck6" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck6" method="_on_mouse_exited"]
