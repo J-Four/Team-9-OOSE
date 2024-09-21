@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://wn060hktsxp1"
-path="res://.godot/imported/flashcardIconsV6.png-eceb39d72a1858926224a255ba68bee6.ctex"
+uid="uid://dcu7502qhmn3l"
+path="res://.godot/imported/flashcardIconsV7.png-9f01b0e795168a336624013a3b706ad4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://flashcardIconsV6.png"
-dest_files=["res://.godot/imported/flashcardIconsV6.png-eceb39d72a1858926224a255ba68bee6.ctex"]
+source_file="res://Assets/Images/flashcardIconsV7.png"
+dest_files=["res://.godot/imported/flashcardIconsV7.png-9f01b0e795168a336624013a3b706ad4.ctex"]
 
 [params]
 

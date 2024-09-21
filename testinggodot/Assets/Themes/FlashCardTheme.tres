@@ -1,9 +1,9 @@
-[gd_resource type="Theme" load_steps=8 format=3 uid="uid://d11c37qf38urw"]
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://4xs2hn1w2or8"]
 
-[ext_resource type="FontFile" uid="uid://cjny1ac6ljuky" path="res://ink-free.ttf" id="1_mgg5v"]
-[ext_resource type="Texture2D" uid="uid://wn060hktsxp1" path="res://flashcardIconsV6.png" id="2_n0yfg"]
+[ext_resource type="FontFile" uid="uid://cjny1ac6ljuky" path="res://Assets/Fonts/ink-free.ttf" id="1_f28ag"]
+[ext_resource type="Texture2D" uid="uid://b8hutf862hswu" path="res://Assets/Images/flashcardIconsV4.png" id="2_jjxnw"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8idvo"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6vf4b"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -15,7 +15,7 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6uyuc"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nxa2e"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -36,15 +36,15 @@ expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_it4jj"]
-texture = ExtResource("2_n0yfg")
-region_rect = Rect2(1934, 800, 436, 483)
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_g2gqx"]
+texture = ExtResource("2_jjxnw")
+region_rect = Rect2(1063, 753, 775, 480)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fejd8"]
-texture = ExtResource("2_n0yfg")
-region_rect = Rect2(1969, 838, 342, 409)
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xpme5"]
+texture = ExtResource("2_jjxnw")
+region_rect = Rect2(1049, 172, 775, 480)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_srydk"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xshks"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -57,6 +57,7 @@ corner_radius_bottom_left = 3
 corner_detail = 5
 
 [resource]
+default_font_size = 24
 Button/colors/font_color = Color(0, 0, 0, 1)
 Button/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
 Button/colors/font_focus_color = Color(0.95, 0.95, 0.95, 1)
@@ -65,19 +66,19 @@ Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
 Button/colors/font_outline_color = Color(0, 0, 0, 1)
 Button/colors/font_pressed_color = Color(1, 1, 1, 1)
 Button/colors/icon_disabled_color = Color(1, 1, 1, 0.4)
-Button/colors/icon_focus_color = Color(1, 1, 1, 1)
-Button/colors/icon_hover_color = Color(1, 1, 1, 1)
-Button/colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
-Button/colors/icon_normal_color = Color(1, 1, 1, 1)
-Button/colors/icon_pressed_color = Color(1, 1, 1, 1)
+Button/colors/icon_focus_color = Color(0.8, 0.454902, 0.247059, 1)
+Button/colors/icon_hover_color = Color(0.8, 0.454902, 0.247059, 1)
+Button/colors/icon_hover_pressed_color = Color(0.8, 0.454902, 0.247059, 1)
+Button/colors/icon_normal_color = Color(0.800356, 0.454434, 0.245463, 1)
+Button/colors/icon_pressed_color = Color(0.819665, 0.37991, 0.23172, 1)
 Button/constants/align_to_largest_stylebox = 0
 Button/constants/h_separation = 4
 Button/constants/icon_max_width = 0
-Button/constants/outline_size = 0
-Button/font_sizes/font_size = 60
-Button/fonts/font = ExtResource("1_mgg5v")
-Button/styles/disabled = SubResource("StyleBoxFlat_8idvo")
-Button/styles/focus = SubResource("StyleBoxFlat_6uyuc")
-Button/styles/hover = SubResource("StyleBoxTexture_it4jj")
-Button/styles/normal = SubResource("StyleBoxTexture_fejd8")
-Button/styles/pressed = SubResource("StyleBoxFlat_srydk")
+Button/constants/outline_size = 2
+Button/font_sizes/font_size = 36
+Button/fonts/font = ExtResource("1_f28ag")
+Button/styles/disabled = SubResource("StyleBoxFlat_6vf4b")
+Button/styles/focus = SubResource("StyleBoxFlat_nxa2e")
+Button/styles/hover = SubResource("StyleBoxTexture_g2gqx")
+Button/styles/normal = SubResource("StyleBoxTexture_xpme5")
+Button/styles/pressed = SubResource("StyleBoxFlat_xshks")

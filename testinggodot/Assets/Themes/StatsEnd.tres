@@ -1,10 +1,10 @@
 [gd_resource type="Theme" load_steps=4 format=3 uid="uid://b4yg6ph2idjkj"]
 
-[ext_resource type="FontFile" uid="uid://cjny1ac6ljuky" path="res://ink-free.ttf" id="1_63i2a"]
-[ext_resource type="Texture2D" uid="uid://dcu7502qhmn3l" path="res://flashcardIconsV7.png" id="2_7102x"]
+[ext_resource type="FontFile" uid="uid://cjny1ac6ljuky" path="res://Assets/Fonts/ink-free.ttf" id="1_63i2a"]
+[ext_resource type="Texture2D" uid="uid://dcu7502qhmn3l" path="res://Assets/Images/flashcardIconsV7.png" id="2_q6ski"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jqewg"]
-texture = ExtResource("2_7102x")
+texture = ExtResource("2_q6ski")
 region_rect = Rect2(1940, 515, 1271, 548)
 
 [resource]

@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://cjny1ac6ljuky"
-path="res://.godot/imported/ink-free.ttf-5ee08ae1ce9bf476eb5b2ced5954aed3.fontdata"
+path="res://.godot/imported/ink-free.ttf-92eb78cb321f5ed302621f7b9146ad3c.fontdata"
 
 [deps]
 
-source_file="res://ink-free.ttf"
-dest_files=["res://.godot/imported/ink-free.ttf-5ee08ae1ce9bf476eb5b2ced5954aed3.fontdata"]
+source_file="res://Assets/Fonts/ink-free.ttf"
+dest_files=["res://.godot/imported/ink-free.ttf-92eb78cb321f5ed302621f7b9146ad3c.fontdata"]
 
 [params]
 

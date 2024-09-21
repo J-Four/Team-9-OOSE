@@ -12,10 +12,10 @@ func _process(_delta: float) -> void:
 
 
 func _Exit_deck_on_pressed() -> void:
-	get_tree().change_scene_to_file("res://MainSceneControl.tscn")
+	get_tree().change_scene_to_file("res://Scenes/MainSceneControl.tscn")
 	pass # Replace with function body.
 
 
 func _on_next_arrow_pressed() -> void:
-	get_tree().change_scene_to_file("res://DeckEnd.tscn")
+	get_tree().change_scene_to_file("res://Scenes/DeckEnd.tscn")
 	pass # Replace with function body.
