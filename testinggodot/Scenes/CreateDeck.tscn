@@ -83,14 +83,14 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 23
 
-[node name="QLineEdit" type="LineEdit" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer"]
+[node name="QuestionLineEdit" type="LineEdit" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 placeholder_text = "Enter Question Here"
 alignment = 1
 script = ExtResource("4_gafpp")
 
-[node name="AEdit" type="TextEdit" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer"]
+[node name="AnswerEdit" type="TextEdit" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer"]
 clip_contents = false
 custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
@@ -101,23 +101,49 @@ placeholder_text = "Enter Answer Here"
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 
+[node name="OptionsLabel2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+text = "Deck Options"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+text = "Name: "
+
+[node name="DeckNameLineEdit" type="LineEdit" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Default Deck Name"
+
+[node name="ScaleDifficultyCheckBox" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+button_pressed = true
+text = "Scale difficulty with level"
+
+[node name="HSeparator2" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 23)
+layout_mode = 2
+
 [node name="OptionsLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(0, 46)
 layout_mode = 2
-text = "Options"
+text = "Card Options"
 
-[node name="CheckBox" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2"]
+[node name="CaseCheckBox" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
-text = "Case Sensitive"
+text = "Case sensitive"
 
-[node name="CheckBox3" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2"]
+[node name="SpaceCheckBox" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
-text = "Space Sensitive"
+text = "Space sensitive"
 
 [node name="CheckBox2" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 disabled = true
-text = "Multiple Choice"
+text = "Multiple choice"
 
 [node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(0, 23)
@@ -159,18 +185,18 @@ layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
 
-[node name="Button2" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer3/MarginContainer/HBoxContainer"]
+[node name="NavLeftButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer3/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 text = "<"
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer3/MarginContainer/HBoxContainer"]
+[node name="NavigationLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer3/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 text = "7 / 32"
 horizontal_alignment = 1
 
-[node name="Button3" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer3/MarginContainer/HBoxContainer"]
+[node name="NavRightButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer3/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 text = ">"
@@ -183,7 +209,18 @@ theme = ExtResource("7_lvu4l")
 text = "Finish Deck"
 
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/Button" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/Button" method="_on_pressed"]
-[connection signal="get_Card" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/AddCardButton" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/QLineEdit" method="_on_add_card_button_get_card"]
+[connection signal="text_changed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/QuestionLineEdit" to="." method="_on_question_line_edit_text_changed"]
+[connection signal="text_changed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/AnswerEdit" to="." method="_on_answer_edit_text_changed"]
+[connection signal="text_changed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/HBoxContainer/DeckNameLineEdit" to="." method="_on_deck_name_line_edit_text_changed"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/ScaleDifficultyCheckBox" to="." method="_on_scale_difficulty_check_box_toggled"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/CaseCheckBox" to="." method="_on_case_check_box_toggled"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/SpaceCheckBox" to="." method="_on_space_check_box_toggled"]
+[connection signal="get_Card" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/AddCardButton" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/QuestionLineEdit" method="_on_add_card_button_get_card"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/AddCardButton" to="." method="_on_add_card_button_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/AddCardButton" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/AddCardButton" method="_on_pressed"]
-[connection signal="get_Card" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/RemoveCardButton" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/QLineEdit" method="_on_add_card_button_get_card"]
+[connection signal="get_Card" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/RemoveCardButton" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/QuestionLineEdit" method="_on_add_card_button_get_card"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/RemoveCardButton" to="." method="_on_remove_card_button_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/RemoveCardButton" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/RemoveCardButton" method="_on_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer3/MarginContainer/HBoxContainer/NavLeftButton" to="." method="_on_nav_left_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer3/MarginContainer/HBoxContainer/NavRightButton" to="." method="_on_nav_right_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer3/MarginContainer/FinishDeckButton" to="." method="_on_finish_deck_button_pressed"]
