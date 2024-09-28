@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://deafssq11jyu2"]
+[gd_scene load_steps=9 format=3 uid="uid://deafssq11jyu2"]
 
 [ext_resource type="Script" path="res://scripts/playScreen.gd" id="1_om22i"]
 [ext_resource type="Theme" uid="uid://cta3fyluiaeg0" path="res://Assets/Themes/OrangeButton.tres" id="2_o5kyd"]
 [ext_resource type="Theme" uid="uid://d11c37qf38urw" path="res://Assets/Themes/arrowButton.tres" id="3_wb6ev"]
+[ext_resource type="Theme" uid="uid://22467k66gk57" path="res://Assets/Themes/RedHeart.tres" id="4_8gpma"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wov2c"]
 bg_color = Color(0.150865, 0.0527684, 0.075334, 1)
@@ -14,13 +15,13 @@ corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gwkxd"]
 
-[sub_resource type="Gradient" id="Gradient_x07c0"]
+[sub_resource type="Gradient" id="Gradient_pv2ao"]
 interpolation_mode = 2
 offsets = PackedFloat32Array(0, 0.337662, 0.831169)
 colors = PackedColorArray(1, 0.151344, 0.108333, 1, 0.953841, 0.943234, 0.207595, 1, 1.05888e-06, 0.844431, 0.527452, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_a0eps"]
-gradient = SubResource("Gradient_x07c0")
+gradient = SubResource("Gradient_pv2ao")
 
 [node name="PlayDeck" type="Control"]
 layout_mode = 3
@@ -133,6 +134,29 @@ size_flags_vertical = 4
 theme = ExtResource("3_wb6ev")
 text = ">"
 script = ExtResource("1_om22i")
+
+[node name="PanelContainer4" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="BoxContainer" type="BoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer4"]
+layout_mode = 2
+alignment = 1
+
+[node name="Heart1" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer4/BoxContainer"]
+custom_minimum_size = Vector2(45, 40)
+layout_mode = 2
+theme = ExtResource("4_8gpma")
+horizontal_alignment = 1
+
+[node name="Heart2" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer4/BoxContainer"]
+custom_minimum_size = Vector2(45, 40)
+layout_mode = 2
+theme = ExtResource("4_8gpma")
+
+[node name="Heart3" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer4/BoxContainer"]
+custom_minimum_size = Vector2(45, 40)
+layout_mode = 2
+theme = ExtResource("4_8gpma")
 
 [node name="PanelContainer3" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)

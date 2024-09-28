@@ -1,9 +1,27 @@
-[gd_scene load_steps=5 format=3 uid="uid://bnup7638tw62u"]
+[gd_scene load_steps=9 format=3 uid="uid://bnup7638tw62u"]
 
 [ext_resource type="Script" path="res://scripts/DeckEnd.gd" id="1_72tys"]
 [ext_resource type="Theme" uid="uid://dm5cgqg5vfxeq" path="res://Assets/Themes/EndTitle.tres" id="2_jjbr8"]
 [ext_resource type="Theme" uid="uid://b4yg6ph2idjkj" path="res://Assets/Themes/StatsEnd.tres" id="3_occmg"]
 [ext_resource type="Theme" uid="uid://d3pis5jvba6vf" path="res://Assets/Themes/GreenButton.tres" id="4_lrkli"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o4hx6"]
+bg_color = Color(0.150865, 0.0527684, 0.075334, 1)
+draw_center = false
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xfveo"]
+
+[sub_resource type="Gradient" id="Gradient_x07c0"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.489583, 1)
+colors = PackedColorArray(0.335345, 0.892098, 0.190316, 1, 0.636709, 0.839304, 0.377849, 1, 0.240735, 0.860643, 0.177379, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gjmxx"]
+gradient = SubResource("Gradient_x07c0")
 
 [node name="DeckEnd" type="Control"]
 layout_mode = 3
@@ -48,9 +66,9 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 125
-theme_override_constants/margin_top = 50
+theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 125
-theme_override_constants/margin_bottom = 50
+theme_override_constants/margin_bottom = 40
 
 [node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer"]
 layout_mode = 2
@@ -60,9 +78,9 @@ size_flags_vertical = 0
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/PanelContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 17
-theme_override_constants/margin_top = 17
+theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 17
-theme_override_constants/margin_bottom = 17
+theme_override_constants/margin_bottom = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
@@ -78,6 +96,23 @@ theme_override_font_sizes/font_size = 38
 text = "Deck Completed!"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="ProgressBar2" type="ProgressBar" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+clip_children = 2
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_o4hx6")
+theme_override_styles/fill = SubResource("StyleBoxFlat_xfveo")
+value = 45.0
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ProgressBar2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_gjmxx")
 
 [node name="Label3" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(800, 300)
