@@ -7,40 +7,41 @@ extends Node
 @onready var space_checkbox: CheckBox = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/SpaceCheckBox")
 @onready var popup: Resource = preload("res://Scenes/ErrorPopup.tscn")
 
-var empty_array: Array[Dictionary]
-var new_deck: Dictionary = {
+var empty_array: Array[Dictionary] #dictionary is a struct with key : value
+var new_deck: Dictionary = { #this is saved cards array first, lvl, scaleDiff last
 	"Scale difficulty": true,
 	"Level": 1,
-	"Cards": empty_array.duplicate(true)
+	"Cards": empty_array.duplicate(true) #makes another array of Dict to save cards
 }
 var current_card: int = -1
 var deck_name: String = "Default Deck Name"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	nav_label.text = "0 / 0"
-	add_new_card_to_deck()
+	nav_label.text = "0 / 0" # the label in the bottoms that shows num of cards
+	add_new_card_to_deck() #run this func
 
 
 func add_new_card_to_deck() -> void:
-	var tmp: Dictionary = {
+	var tmp: Dictionary = { #temp Dict var to hold empty card
 		"Question": "",
 		"Answer": "",
 		"Case sensitive": false,
 		"Space sensitive": false
 		}
-	new_deck["Cards"].append(tmp.duplicate(true))
+	new_deck["Cards"].append(tmp.duplicate(true)) #add the empty card to "cards" array
 	
-	current_card = len(new_deck["Cards"]) - 1
-	update_display_to_card(current_card)
+	current_card = len(new_deck["Cards"]) - 1 #update length of cards
+	update_display_to_card(current_card) #function to change display to this new empty card
 
 
-func update_nav_label() -> void:
+func update_nav_label() -> void: #updating the label on bottom
 	nav_label.text = str(current_card + 1) + " / " + str(len(new_deck["Cards"]))
 
 
-func update_display_to_card(card_idx: int) -> void:
-	question_line_edit.text = new_deck["Cards"][card_idx]["Question"]
+func update_display_to_card(card_idx: int) -> void: #using int to change display
+	#loading in what is saved to "cards"
+	question_line_edit.text = new_deck["Cards"][card_idx]["Question"] 
 	answer_edit.text = new_deck["Cards"][card_idx]["Answer"]
 	case_checkbox.set_pressed_no_signal(new_deck["Cards"][card_idx]["Case sensitive"])
 	space_checkbox.set_pressed_no_signal(new_deck["Cards"][card_idx]["Space sensitive"])
@@ -128,6 +129,7 @@ func _on_finish_deck_button_pressed() -> void:
 
 func write_deck(json_string: String) -> void:
 	# Create or overrite json file
+	
 	var path: String = str(OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP) + "/flash_cards/" + deck_name + ".json")
 	var file = FileAccess.open(path, FileAccess.WRITE)
 	if file == null:
@@ -149,7 +151,7 @@ func _on_remove_card_button_pressed() -> void:
 	if len(new_deck["Cards"]) <= 1:
 		return
 	new_deck["Cards"].remove_at(current_card)
-	if current_card == (len(new_deck["Cards"])):
+	if current_card == (len(new_deck["Cards"])): #if last card was deleted go back one for display
 		_on_nav_left_button_pressed()
-	else:
+	else: 
 		update_display_to_card(current_card)
