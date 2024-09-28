@@ -38,6 +38,7 @@ func add_deck_button(name: String, data: Dictionary):
 	hflow.add_child(new_deck)
 	if "Level" in data.keys():
 		new_deck.text = name + "\nLvl " + str(data["Level"])
+		new_deck.pressed.connect(self._deck_pressed)
 	else:
 		new_deck.text = "Error"
 		print(get_tree().root.get_child(1).name)
@@ -54,7 +55,7 @@ func _on_pressed() -> void:
 	get_tree().change_scene_to_file("res://Scenes/CreateDeck.tscn")
 
 
-func _on_deck_1_pressed() -> void:
+func _deck_pressed() -> void:
 	get_tree().change_scene_to_file("res://Scenes/playDeck.tscn")
 
 
