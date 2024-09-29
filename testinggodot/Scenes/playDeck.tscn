@@ -62,12 +62,11 @@ auto_translate_mode = 1
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer/HBoxContainer"]
+[node name="ExitButton" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer/HBoxContainer"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme = ExtResource("2_o5kyd")
 text = "Exit Deck"
-script = ExtResource("1_om22i")
 
 [node name="PanelContainer2" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 500)
@@ -86,7 +85,7 @@ layout_mode = 2
 theme_override_constants/separation = 17
 alignment = 1
 
-[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
+[node name="PrevArrow" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(80, 100)
 layout_mode = 2
 size_flags_vertical = 4
@@ -110,7 +109,7 @@ layout_mode = 2
 [node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer"]
+[node name="QLabel" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer"]
 custom_minimum_size = Vector2(900, 121)
 layout_mode = 2
 text = "Question Here"
@@ -120,7 +119,7 @@ vertical_alignment = 1
 [node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="TextEdit" type="TextEdit" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="ATextEdit" type="TextEdit" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 clip_contents = false
 custom_minimum_size = Vector2(900, 300)
 layout_mode = 2
@@ -133,7 +132,6 @@ layout_mode = 2
 size_flags_vertical = 4
 theme = ExtResource("3_wb6ev")
 text = ">"
-script = ExtResource("1_om22i")
 
 [node name="PanelContainer4" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
@@ -187,13 +185,14 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture1D_a0eps")
 
-[node name="Label3" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer3"]
+[node name="TimerLabel" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer3"]
 layout_mode = 2
 theme_override_constants/outline_size = 10
 text = "Time Here"
 horizontal_alignment = 1
 
-[node name="Timer" type="Timer" parent="PanelContainer/VBoxContainer/PanelContainer3/Label3"]
+[node name="Timer" type="Timer" parent="PanelContainer/VBoxContainer/PanelContainer3/TimerLabel"]
 
-[connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer/HBoxContainer/Button" to="PanelContainer/VBoxContainer/PanelContainer/HBoxContainer/Button" method="_Exit_deck_on_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer/HBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PrevArrow" to="." method="_on_prev_arrow_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/NextArrow" to="." method="_on_next_arrow_pressed"]
