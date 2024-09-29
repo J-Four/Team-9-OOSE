@@ -3,8 +3,6 @@ extends Node
 @onready var deck_button: Resource = preload("res://Scenes/DeckButton.tscn")
 @onready var hflow: HFlowContainer = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer")
 
-signal ChosenDeck (deckName : String)
-var ChosenDeckName : String
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -38,9 +36,11 @@ func _ready() -> void:
 func add_deck_button(name: String, data: Dictionary):
 	var new_deck = deck_button.instantiate()
 	hflow.add_child(new_deck)
+	new_deck.pressed.connect(_deck_pressed.bind(new_deck)) #new button will run deck pressed func now
+	new_deck.name = name
 	if "Level" in data.keys():
 		new_deck.text = name + "\nLvl " + str(data["Level"])
-		new_deck.pressed.connect(self._deck_pressed) #new button will run deck pressed func now
+		
 	else:
 		new_deck.text = "Error"
 		print(get_tree().root.get_child(1).name)
@@ -57,9 +57,9 @@ func _on_pressed() -> void:
 	get_tree().change_scene_to_file("res://Scenes/CreateDeck.tscn")
 
 
-func _deck_pressed() -> void:
-	
-	#ChosenDeck.emit(ChosenDeckName)
+func _deck_pressed(button : Button):
+	var n : String = button.name #gets the name of button pressed
+	Global.ChosenDeck = n
 	get_tree().change_scene_to_file("res://Scenes/playDeck.tscn")
 
 

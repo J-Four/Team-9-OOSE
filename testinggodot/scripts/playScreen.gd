@@ -9,16 +9,18 @@ extends Node
 @onready var TimerBar : ProgressBar = get_node("PanelContainer/VBoxContainer/PanelContainer3/MarginContainer/ProgressBar")
 @onready var Timerlabel : Label = get_node("PanelContainer/VBoxContainer/PanelContainer3/TimerLabel")
 
+
 var currentCard : int = 1
 var numCards: int = 1
 var currentDeck : Dictionary
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#Deckname.ChosenDeck.connect(_open_deck)
+	#ChoseDeck.connect("ChosenDeck", _open_deck)
 	TimerBar.value = 100
+	_open_deck(Global.ChosenDeck)
 	#QLabel.text = "testing this func"
-	_open_deck("SomeDeck")
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

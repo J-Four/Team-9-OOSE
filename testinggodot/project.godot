@@ -18,6 +18,7 @@ config/icon="res://Assets/Images/icon.svg"
 [autoload]
 
 MessageDisplayer="*res://scripts/MessageDisplayer.gd"
+Global="*res://scripts/Global.gd"
 
 [dotnet]
 
