@@ -17,8 +17,7 @@ corner_radius_bottom_left = 5
 
 [sub_resource type="Gradient" id="Gradient_pv2ao"]
 interpolation_mode = 2
-offsets = PackedFloat32Array(0, 0.337662, 0.831169)
-colors = PackedColorArray(1, 0.151344, 0.108333, 1, 0.953841, 0.943234, 0.207595, 1, 1.05888e-06, 0.844431, 0.527452, 1)
+colors = PackedColorArray(0.862656, 0.126259, 0.215131, 1, 0.209471, 0.696311, 0.479194, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_a0eps"]
 gradient = SubResource("Gradient_pv2ao")
@@ -91,6 +90,11 @@ layout_mode = 2
 size_flags_vertical = 4
 theme = ExtResource("3_wb6ev")
 text = "<"
+
+[node name="PrevArrowDisabled" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(80, 100)
+layout_mode = 2
+size_flags_vertical = 4
 
 [node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
 layout_mode = 2
@@ -195,4 +199,5 @@ horizontal_alignment = 1
 
 [connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer/HBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PrevArrow" to="." method="_on_prev_arrow_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PrevArrowDisabled" to="." method="_on_prev_arrow_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/NextArrow" to="." method="_on_next_arrow_pressed"]

@@ -2,12 +2,12 @@ extends Node
 
 @onready var Deckname 
 @onready var PrevArrow : Button = get_node("PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PrevArrow")
+@onready var PrevArrowD : Button = get_node("PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PrevArrowDisabled")
 @onready var NextArrow : Button = get_node("PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/NextArrow")
 @onready var QLabel : Label = get_node("PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/QLabel")
 @onready var ATextEdit : TextEdit = get_node("PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/ATextEdit")
 @onready var TimerBar : ProgressBar = get_node("PanelContainer/VBoxContainer/PanelContainer3/MarginContainer/ProgressBar")
 @onready var Timerlabel : Label = get_node("PanelContainer/VBoxContainer/PanelContainer3/TimerLabel")
-
 
 var currentCard : int = 1
 var numCards: int = 1
@@ -17,6 +17,7 @@ var currentDeck : Dictionary
 func _ready() -> void:
 	#Deckname.ChosenDeck.connect(_open_deck)
 	TimerBar.value = 100
+	#QLabel.text = "testing this func"
 	_open_deck("SomeDeck")
 
 
@@ -31,6 +32,7 @@ func _process(_delta: float) -> void:
 
 
 func _open_deck(Dname : String):
+	
 	var dir_path: String = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP) + "/flash_cards"
 	var dir = DirAccess.open(dir_path) #grabbed a lot of this straight from Main menu script
 	if not dir:
@@ -41,11 +43,13 @@ func _open_deck(Dname : String):
 		print("Found: " + Dname)
 		var deck_file = FileAccess.open(dir_path + "/" + Dname + ".json", FileAccess.READ)
 		var data_str: String = deck_file.get_as_text()
-			
+		
 		var json = JSON.new()
 		var error = json.parse(data_str)
+		
 		if error == OK:
 			var data: Dictionary = json.data
+			_load_deck(Dname, data)
 		else:
 			MessageDisplayer.error_popup("JSON parse error: " + json.get_error_message() + " in " + data_str, self)
 	else:
@@ -55,21 +59,21 @@ func _open_deck(Dname : String):
 func _load_deck(Dname : String, data : Dictionary):
 	PrevArrow.visible = false
 	currentDeck = data
-	numCards = len(data["cards"]) #getting number of cards
-	QLabel.text = str(data["Cards"][currentCard]["Question"]) #filling in question text
+	numCards = len(data["Cards"]) #getting number of cards
+	QLabel.text = str(data["Cards"][currentCard-1]["Question"]) #filling in question text
 	
 	pass
 
 func _change_card_display(idx : int):
 	if (idx == 0): # if first card turn off left arrow
 		PrevArrow.visible = false
+		PrevArrowD.visible = true
 	else:
 		PrevArrow.visible = true
-	if (idx == numCards): # if last card turn off right arrow
-		NextArrow.visible = false
-	else:
-		NextArrow.visibile = true
-	QLabel.text = str(currentDeck["Cards"][currentCard]["Question"]) #filling in question text
+		PrevArrowD.visible = false
+	
+	NextArrow.visible = true
+	QLabel.text = str(currentDeck["Cards"][currentCard-1]["Question"]) #filling in question text
 
 	
 
