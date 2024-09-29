@@ -16,10 +16,9 @@ var currentDeck : Dictionary
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#ChoseDeck.connect("ChosenDeck", _open_deck)
 	TimerBar.value = 100
 	_open_deck(Global.ChosenDeck)
-	#QLabel.text = "testing this func"
+	
 	
 
 
@@ -76,16 +75,33 @@ func _change_card_display(idx : int):
 	
 	NextArrow.visible = true
 	QLabel.text = str(currentDeck["Cards"][currentCard-1]["Question"]) #filling in question text
+	ATextEdit.clear()
 
 	
+func _verify_answer() -> bool:
+	var trueDict : Dictionary = {"Case sensitive":true}
+	if (currentDeck["Cards"][currentCard-1]["Case sensitive"] == trueDict["Case sensitive"] ):
+		if (str(currentDeck["Cards"][currentCard-1]["Answer"]).nocasecmp_to(ATextEdit.text) == 0):
+			return true
+		else: 
+			return false
+	else:
+		if (str(currentDeck["Cards"][currentCard-1]["Answer"]).casecmp_to(ATextEdit.text) == 0):
+			return true
+		else:
+			return false
 
 
 func _on_next_arrow_pressed() -> void:
-	if (currentCard == numCards):
-		get_tree().change_scene_to_file("res://Scenes/DeckEnd.tscn")
+	if (_verify_answer()):
+		if (currentCard == numCards):
+			get_tree().change_scene_to_file("res://Scenes/DeckEnd.tscn")
+		else: 
+			currentCard = currentCard + 1
+			_change_card_display(currentCard)
 	else: 
-		currentCard = currentCard + 1
-		_change_card_display(currentCard)
+			return
+	
 	
 
 func _on_prev_arrow_pressed() -> void:
