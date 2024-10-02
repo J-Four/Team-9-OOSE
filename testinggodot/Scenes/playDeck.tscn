@@ -258,6 +258,7 @@ layout_mode = 2
 size_flags_vertical = 1
 theme_override_styles/background = SubResource("StyleBoxFlat_wov2c")
 theme_override_styles/fill = SubResource("StyleBoxFlat_gwkxd")
+step = 0.001
 value = 84.49
 show_percentage = false
 
