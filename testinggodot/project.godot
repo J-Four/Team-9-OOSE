@@ -19,6 +19,11 @@ config/icon="res://Assets/Images/icon.svg"
 
 MessageDisplayer="*res://scripts/MessageDisplayer.gd"
 Global="*res://scripts/Global.gd"
+SceneTransitioner="*res://Scenes/scene_transitioner.tscn"
+
+[display]
+
+window/vsync/vsync_mode=0
 
 [dotnet]
 

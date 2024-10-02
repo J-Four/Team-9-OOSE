@@ -3,15 +3,17 @@ extends Node
 @onready var deck_button: Resource = preload("res://Scenes/DeckButton.tscn")
 @onready var hflow: HFlowContainer = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer")
 
+var loaded_decks: Dictionary
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	# TODO: Probably should not load all decks everytime the main menu is loaded. Especially if we end up adding support for images in the future. Maybe add a reload or refresh button under 'file'.
 	# Open the directory that decks are saved at
 	# TODO: change this from hard code to variable set by the user
-	var dir_path: String = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP) + "/flash_cards"
+	var dir_path: String = Global.deck_save_directory
 	var dir = DirAccess.open(dir_path)
 	if not dir:
-		MessageDisplayer.error_popup("Error reading desktop path.", self)
+		MessageDisplayer.error_popup("Error reading path: " + dir_path, self)
 		return
 	
 	# Get each json file in the direrctory
@@ -29,22 +31,22 @@ func _ready() -> void:
 				var data: Dictionary = json.data
 				add_deck_button(file_name.substr(0, file_name.rfind(".")), data)
 			else:
-				MessageDisplayer.error_popup("JSON parse error: " + json.get_error_message() + " in " + data_str, self)
+				MessageDisplayer.error_popup("JSON parse error: " + json.get_error_message() + "\nin file: " + file_name, self)
 		file_name = dir.get_next()
 
 
 func add_deck_button(name: String, data: Dictionary):
 	var new_deck = deck_button.instantiate()
 	hflow.add_child(new_deck)
-	new_deck.pressed.connect(_deck_pressed.bind(new_deck)) #new button will run deck pressed func now
+	new_deck.pressed.connect(_deck_pressed.bind(name)) #new button will run deck pressed func now
 	new_deck.name = name
-	if "Level" in data.keys():
-		new_deck.text = name + "\nLvl " + str(data["Level"])
-		
+	new_deck.tooltip_text = name
+	if "XP" in data.keys():
+		new_deck.text = name + "\nLvl " + str(Global.get_level_from_xp(data["XP"]))
+		loaded_decks[name] = data
 	else:
 		new_deck.text = "Error"
-		print(get_tree().root.get_child(1).name)
-		MessageDisplayer.error_popup("Error getting level data from json file: " + name, get_tree().root.get_child(1))
+		MessageDisplayer.error_popup("Error getting xp data from json file: " + name, self) # get_tree().root.get_child(1)
 		new_deck.queue_free()
 
 
@@ -57,10 +59,11 @@ func _on_pressed() -> void:
 	get_tree().change_scene_to_file("res://Scenes/CreateDeck.tscn")
 
 
-func _deck_pressed(button : Button):
-	var n : String = button.name #gets the name of button pressed
-	Global.ChosenDeck = n
-	get_tree().change_scene_to_file("res://Scenes/playDeck.tscn")
+func _deck_pressed(deck_name: String):
+	Global.ChosenDeck = deck_name
+	Global.deck_name = deck_name
+	Global.deck_data = loaded_decks[deck_name]
+	SceneTransitioner.transition_in_from_top_bounce("res://Scenes/playDeck.tscn")
 
 
 func _on_edit_button_pressed() -> void:
@@ -68,4 +71,4 @@ func _on_edit_button_pressed() -> void:
 
 
 func _on_create_deck_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://Scenes/CreateDeck.tscn")
+	SceneTransitioner.transition_in_from_top_bounce("res://Scenes/CreateDeck.tscn")

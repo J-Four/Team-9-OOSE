@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bnup7638tw62u"]
+[gd_scene load_steps=16 format=3 uid="uid://bnup7638tw62u"]
 
 [ext_resource type="Script" path="res://scripts/DeckEnd.gd" id="1_72tys"]
 [ext_resource type="Theme" uid="uid://dm5cgqg5vfxeq" path="res://Assets/Themes/EndTitle.tres" id="2_jjbr8"]
 [ext_resource type="Theme" uid="uid://b4yg6ph2idjkj" path="res://Assets/Themes/StatsEnd.tres" id="3_occmg"]
+[ext_resource type="FontFile" uid="uid://cjny1ac6ljuky" path="res://Assets/Fonts/ink-free.ttf" id="4_35fk7"]
 [ext_resource type="Theme" uid="uid://d3pis5jvba6vf" path="res://Assets/Themes/GreenButton.tres" id="4_lrkli"]
+[ext_resource type="Script" path="res://scripts/node2d_screen_position.gd" id="5_6r5h6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o4hx6"]
 bg_color = Color(0.150865, 0.0527684, 0.075334, 1)
@@ -22,6 +24,27 @@ colors = PackedColorArray(0.335345, 0.892098, 0.190316, 1, 0.636709, 0.839304, 0
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_gjmxx"]
 gradient = SubResource("Gradient_x07c0")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hf6p2"]
+draw_center = false
+
+[sub_resource type="Curve" id="Curve_2um3x"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.769663, 0.813187), -0.920491, -0.920491, 0, 0, Vector2(1, 0), -3.00393, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_q8i0f"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.326667, 0.653333)
+colors = PackedColorArray(1, 0.479255, 0.680212, 1, 3.08037e-06, 0.759537, 0.9377, 1, 1, 0.872675, 0.172653, 1)
+
+[sub_resource type="Curve" id="Curve_xndin"]
+_data = [Vector2(0, 1), 0.0, -0.115061, 0, 0, Vector2(0.960674, 0), -3.56691, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_udy7q"]
+offsets = PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1)
+colors = PackedColorArray(1, 0, 0, 1, 1, 0.323637, 0.0872343, 1, 1, 0.751975, 0.113575, 1, 1.73271e-05, 0.993871, 0, 1, 0.108613, 1, 0.963571, 1, 0.202488, 0.261186, 1, 1, 0.474535, 0.243823, 1, 1, 1, 0, 0, 1, 1, 0.270588, 0.027451, 1, 1, 0.752941, 0.113725, 1, 0, 0.992157, 0, 1)
+metadata/_snap_enabled = true
 
 [node name="DeckEnd" type="Control"]
 layout_mode = 3
@@ -84,10 +107,10 @@ theme_override_constants/margin_bottom = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 23
+theme_override_constants/separation = 20
 alignment = 1
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="TitleLabel" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(800, 100)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -97,15 +120,47 @@ text = "Deck Completed!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ProgressBar2" type="ProgressBar" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="LevelLabel" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Level 1"
+horizontal_alignment = 1
+
+[node name="spacer2" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="EarnedXPLabel" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "+60xp"
+
+[node name="spacer3" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="NextLevelLabel" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "2"
+horizontal_alignment = 1
+
+[node name="ProgressBar2" type="ProgressBar" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
 clip_children = 2
+custom_minimum_size = Vector2(0, 23)
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_styles/background = SubResource("StyleBoxFlat_o4hx6")
 theme_override_styles/fill = SubResource("StyleBoxFlat_xfveo")
-value = 45.0
+value = 56.18
+show_percentage = false
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ProgressBar2"]
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/ProgressBar2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -114,22 +169,87 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture1D_gjmxx")
 
-[node name="Label3" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(800, 300)
+[node name="StatsLabel" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(800, 280)
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("3_occmg")
 theme_override_font_sizes/font_size = 30
-text = "Stats Go Here"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="StatsLabel2" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/StatsLabel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -10.5
+offset_right = 20.0
+offset_bottom = 10.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_35fk7")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxFlat_hf6p2")
+text = "Stats Go 	Here"
+
 [node name="OKButton" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("4_lrkli")
 text = "OK"
-script = ExtResource("1_72tys")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(0, 35)
+amount = 32
+spread = 65.0
+initial_velocity_min = 125.0
+initial_velocity_max = 150.0
+scale_amount_min = 5.0
+scale_amount_max = 12.0
+scale_amount_curve = SubResource("Curve_2um3x")
+color_initial_ramp = SubResource("Gradient_q8i0f")
+script = ExtResource("5_6r5h6")
+left_edge = true
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="."]
+position = Vector2(1152, 35)
+amount = 32
+local_coords = true
+direction = Vector2(-1, 0)
+spread = 65.0
+initial_velocity_min = 125.0
+initial_velocity_max = 150.0
+scale_amount_min = 5.0
+scale_amount_max = 12.0
+scale_amount_curve = SubResource("Curve_2um3x")
+color_initial_ramp = SubResource("Gradient_q8i0f")
+script = ExtResource("5_6r5h6")
+right_edge = true
+
+[node name="LvlUpParticles" type="CPUParticles2D" parent="."]
+modulate = Color(1, 1, 1, 0.607843)
+position = Vector2(1146, 653)
+emitting = false
+amount = 60
+lifetime = 1.5
+one_shot = true
+explosiveness = 1.0
+local_coords = true
+direction = Vector2(-1, -1)
+initial_velocity_min = 464.64
+initial_velocity_max = 1000.0
+scale_amount_min = 56.0
+scale_amount_max = 91.91
+scale_amount_curve = SubResource("Curve_xndin")
+color_ramp = SubResource("Gradient_udy7q")
+script = ExtResource("5_6r5h6")
+right_edge = true
+bottom_edge = true
 
 [connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/OKButton" to="." method="_on_ok_button_pressed"]

@@ -7,10 +7,11 @@ extends Node
 @onready var space_checkbox: CheckBox = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/SpaceCheckBox")
 @onready var popup: Resource = preload("res://Scenes/ErrorPopup.tscn")
 
-var empty_array: Array[Dictionary] #dictionary is a struct with key : value
+var empty_array: Array[Dictionary] #dictionary is a struct with key : value. Each 'Cards' part of a deck dictionary is an array of dictionaries.
 var new_deck: Dictionary = { #this is saved cards array first, lvl, scaleDiff last
 	"Scale difficulty": true,
-	"Level": 1,
+	"Random order": true,
+	"XP": 0,
 	"Cards": empty_array.duplicate(true) #makes another array of Dict to save cards
 }
 var current_card: int = -1
@@ -112,34 +113,20 @@ func _on_finish_deck_button_pressed() -> void:
 		return
 	
 	# Check if file with deck name aleady exists
+	print("name " + deck_name)
 	var file_exists = FileAccess.open(OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP) + "/flash_cards/" + deck_name + ".json", FileAccess.READ)
 	if file_exists:
 		print("A deck with the name '" + deck_name + "' already exists.")
 		var p = popup.instantiate()
 		add_child(p)
 		p.error_label.text = "A deck with the name '" + deck_name + "' already exists.\n Would you like to overwrite this deck?"
-		p.yes_button.pressed.connect(write_deck.bind(json_string))
+		p.yes_button.pressed.connect(Global.write_deck.bind(json_string))
 		p.yes_button.pressed.connect(p.free_self)
 		p.no_button.pressed.connect(p.free_self)
 		p.cancel_button.pressed.connect(p.free_self)
 		p.show()
 	else:
-		write_deck(json_string)
-
-
-func write_deck(json_string: String) -> void:
-	# Create or overrite json file
-	
-	var path: String = str(OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP) + "/flash_cards/" + deck_name + ".json")
-	var file = FileAccess.open(path, FileAccess.WRITE)
-	if file == null:
-		print("Error writing json file.")
-		MessageDisplayer.error_popup("Error writing json file. Check deck name.", self)
-		return
-	file.store_line(json_string)
-	file.close()
-	
-	MessageDisplayer.green_popup("Successfully saved deck to:\n" + path, self)
+		Global.write_deck(json_string, deck_name)
 
 
 func _on_deck_name_line_edit_text_changed(new_text: String) -> void:
@@ -155,3 +142,18 @@ func _on_remove_card_button_pressed() -> void:
 		_on_nav_left_button_pressed()
 	else: 
 		update_display_to_card(current_card)
+
+
+func _on_random_order_check_box_2_toggled(toggled_on: bool) -> void:
+	new_deck["Random order"] = toggled_on
+
+
+func _on_back_button_pressed() -> void:
+	var p = popup.instantiate()
+	add_child(p)
+	p.error_label.text = "Are you sure you want to exit deck creation? Any unsaved changes will be lost."
+	p.yes_button.pressed.connect(SceneTransitioner.transition_in_from_top_bounce.bind("res://Scenes/MainSceneControl.tscn"))
+	p.yes_button.pressed.connect(p.free_self)
+	p.no_button.pressed.connect(p.free_self)
+	p.cancel_button.pressed.connect(p.free_self)
+	p.show()
