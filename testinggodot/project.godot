@@ -21,6 +21,7 @@ config/icon="res://Assets/Images/icon.svg"
 MessageDisplayer="*res://scripts/MessageDisplayer.gd"
 Global="*res://scripts/Global.gd"
 SceneTransitioner="*res://Scenes/scene_transitioner.tscn"
+AudioPlayer="*res://Scenes/audio_player.tscn"
 
 [display]
 

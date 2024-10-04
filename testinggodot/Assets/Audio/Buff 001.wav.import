@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://6kcy85dyo0au"
+path="res://.godot/imported/Buff 001.wav-76ccaa2c6e96f6b74a6f91a5de17e350.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/Buff 001.wav"
+dest_files=["res://.godot/imported/Buff 001.wav-76ccaa2c6e96f6b74a6f91a5de17e350.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

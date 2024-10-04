@@ -12,6 +12,8 @@ extends Node
 @onready var card_progress_hbox: HBoxContainer = get_node("PanelContainer/VBoxContainer/PanelContainer5/MarginContainer/CardProgressHBoxContainer")
 @onready var card_progress_label: Resource = preload("res://Scenes/CardProgressLabel.tscn")
 @onready var black_heart_texture: Resource = preload("res://Assets/Images/BlackHeart.png")
+@onready var correct_sfx: Resource = preload("res://Assets/Audio/Buff 001.wav")
+@onready var wrong_sfx: Resource = preload("res://Assets/Audio/Debuff 001.wav")
 @onready var lives: Array = [
 	get_node("PanelContainer/VBoxContainer/PanelContainer4/MarginContainer/BoxContainer/CenterContainer/Heart1"),
 	get_node("PanelContainer/VBoxContainer/PanelContainer4/MarginContainer/BoxContainer/CenterContainer2/Heart2"),
@@ -34,148 +36,91 @@ var game_over: bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Set lives index to the last index in the lives array.
+	# So the index can be decreased by one at a time until it gets to 0
 	lives_idx = len(lives) - 1
 	
+	# Set the timer value in seconds. This is hard coded right now but should be changed later to
+	# differ depending on difficulty or level of deck.(TODO)
 	TimerBar.max_value = 60
 	TimerBar.value = TimerBar.max_value
+	# Get the selected deck's data from the global 'Global' script.
 	currentDeck = Global.deck_data
+	# Pull out the array of cards into it's own seperate array.
 	cards = currentDeck["Cards"].duplicate(true)
+	# Get the number of cards in the deck.
 	num_cards = len(cards)
 	
-	# Add the card progress labels at top of screen.
+	# Add the card progress labels at top of screen. One label per card. 
+	# If the user gets the correct answer, the corresponding label for the card will turn green. 
+	# If the user is wrong, it will be red.
 	for i in range(num_cards):
 		var prog_label: Label = card_progress_label.instantiate()
 		prog_label.text = str(i + 1)
 		card_progress_hbox.add_child(prog_label)
+		# Put all of these labels into this array so they can be accessed later.
 		progress_labels.append(prog_label)
 	
-	# If Random order property is set to true, shuffle the order of the cards in the cards array
+	# If 'Random order' property of the deck data is set to true, 
+	# shuffle the order of the cards in the cards array
 	if "Random order" in currentDeck.keys():
 		if currentDeck["Random order"]:
 			cards.shuffle()
 	else:
 		MessageDisplayer.error_popup("Error getting 'Random order' property in deck.", self)
 	
+	# Set card index to the first card in the array to start with. 
+	# This will be increased one at a time when the user enters an answer.
 	current_card_idx = 0
 	display_card(current_card_idx)
-	#_open_deck(Global.ChosenDeck)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(_delta: float) -> void:
-	#TimerBar.value = TimerBar.value - 0.01
-	#Timerlabel.text = str(roundf(TimerBar.value))
-	#if (TimerBar.value == 0):
-		#Timerlabel.text = "Time's Up!"
-		#await get_tree().create_timer(1).timeout
-		#_on_next_arrow_pressed()
 
 func _process(delta: float) -> void:
+	# If 'count_down_timer' is true, decrease the timer by however much time has passed.
 	if count_down_timer:
-		TimerBar.value -= delta # Delta is the time in seconds between the current frame and the previous frame. If I remember correctly.
+		# 'delta' is the time in seconds between the cirrent frame and the previous frame so we can
+		# track how much time has passed.
+		TimerBar.value -= delta
 		Timerlabel.text = str(TimerBar.value)
+		# Check if the timer raeches 0 seconds.
+		# Will then call '_on_next_arrow_pressed' until out of lives and continues to end screen.
 		if (TimerBar.value <= 0):
 			Timerlabel.text = "Time's Up!"
 			await get_tree().create_timer(1).timeout
 			_on_next_arrow_pressed()
 
 
+# This fucntion updates the label used for displaying the question with the question of the card of
+# the passed index value, and resets the answer line edit to be empty.
 func display_card(card_idx: int):
 	QLabel.text = cards[card_idx]["Question"]
 	answer_line_edit.text = ""
 
 
-func _open_deck(Dname : String):
-	
-	var dir_path: String = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP) + "/flash_cards"
-	var dir = DirAccess.open(dir_path) #grabbed a lot of this straight from Main menu script
-	if not dir:
-		MessageDisplayer.error_popup("Error reading desktop path.", self)
-		return
-	
-	if (dir.file_exists(Dname + ".json")):
-		print("Found: " + Dname)
-		var deck_file = FileAccess.open(dir_path + "/" + Dname + ".json", FileAccess.READ)
-		var data_str: String = deck_file.get_as_text()
-		
-		var json = JSON.new()
-		var error = json.parse(data_str)
-		
-		if error == OK:
-			var data: Dictionary = json.data
-			_load_deck(Dname, data)
-		else:
-			MessageDisplayer.error_popup("JSON parse error: " + json.get_error_message() + " in " + data_str, self)
-	else:
-		QLabel.text = "deck not found"
-		print("deck not found")
-
-func _load_deck(Dname : String, data : Dictionary):
-	PrevArrow.visible = false
-	currentDeck = data
-	numCards = len(data["Cards"]) #getting number of cards
-	QLabel.text = str(data["Cards"][currentCard-1]["Question"]) #filling in question text
-	
-	pass
-
-func _change_card_display(idx : int):
-	if (idx == 0): # if first card turn off left arrow
-		PrevArrow.visible = false
-		PrevArrowD.visible = true
-	else:
-		PrevArrow.visible = true
-		PrevArrowD.visible = false
-	
-	NextArrow.visible = true
-	QLabel.text = str(currentDeck["Cards"][currentCard-1]["Question"]) #filling in question text
-	ATextEdit.clear()
-
-	
-func _verify_answer() -> bool:
-	var trueDict : Dictionary = {"Case sensitive":true}
-	if (currentDeck["Cards"][currentCard-1]["Case sensitive"] == trueDict["Case sensitive"] ):
-		if (str(currentDeck["Cards"][currentCard-1]["Answer"]).nocasecmp_to(ATextEdit.text) == 0):
-			return true
-		else: 
-			return false
-	else:
-		if (str(currentDeck["Cards"][currentCard-1]["Answer"]).casecmp_to(ATextEdit.text) == 0):
-			return true
-		else:
-			return false
-
-
+# This function is called when the user clicks on the next arrow button.
+# This function just calls '_on answer_line_edit_text_submitted' with the text entered by the user
+# in the answer box so it will have the same functionality as the user pressing enter.
 func _on_next_arrow_pressed() -> void:
 	_on_answer_line_edit_text_submitted(answer_line_edit.text)
-	return
-	
-	if (_verify_answer()):
-		if (currentCard == numCards):
-			get_tree().change_scene_to_file("res://Scenes/DeckEnd.tscn")
-		else: 
-			currentCard = currentCard + 1
-			_change_card_display(currentCard)
-	else: 
-			return
-	
-	
+
 
 func _on_prev_arrow_pressed() -> void:
 	if (currentCard != 1):
 		currentCard = currentCard - 1
-		_change_card_display(currentCard)
-	
 
 
+# This function is called when the back button is pressed.
+# It will leave study mode and take the user back to the main menu.
 func _on_exit_button_pressed() -> void:
 	SceneTransitioner.transition_in_from_top_bounce("res://Scenes/MainSceneControl.tscn")
 
 
 func deck_complete(msg: String, wait_time: int = 1):
+	# Set 'game_over' to true and 'count_down_timer' to false to stop the timer from counting down.
 	game_over = true
 	count_down_timer = false
 	Timerlabel.text = msg
 	
+	# Set variables in 'Global' for the next screen to pull from.
 	Global.num_cards = num_cards
 	Global.cards_correct = cards_correct
 	Global.cards_wrong = cards_wrong
@@ -183,12 +128,13 @@ func deck_complete(msg: String, wait_time: int = 1):
 	
 	await get_tree().create_timer(wait_time).timeout
 	SceneTransitioner.transition_in_from_right_cubic("res://Scenes/DeckEnd.tscn")
-	#get_tree().change_scene_to_file("res://Scenes/DeckEnd.tscn")
 
 
 func _on_answer_line_edit_text_submitted(new_text: String) -> void:
+	# If game has already ended, dont process or let the user attempt any other answers
 	if game_over:
 		return
+	
 	# String entered by user
 	var user_str: String = new_text
 	# Correct answer string
@@ -206,6 +152,7 @@ func _on_answer_line_edit_text_submitted(new_text: String) -> void:
 	# Check if user has correct answer
 	if user_str == answer_str:
 		# TODO: Some visual and audio effect for correct answer
+		AudioPlayer.play_sound_effect(correct_sfx, 0.25)
 		progress_labels[current_card_idx].modulate = Color.GREEN
 		cards_correct += 1
 		
@@ -217,24 +164,26 @@ func _on_answer_line_edit_text_submitted(new_text: String) -> void:
 			display_card(current_card_idx)
 	else:
 		# TODO: Some visual and audio effect for wrong answer
+		AudioPlayer.play_sound_effect(wrong_sfx, 0.25)
 		progress_labels[current_card_idx].modulate = Color.RED
 		cards_wrong += 1
 		
 		# If lives are left, subtract one life.
 		if lives_idx >= 0:
+			# Change the red heart to a black heart
 			lives[lives_idx].texture = black_heart_texture
+			# Use a 'tween' to shrink the heart over set time.
 			var tween = get_tree().create_tween()
 			tween.tween_property(lives[lives_idx], "custom_minimum_size", Vector2(0, 0), 0.25)
 			tween.tween_callback(lives[lives_idx].hide)
-			#lives[lives_idx].hide()
 			lives_idx -= 1
 		
 		# If there are no more lives left, lose the game
 		if lives_idx < 0:
 			Global.lost = true
 			deck_complete("Out of lives!", 2)
+			# TODO: Lose game here with some visual and audio effects.
 			return
-			# TODO: Lose game here
 		
 		# If this is the final card, go to end screen. Else go to next card
 		if current_card_idx == num_cards - 1:

@@ -41,7 +41,7 @@ func tween_progress_bar(min: int, max: int, current_xp: int, to_xp: int, lvl: in
 	progress_bar.value = current_xp
 	
 	var tween = get_tree().create_tween()
-	# If new xp val is greater than next lvl xp val, tween to the max and recall this func with the difference of to_xp and max.
+	# If new xp val is greater than next lvl xp val, tween to the max and call this func again for the remaining xp
 	if to_xp >= max:
 		tween.tween_property(progress_bar, "value", max, 2.0)
 		tween.tween_callback(level_up.bind(lvl))
@@ -62,11 +62,6 @@ func update_level_labels(lvl: int, xp_earned: int = -1):
 	if xp_earned != -1:
 		earned_xp_label.text = "+" + str(xp_earned) + "xp"
 	next_level_label.text = str(lvl + 1)
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 
 func _on_ok_button_pressed() -> void:
