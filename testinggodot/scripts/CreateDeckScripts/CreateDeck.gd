@@ -133,7 +133,7 @@ func _on_finish_deck_button_pressed() -> void:
 		var p = popup.instantiate()
 		add_child(p)
 		p.error_label.text = "A deck with the name '" + deck_name + "' already exists.\n Would you like to overwrite this deck?"
-		p.yes_button.pressed.connect(Global.write_deck.bind(json_string))
+		p.yes_button.pressed.connect(Global.write_deck.bind(json_string, deck_name))
 		p.yes_button.pressed.connect(p.free_self)
 		p.no_button.pressed.connect(p.free_self)
 		p.cancel_button.pressed.connect(p.free_self)
