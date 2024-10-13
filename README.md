@@ -4,4 +4,5 @@ Our project aims to turn studying turning it into an engaging, game-like experie
 
 
 
-### Other comments
+## Other comments
+All files not under the 'scripts' folder were written automatically with the GoDot UI. We have only added comments for files under 'scripts' folder. 
