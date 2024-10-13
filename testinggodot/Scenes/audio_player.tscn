@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0nmmj3u2yk6t"]
+
+[ext_resource type="Script" path="res://scripts/audio_player.gd" id="1_v6grf"]
+
+[node name="AudioPlayerMusic" type="AudioStreamPlayer2D"]
+bus = &"Music"
+script = ExtResource("1_v6grf")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+current = true
+
+[node name="AudioPlayerEffect" type="AudioStreamPlayer2D" parent="."]
+bus = &"Effects"

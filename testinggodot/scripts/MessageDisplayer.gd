@@ -7,7 +7,8 @@ func display_message(msg: String):
 	pass
 
 
-func green_popup(msg: String, node: Node):
+# Creates a popup with green text.
+func green_popup(msg: String, node: Node = get_tree().root.get_child(get_tree().root.get_child_count() - 1)):
 	var p = popup.instantiate()
 	node.add_child(p)
 	
@@ -21,7 +22,8 @@ func green_popup(msg: String, node: Node):
 	p.show()
 
 
-func error_popup(msg: String, node: Node):
+# Creates a popup with red text.
+func error_popup(msg: String, node: Node = get_tree().root.get_child(get_tree().root.get_child_count() - 1)):
 	var p = popup.instantiate()
 	node.add_child(p)
 	

@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://54ht0y57mics"]
+[gd_scene load_steps=7 format=3 uid="uid://54ht0y57mics"]
 
 [ext_resource type="Script" path="res://scripts/CreateDeckScripts/CreateDeck.gd" id="1_ftljd"]
 [ext_resource type="Theme" uid="uid://cta3fyluiaeg0" path="res://Assets/Themes/OrangeButton.tres" id="2_tebs5"]
-[ext_resource type="Script" path="res://scripts/CreateDeckScripts/go_back_button.gd" id="3_pvv6r"]
 [ext_resource type="Script" path="res://scripts/CreateDeckScripts/QEdit.gd" id="4_gafpp"]
 [ext_resource type="Theme" uid="uid://d11c37qf38urw" path="res://Assets/Themes/arrowButton.tres" id="5_aciva"]
 [ext_resource type="Script" path="res://scripts/CreateDeckScripts/add_card_button.gd" id="6_fs1bt"]
@@ -53,14 +52,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "                                                                                                                                                                                                                           "
 
-[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer"]
+[node name="BackButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer"]
 custom_minimum_size = Vector2(125, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 theme = ExtResource("2_tebs5")
-text = "Cancel"
-script = ExtResource("3_pvv6r")
+text = "Back"
 
 [node name="PanelContainer2" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -122,6 +120,11 @@ text = "Default Deck Name"
 layout_mode = 2
 button_pressed = true
 text = "Scale difficulty with level"
+
+[node name="RandomOrderCheckBox2" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+button_pressed = true
+text = "Random order"
 
 [node name="HSeparator2" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(0, 23)
@@ -208,11 +211,13 @@ size_flags_horizontal = 8
 theme = ExtResource("7_lvu4l")
 text = "Finish Deck"
 
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/Button" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/Button" method="_on_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/BackButton" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/BackButton" method="_on_pressed"]
 [connection signal="text_changed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/QuestionLineEdit" to="." method="_on_question_line_edit_text_changed"]
 [connection signal="text_changed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/AnswerEdit" to="." method="_on_answer_edit_text_changed"]
 [connection signal="text_changed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/HBoxContainer/DeckNameLineEdit" to="." method="_on_deck_name_line_edit_text_changed"]
 [connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/ScaleDifficultyCheckBox" to="." method="_on_scale_difficulty_check_box_toggled"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/RandomOrderCheckBox2" to="." method="_on_random_order_check_box_2_toggled"]
 [connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/CaseCheckBox" to="." method="_on_case_check_box_toggled"]
 [connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/SpaceCheckBox" to="." method="_on_space_check_box_toggled"]
 [connection signal="get_Card" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/AddCardButton" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/QuestionLineEdit" method="_on_add_card_button_get_card"]

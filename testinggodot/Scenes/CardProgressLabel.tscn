@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://divht6dg4fur2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1hyof"]
+bg_color = Color(0.28485, 0.28485, 0.28485, 1)
+
+[node name="Label" type="Label"]
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/normal = SubResource("StyleBoxFlat_1hyof")
+horizontal_alignment = 1

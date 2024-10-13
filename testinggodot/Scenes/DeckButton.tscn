@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://duv6445xsaa2n"]
+[gd_scene load_steps=3 format=3 uid="uid://b545iy5qcvnn"]
 
 [ext_resource type="Theme" uid="uid://4xs2hn1w2or8" path="res://Assets/Themes/FlashCardTheme.tres" id="1_d1lse"]
 [ext_resource type="Script" path="res://scripts/button_hover_size_changer.gd" id="2_1xdfk"]
@@ -8,9 +8,7 @@ custom_minimum_size = Vector2(250, 160)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("1_d1lse")
-text = "Calc Exam 1
-Lvl1"
-autowrap_mode = 2
+text_overrun_behavior = 3
 script = ExtResource("2_1xdfk")
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
