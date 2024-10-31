@@ -72,3 +72,7 @@ func _on_edit_button_pressed() -> void:
 
 func _on_create_deck_button_pressed() -> void:
 	SceneTransitioner.transition_in_from_top_bounce("res://Scenes/CreateDeck.tscn")
+
+
+func _on_edit_player_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://Scenes/PlayerCustomize.tscn")

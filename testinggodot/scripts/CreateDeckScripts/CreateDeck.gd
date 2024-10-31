@@ -111,8 +111,8 @@ func _on_scale_difficulty_check_box_toggled(toggled_on: bool) -> void:
 # Save the deck data to a json file
 func _on_finish_deck_button_pressed() -> void:
 	# Save deck as json file in folder on desktop. For now at least
-	var json = JSON.new()
-	var json_string = json.stringify(new_deck)
+	# var json = JSON.new() fixing a warning
+	var json_string = JSON.stringify(new_deck)
 	
 	# Create folder on desktop if it does not already exist
 	var dir = DirAccess.open(OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP))

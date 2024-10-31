@@ -153,6 +153,11 @@ layout_mode = 2
 theme = ExtResource("4_1gt6r")
 text = "Edit Decks"
 
+[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer3/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_6c7lq")
+text = "    Edit Player   "
+
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/CreateDeckButton" to="." method="_on_create_deck_button_pressed"]
 [connection signal="mouse_entered" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck2" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck2" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck2" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck2" method="_on_mouse_exited"]
@@ -170,3 +175,4 @@ text = "Edit Decks"
 [connection signal="mouse_exited" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck6" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck6" method="_on_mouse_exited"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer/Deck6" to="." method="_on_deck_6_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer3/HBoxContainer/EditButton" to="." method="_on_edit_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer3/HBoxContainer/Button" to="." method="_on_edit_player_button_pressed"]
