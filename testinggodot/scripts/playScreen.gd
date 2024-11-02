@@ -19,7 +19,13 @@ extends Node
 	get_node("PanelContainer/VBoxContainer/PanelContainer4/MarginContainer/BoxContainer/CenterContainer2/Heart2"),
 	get_node("PanelContainer/VBoxContainer/PanelContainer4/MarginContainer/BoxContainer/CenterContainer3/Heart3")
 	]
-	
+@onready var TrueFalseChoice: HBoxContainer = get_node("PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/TrueFalseChoice")
+@onready var MultipleChoice: VBoxContainer = get_node("PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MultipleChoice")
+@onready var a1_button: Button = get_node("PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MultipleChoice/HBoxContainer/A1Button")
+@onready var a2_button: Button = get_node("PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MultipleChoice/HBoxContainer/A2Button")
+@onready var a3_button: Button = get_node("PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MultipleChoice/HBoxContainer2/A3Button")
+@onready var a4_button: Button = get_node("PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MultipleChoice/HBoxContainer2/A4Button")
+
 var currentCard : int = 1
 var numCards: int = 1
 var currentDeck : Dictionary
@@ -93,8 +99,23 @@ func _process(delta: float) -> void:
 # the passed index value, and resets the answer line edit to be empty.
 func display_card(card_idx: int):
 	QLabel.text = cards[card_idx]["Question"]
-	if(cards[card_idx]["Free Responce"] == true):
+	if(cards[card_idx]["Free Response"] == true):
+		answer_line_edit.set_visible(true)
+		MultipleChoice.set_visible(false)
+		TrueFalseChoice.set_visible(false)
 		answer_line_edit.text = ""
+	if(cards[card_idx]["Multiple Choice"] == true):
+		answer_line_edit.set_visible(false)
+		MultipleChoice.set_visible(true)
+		TrueFalseChoice.set_visible(false)
+		a1_button.text = cards[card_idx]["Multiple Answers"]["answer1"]
+		a2_button.text = cards[card_idx]["Multiple Answers"]["answer2"]
+		a3_button.text = cards[card_idx]["Multiple Answers"]["answer3"]
+		a4_button.text = cards[card_idx]["Multiple Answers"]["answer4"]
+	if(cards[card_idx]["T/F Choice"] == true):
+		answer_line_edit.set_visible(false)
+		MultipleChoice.set_visible(false)
+		TrueFalseChoice.set_visible(true)
 
 
 # This function is called when the user clicks on the next arrow button.
@@ -152,6 +173,12 @@ func _on_answer_line_edit_text_submitted(new_text: String) -> void:
 	
 	# Check if user has correct answer
 	if user_str == answer_str:
+		answer_correct(true)
+	else:
+		answer_correct(false)
+
+func answer_correct(isCorrect: bool) -> void:
+	if isCorrect:
 		# TODO: Some visual and audio effect for correct answer
 		AudioPlayer.play_sound_effect(correct_sfx, 0.25)
 		progress_labels[current_card_idx].modulate = Color.GREEN
@@ -192,3 +219,44 @@ func _on_answer_line_edit_text_submitted(new_text: String) -> void:
 		else:
 			current_card_idx += 1
 			display_card(current_card_idx)
+
+func _on_true_button_pressed() -> void:
+	if (cards[current_card_idx]["Answer"] == "True"):
+		answer_correct(true)
+	else:
+		answer_correct(false)
+
+
+func _on_false_button_pressed() -> void:
+	if (cards[current_card_idx]["Answer"] == "False"):
+		answer_correct(true)
+	else:
+		answer_correct(false)
+
+
+func _on_a1_button_pressed() -> void:
+	if (cards[current_card_idx]["Answer"] == "1"):
+		answer_correct(true)
+	else:
+		answer_correct(false)
+
+
+func _on_a2_button_pressed() -> void:
+	if (cards[current_card_idx]["Answer"] == "2"):
+		answer_correct(true)
+	else:
+		answer_correct(false)
+
+
+func _on_a3_button_pressed() -> void:
+	if (cards[current_card_idx]["Answer"] == "3"):
+		answer_correct(true)
+	else:
+		answer_correct(false)
+
+
+func _on_a4_button_pressed() -> void:
+	if (cards[current_card_idx]["Answer"] == "4"):
+		answer_correct(true)
+	else:
+		answer_correct(false)
