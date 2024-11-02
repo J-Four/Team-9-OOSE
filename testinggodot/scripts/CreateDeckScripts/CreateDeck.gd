@@ -144,7 +144,10 @@ func _on_nav_right_button_pressed() -> void:
 
 # Add a new blank card and change to it
 func _on_add_card_button_pressed() -> void:
-	add_new_card_to_deck()
+	if(new_deck["Cards"][current_card]["Answer"] != "" && new_deck["Cards"][current_card]["Question"] != ""): #check if Q and A is not empty
+		add_new_card_to_deck()
+	else:
+		pass #TODO add pop up to ask user to fill Q and choose answer
 
 
 # Update the question in the deck data when the user changes text in the question line edit

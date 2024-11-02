@@ -184,6 +184,7 @@ theme_override_font_sizes/font_size = 50
 text = "False"
 
 [node name="MultipleChoice" type="VBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
