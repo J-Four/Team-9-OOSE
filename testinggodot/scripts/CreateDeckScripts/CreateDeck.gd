@@ -89,11 +89,38 @@ func update_nav_label() -> void:
 func update_display_to_card(card_idx: int) -> void:
 	# Loading in what is saved to "cards"
 	question_line_edit.text = new_deck["Cards"][card_idx]["Question"] 
-	answer_edit.text = new_deck["Cards"][card_idx]["Answer"]
+	if(new_deck["Cards"][card_idx]["Multiple Choice"]):
+		_on_answer_option_item_selected(1)
+		answer_options.selected = 1
+		update_multiple_choice()
+	if(new_deck["Cards"][card_idx]["Free Response"]):
+		_on_answer_option_item_selected(0)
+		answer_options.selected = 0
+		answer_edit.text = new_deck["Cards"][card_idx]["Answer"]
+	if(new_deck["Cards"][card_idx]["T/F Choice"]):
+		_on_answer_option_item_selected(2)
+		answer_options.selected = 2
 	case_checkbox.set_pressed_no_signal(new_deck["Cards"][card_idx]["Case sensitive"])
 	space_checkbox.set_pressed_no_signal(new_deck["Cards"][card_idx]["Space sensitive"])
 	update_nav_label()
 
+func update_multiple_choice() -> void:
+	a1_line_edit.text = new_deck["Cards"][current_card]["Multiple Answers"]["answer1"]
+	a2_line_edit.text = new_deck["Cards"][current_card]["Multiple Answers"]["answer2"]
+	a3_line_edit.text = new_deck["Cards"][current_card]["Multiple Answers"]["answer3"]
+	a4_line_edit.text = new_deck["Cards"][current_card]["Multiple Answers"]["answer4"]
+	a1_checkbox.button_pressed = false
+	a2_checkbox.button_pressed = false
+	a3_checkbox.button_pressed = false
+	a4_checkbox.button_pressed = false
+	if(new_deck["Cards"][current_card]["Answer"] == "1"):
+		a1_checkbox.button_pressed = true
+	if(new_deck["Cards"][current_card]["Answer"] == "2"):
+		a2_checkbox.button_pressed = true
+	if(new_deck["Cards"][current_card]["Answer"] == "3"):
+		a3_checkbox.button_pressed = true
+	if(new_deck["Cards"][current_card]["Answer"] == "4"):
+		a4_checkbox.button_pressed = true
 
 # Changes the current_card index to passed int and updates display.
 func change_card(card_idx: int) -> void:
@@ -177,6 +204,8 @@ func _on_finish_deck_button_pressed() -> void:
 		p.show()
 	else:
 		Global.write_deck(json_string, deck_name)
+		
+	get_tree().change_scene_to_file("res://Scenes/MainSceneControl.tscn")
 
 
 # Update deck name when the user changes the deck name line edit
@@ -229,6 +258,7 @@ func _on_answer_option_item_selected(index: int) -> void:
 		new_deck["Cards"][current_card]["Free Response"] = false
 		new_deck["Cards"][current_card]["Multiple Choice"] = true
 		new_deck["Cards"][current_card]["T/F Choice"] = false
+		update_multiple_choice()
 	if(index == 2): #t/f responce becomes visible
 		answer_edit.set_visible(false)
 		multiple_choice_format.set_visible(false)

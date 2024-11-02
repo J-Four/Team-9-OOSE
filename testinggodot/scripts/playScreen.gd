@@ -93,7 +93,8 @@ func _process(delta: float) -> void:
 # the passed index value, and resets the answer line edit to be empty.
 func display_card(card_idx: int):
 	QLabel.text = cards[card_idx]["Question"]
-	answer_line_edit.text = ""
+	if(cards[card_idx]["Free Responce"] == true):
+		answer_line_edit.text = ""
 
 
 # This function is called when the user clicks on the next arrow button.

@@ -42,7 +42,7 @@ region_rect = Rect2(165, 1354, 845, 292)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xfeft"]
 texture = ExtResource("1_m8e2m")
-region_rect = Rect2(192, 1380, 793, 248)
+region_rect = Rect2(206, 1380, 769, 248)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xshks"]
 content_margin_left = 4.0

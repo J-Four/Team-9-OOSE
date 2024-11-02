@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://deafssq11jyu2"]
+[gd_scene load_steps=12 format=3 uid="uid://deafssq11jyu2"]
 
 [ext_resource type="Script" path="res://scripts/playScreen.gd" id="1_om22i"]
 [ext_resource type="Theme" uid="uid://cta3fyluiaeg0" path="res://Assets/Themes/OrangeButton.tres" id="2_o5kyd"]
 [ext_resource type="PackedScene" uid="uid://divht6dg4fur2" path="res://Scenes/CardProgressLabel.tscn" id="3_30y6a"]
 [ext_resource type="Theme" uid="uid://d11c37qf38urw" path="res://Assets/Themes/arrowButton.tres" id="3_wb6ev"]
 [ext_resource type="Theme" uid="uid://22467k66gk57" path="res://Assets/Themes/RedHeart.tres" id="4_8gpma"]
+[ext_resource type="Theme" uid="uid://d3pis5jvba6vf" path="res://Assets/Themes/GreenButton.tres" id="5_v6alf"]
 [ext_resource type="Texture2D" uid="uid://bx7pqymtd37xo" path="res://Assets/Images/RedHeart.png" id="6_n6s0q"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wov2c"]
@@ -158,9 +159,61 @@ size_flags_vertical = 3
 placeholder_text = "Answer Here"
 
 [node name="AnswerLineEdit" type="LineEdit" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 placeholder_text = "Type answer here..."
+
+[node name="TrueFalseChoice" type="HBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TrueButton" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/TrueFalseChoice"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("5_v6alf")
+theme_override_font_sizes/font_size = 50
+text = "True"
+
+[node name="FalseButton" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/TrueFalseChoice"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_o5kyd")
+theme_override_font_sizes/font_size = 50
+text = "False"
+
+[node name="MultipleChoice" type="VBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MultipleChoice"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="A1Button" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MultipleChoice/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("5_v6alf")
+
+[node name="A2Button" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MultipleChoice/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_o5kyd")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MultipleChoice"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="A3Button" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MultipleChoice/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_o5kyd")
+
+[node name="A4Button" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MultipleChoice/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("5_v6alf")
 
 [node name="NextArrow" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(80, 100)
