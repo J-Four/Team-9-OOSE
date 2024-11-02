@@ -6,6 +6,25 @@ extends Node
 @onready var case_checkbox: CheckBox = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/CaseCheckBox")
 @onready var space_checkbox: CheckBox = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/SpaceCheckBox")
 @onready var popup: Resource = preload("res://Scenes/ErrorPopup.tscn")
+@onready var answer_options: OptionButton = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/AnswerOption")
+@onready var multiple_choice_format: VBoxContainer = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat")
+@onready var answer_1: HBoxContainer = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer1")
+@onready var answer_2: HBoxContainer = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer2")
+@onready var answer_3: HBoxContainer = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer3")
+@onready var answer_4: HBoxContainer = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer4")
+@onready var tf_choice_format: VBoxContainer = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/TFAnswerFormat")
+@onready var answer_true: CheckBox = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/TFAnswerFormat/TrueBox")
+@onready var answer_false: CheckBox = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/TFAnswerFormat/FalseBox")
+@onready var a1_checkbox: CheckBox = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer1/A1Checkbox")
+@onready var a2_checkbox: CheckBox = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer2/A2Checkbox")
+@onready var a3_checkbox: CheckBox = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer3/A3Checkbox")
+@onready var a4_checkbox: CheckBox = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer4/A4Checkbox")
+@onready var a1_line_edit: LineEdit = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer1/A1Edit")
+@onready var a2_line_edit: LineEdit = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer2/A2Edit")
+@onready var a3_line_edit: LineEdit = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer3/A3Edit")
+@onready var a4_line_edit: LineEdit = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer4/A4Edit")
+
+
 
 # Dictionary is a struct with key : value. Each of the 'Cards' part of a deck dictionary is an array
 # of dictionaries.
@@ -23,16 +42,34 @@ var deck_name: String = "Default Deck Name"
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	nav_label.text = "0 / 0" # The label in the bottoms that shows num of cards
+	add_answer_options() #fill option box for answer formats
+	#update_answer_format()
 	add_new_card_to_deck() # Run this func
 
+
+
+
+func add_answer_options() -> void:
+	answer_options.add_item("Free Response", 1)
+	answer_options.add_item("Multiple Choice", 2)
+	answer_options.add_item("T/F Choice", 3)
 
 func add_new_card_to_deck() -> void:
 	# Temp Dict var to hold empty card
 	var tmp: Dictionary = { 
 		"Question": "",
 		"Answer": "",
+		"Free Response": true,
+		"T/F Choice": false,
+		"Multiple Choice": false,
 		"Case sensitive": false,
-		"Space sensitive": false
+		"Space sensitive": false,
+		"Multiple Answers": {
+			"answer1": "",
+			"answer2": "",
+			"answer3": "",
+			"answer4": ""
+		} #a dictionary to hold multi answers
 		}
 	# Add the empty card to "cards" array
 	new_deck["Cards"].append(tmp.duplicate(true)) 
@@ -175,3 +212,94 @@ func _on_back_button_pressed() -> void:
 	p.no_button.pressed.connect(p.free_self)
 	p.cancel_button.pressed.connect(p.free_self)
 	p.show()
+
+
+func _on_answer_option_item_selected(index: int) -> void:
+	if(index == 0): #free responce becomes visible
+		answer_edit.set_visible(true)
+		multiple_choice_format.set_visible(false)
+		tf_choice_format.set_visible(false)
+		new_deck["Cards"][current_card]["Free Response"] = true
+		new_deck["Cards"][current_card]["Multiple Choice"] = false
+		new_deck["Cards"][current_card]["T/F Choice"] = false
+	if(index == 1): #multi responce becomes visible
+		answer_edit.set_visible(false)
+		multiple_choice_format.set_visible(true)
+		tf_choice_format.set_visible(false)
+		new_deck["Cards"][current_card]["Free Response"] = false
+		new_deck["Cards"][current_card]["Multiple Choice"] = true
+		new_deck["Cards"][current_card]["T/F Choice"] = false
+	if(index == 2): #t/f responce becomes visible
+		answer_edit.set_visible(false)
+		multiple_choice_format.set_visible(false)
+		tf_choice_format.set_visible(true)
+		new_deck["Cards"][current_card]["Free Response"] = false
+		new_deck["Cards"][current_card]["Multiple Choice"] = false
+		new_deck["Cards"][current_card]["T/F Choice"] = true
+
+
+func _on_true_box_toggled(toggled_on: bool) -> void:
+	if (toggled_on): #if toggled on then other answer is not
+		answer_false.button_pressed = false
+		new_deck["Cards"][current_card]["Answer"] = "True" #assigning answer
+	else:
+		answer_false.button_pressed = true
+		new_deck["Cards"][current_card]["Answer"] = "False"
+	
+
+
+func _on_false_box_toggled(toggled_on: bool) -> void:
+	if (toggled_on): #if toggled on then other answer is not
+		answer_true.button_pressed = false
+		new_deck["Cards"][current_card]["Answer"] = "False" #assigning answer
+	else:
+		answer_true.button_pressed = true
+		new_deck["Cards"][current_card]["Answer"] = "True"
+
+
+func _on_a1_edit_text_changed(new_text: String) -> void:
+	new_deck["Cards"][current_card]["Multiple Answers"]["answer1"] = new_text
+
+
+func _on_a2_edit_text_changed(new_text: String) -> void:
+	new_deck["Cards"][current_card]["Multiple Answers"]["answer2"] = new_text
+
+
+func _on_a3_edit_text_changed(new_text: String) -> void:
+	new_deck["Cards"][current_card]["Multiple Answers"]["answer3"] = new_text
+
+
+func _on_a4_edit_text_changed(new_text: String) -> void:
+	new_deck["Cards"][current_card]["Multiple Answers"]["answer4"] = new_text
+
+
+func _on_a1_checkbox_toggled(toggled_on: bool) -> void:
+	if (toggled_on): #if toggled on then other answers are not
+		a2_checkbox.button_pressed = false
+		a3_checkbox.button_pressed = false
+		a4_checkbox.button_pressed = false
+		new_deck["Cards"][current_card]["Answer"] = "1" #assigning answer
+
+
+func _on_a2_checkbox_toggled(toggled_on: bool) -> void:
+	if (toggled_on): #if toggled on then other answers are not
+		a1_checkbox.button_pressed = false
+		a3_checkbox.button_pressed = false
+		a4_checkbox.button_pressed = false
+		new_deck["Cards"][current_card]["Answer"] = "2" #assigning answer
+
+
+func _on_a3_checkbox_toggled(toggled_on: bool) -> void:
+	if (toggled_on): #if toggled on then other answers are not
+		a1_checkbox.button_pressed = false
+		a2_checkbox.button_pressed = false
+		a4_checkbox.button_pressed = false
+		new_deck["Cards"][current_card]["Answer"] = "3" #assigning answer
+
+
+func _on_a4_checkbox_toggled(toggled_on: bool) -> void:
+	if (toggled_on): #if toggled on then other answers are not
+		a1_checkbox.button_pressed = false
+		a2_checkbox.button_pressed = false
+		a3_checkbox.button_pressed = false
+		new_deck["Cards"][current_card]["Answer"] = "4" #assigning answer
