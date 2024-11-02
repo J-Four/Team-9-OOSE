@@ -254,6 +254,8 @@ func _on_answer_option_item_selected(index: int) -> void:
 		new_deck["Cards"][current_card]["Free Response"] = true
 		new_deck["Cards"][current_card]["Multiple Choice"] = false
 		new_deck["Cards"][current_card]["T/F Choice"] = false
+		case_checkbox.disabled = false
+		space_checkbox.disabled = false
 	if(index == 1): #multi responce becomes visible
 		answer_edit.set_visible(false)
 		multiple_choice_format.set_visible(true)
@@ -262,6 +264,8 @@ func _on_answer_option_item_selected(index: int) -> void:
 		new_deck["Cards"][current_card]["Multiple Choice"] = true
 		new_deck["Cards"][current_card]["T/F Choice"] = false
 		update_multiple_choice()
+		case_checkbox.disabled = true
+		space_checkbox.disabled = true
 	if(index == 2): #t/f responce becomes visible
 		answer_edit.set_visible(false)
 		multiple_choice_format.set_visible(false)
@@ -269,6 +273,8 @@ func _on_answer_option_item_selected(index: int) -> void:
 		new_deck["Cards"][current_card]["Free Response"] = false
 		new_deck["Cards"][current_card]["Multiple Choice"] = false
 		new_deck["Cards"][current_card]["T/F Choice"] = true
+		case_checkbox.disabled = true
+		space_checkbox.disabled = true
 
 
 func _on_true_box_toggled(toggled_on: bool) -> void:
