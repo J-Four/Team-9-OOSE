@@ -23,19 +23,15 @@ extends Node
 @onready var a2_line_edit: LineEdit = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer2/A2Edit")
 @onready var a3_line_edit: LineEdit = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer3/A3Edit")
 @onready var a4_line_edit: LineEdit = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer4/A4Edit")
-
+@onready var deck_name_edit: LineEdit = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/HBoxContainer/DeckNameLineEdit")
+@onready var random_order_checkbox: CheckBox = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/RandomOrderCheckBox2")
 
 
 # Dictionary is a struct with key : value. Each of the 'Cards' part of a deck dictionary is an array
 # of dictionaries.
 var empty_array: Array[Dictionary]
 # This is saved cards array first, lvl, scaleDiff last
-var new_deck: Dictionary = { 
-	"Scale difficulty": true,
-	"Random order": true,
-	"XP": 0,
-	"Cards": empty_array.duplicate(true) # Makes another array of Dict to save cards
-}
+var new_deck: Dictionary 
 var current_card: int = -1
 var deck_name: String = "Default Deck Name"
 
@@ -44,7 +40,14 @@ func _ready() -> void:
 	nav_label.text = "0 / 0" # The label in the bottoms that shows num of cards
 	add_answer_options() #fill option box for answer formats
 	#update_answer_format()
-	add_new_card_to_deck() # Run this func
+	#add_new_card_to_deck() # Run this func
+	
+	new_deck = Global.deck_data
+	current_card = 0
+	update_display_to_card(current_card)
+	random_order_checkbox.button_pressed = new_deck["Random order"]
+	deck_name = Global.deck_name
+	deck_name_edit.text = Global.deck_name
 
 
 
@@ -247,7 +250,7 @@ func _on_back_button_pressed() -> void:
 	var p = popup.instantiate()
 	add_child(p)
 	p.error_label.text = "Are you sure you want to exit deck creation? Any unsaved changes will be lost."
-	p.yes_button.pressed.connect(SceneTransitioner.transition_in_from_top_bounce.bind("res://Scenes/MainSceneControl.tscn"))
+	p.yes_button.pressed.connect(SceneTransitioner.transition_in_from_right_cubic.bind("res://Scenes/MainSceneControl.tscn"))
 	p.yes_button.pressed.connect(p.free_self)
 	p.no_button.pressed.connect(p.free_self)
 	p.cancel_button.pressed.connect(p.free_self)
@@ -287,20 +290,20 @@ func _on_answer_option_item_selected(index: int) -> void:
 
 func _on_true_box_toggled(toggled_on: bool) -> void:
 	if (toggled_on): #if toggled on then other answer is not
-		answer_false.button_pressed = false
+		answer_false.set_pressed_no_signal(false)
 		new_deck["Cards"][current_card]["Answer"] = "True" #assigning answer
 	else:
-		answer_false.button_pressed = true
+		answer_false.set_pressed_no_signal(true)
 		new_deck["Cards"][current_card]["Answer"] = "False"
 	
 
 
 func _on_false_box_toggled(toggled_on: bool) -> void:
 	if (toggled_on): #if toggled on then other answer is not
-		answer_true.button_pressed = false
+		answer_true.set_pressed_no_signal(false)
 		new_deck["Cards"][current_card]["Answer"] = "False" #assigning answer
 	else:
-		answer_true.button_pressed = true
+		answer_true.set_pressed_no_signal(true)
 		new_deck["Cards"][current_card]["Answer"] = "True"
 
 

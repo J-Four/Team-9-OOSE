@@ -1,13 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://54ht0y57mics"]
+[gd_scene load_steps=7 format=3 uid="uid://co0i5ikiascpo"]
 
-[ext_resource type="Script" path="res://scripts/CreateDeckScripts/CreateDeck.gd" id="1_ftljd"]
-[ext_resource type="Theme" uid="uid://cta3fyluiaeg0" path="res://Assets/Themes/OrangeButton.tres" id="2_tebs5"]
-[ext_resource type="Script" path="res://scripts/CreateDeckScripts/QEdit.gd" id="4_gafpp"]
-[ext_resource type="Theme" uid="uid://d11c37qf38urw" path="res://Assets/Themes/arrowButton.tres" id="5_aciva"]
-[ext_resource type="Script" path="res://scripts/CreateDeckScripts/add_card_button.gd" id="6_fs1bt"]
-[ext_resource type="Theme" uid="uid://d3pis5jvba6vf" path="res://Assets/Themes/GreenButton.tres" id="7_lvu4l"]
+[ext_resource type="Script" path="res://scripts/EditDeck.gd" id="1_m72y3"]
+[ext_resource type="Theme" uid="uid://cta3fyluiaeg0" path="res://Assets/Themes/OrangeButton.tres" id="2_eit6i"]
+[ext_resource type="Script" path="res://scripts/CreateDeckScripts/QEdit.gd" id="3_nbrfr"]
+[ext_resource type="Theme" uid="uid://d11c37qf38urw" path="res://Assets/Themes/arrowButton.tres" id="4_sosjj"]
+[ext_resource type="Script" path="res://scripts/CreateDeckScripts/add_card_button.gd" id="5_nyipo"]
+[ext_resource type="Theme" uid="uid://d3pis5jvba6vf" path="res://Assets/Themes/GreenButton.tres" id="6_b24bi"]
 
-[node name="CreateDeck" type="Control"]
+[node name="EditDeck" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,7 +16,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource("1_ftljd")
+script = ExtResource("1_m72y3")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -57,7 +57,7 @@ custom_minimum_size = Vector2(125, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
-theme = ExtResource("2_tebs5")
+theme = ExtResource("2_eit6i")
 text = "Back"
 
 [node name="PanelContainer2" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
@@ -86,7 +86,7 @@ custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 placeholder_text = "Enter Question Here"
 alignment = 1
-script = ExtResource("4_gafpp")
+script = ExtResource("3_nbrfr")
 
 [node name="AnswerEdit" type="TextEdit" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer"]
 clip_contents = false
@@ -215,10 +215,10 @@ layout_mode = 2
 custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
 size_flags_horizontal = 4
-theme = ExtResource("5_aciva")
+theme = ExtResource("4_sosjj")
 theme_override_font_sizes/font_size = 25
 text = "Add Card"
-script = ExtResource("6_fs1bt")
+script = ExtResource("5_nyipo")
 
 [node name="RemoveCardButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2"]
 modulate = Color(1, 0.0909423, 0.0594643, 1)
@@ -226,10 +226,10 @@ custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme = ExtResource("5_aciva")
+theme = ExtResource("4_sosjj")
 theme_override_font_sizes/font_size = 25
 text = "Remove Card"
-script = ExtResource("6_fs1bt")
+script = ExtResource("5_nyipo")
 
 [node name="PanelContainer3" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 55)
@@ -267,7 +267,7 @@ text = ">"
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 size_flags_horizontal = 8
-theme = ExtResource("7_lvu4l")
+theme = ExtResource("6_b24bi")
 text = "Finish Deck"
 
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

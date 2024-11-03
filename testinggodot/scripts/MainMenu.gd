@@ -33,6 +33,11 @@ func _ready() -> void:
 			else:
 				MessageDisplayer.error_popup("JSON parse error: " + json.get_error_message() + "\nin file: " + file_name, self)
 		file_name = dir.get_next()
+	
+	# reset global vars
+	Global.ChosenDeck = ""
+	Global.deck_name = ""
+	Global.deck_data = {}
 
 
 func add_deck_button(name: String, data: Dictionary):
@@ -59,15 +64,24 @@ func _on_pressed() -> void:
 	get_tree().change_scene_to_file("res://Scenes/CreateDeck.tscn")
 
 
-func _deck_pressed(deck_name: String):
+func _deck_pressed(deck_name: String) -> void:
 	Global.ChosenDeck = deck_name
 	Global.deck_name = deck_name
 	Global.deck_data = loaded_decks[deck_name]
-	SceneTransitioner.transition_in_from_top_bounce("res://Scenes/playDeck.tscn")
+
+
+func _study_pressed() -> void:
+	if Global.deck_name != "":
+		SceneTransitioner.transition_in_from_top_bounce("res://Scenes/playDeck.tscn")
+	else:
+		MessageDisplayer.error_popup("Please select the deck you want to study first.")
 
 
 func _on_edit_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://Scenes/EditDecks.tscn")
+	if Global.deck_name != "":
+		SceneTransitioner.transition_in_from_right_cubic("res://Scenes/EditDeck.tscn")
+	else:
+		MessageDisplayer.error_popup("Please select the deck you want to edit first.")
 
 
 func _on_create_deck_button_pressed() -> void:
