@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://b22akfk23ehd3"]
+[gd_scene load_steps=3 format=3 uid="uid://b22akfk23ehd3"]
 
 [ext_resource type="Script" path="res://Scenes/player_customize.gd" id="1_6kuql"]
+[ext_resource type="Theme" uid="uid://bw57ena6l4loa" path="res://Assets/Themes/SpriteFAdventure.tres" id="2_ur2dp"]
 
 [node name="PlayerCustomize" type="Control"]
 layout_mode = 3
@@ -68,25 +69,29 @@ text = "Options:"
 [node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer1/Opts"]
 layout_mode = 2
 
-[node name="Hair" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer1/Opts"]
+[node name="MaleAdventure" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer1/Opts"]
 layout_mode = 2
-text = "Hair"
+text = "Adventurer Male"
 
-[node name="Eyes" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer1/Opts"]
+[node name="FemaleAdventure" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer1/Opts"]
 layout_mode = 2
-text = "Eyes"
+text = "Adventurer Female"
 
-[node name="Shirt" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer1/Opts"]
+[node name="MaleSkeleton" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer1/Opts"]
 layout_mode = 2
-text = "Shirt"
+text = "Male Skeleton"
 
-[node name="Pants" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer1/Opts"]
+[node name="FemaleSkeleton" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer1/Opts"]
 layout_mode = 2
-text = "Pants"
+text = "Female Skeleton"
 
-[node name="Shoes" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer1/Opts"]
+[node name="Elf" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer1/Opts"]
 layout_mode = 2
-text = "Shoes"
+text = "Elf"
+
+[node name="Princess" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer1/Opts"]
+layout_mode = 2
+text = "Princess"
 
 [node name="VSeparator2" type="VSeparator" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2"]
 custom_minimum_size = Vector2(10, 0)
@@ -95,119 +100,142 @@ layout_mode = 2
 [node name="PanelContainer2" type="PanelContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2"]
 layout_mode = 2
 
-[node name="HairOpt" type="VBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2"]
+[node name="MAdventureOpt" type="VBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2"]
 layout_mode = 2
 
-[node name="HairOptionsLabel" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/HairOpt"]
+[node name="Emotes" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/MAdventureOpt"]
 layout_mode = 2
-text = "Hair Options: "
+text = "Emotes:"
 
-[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/HairOpt"]
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/MAdventureOpt"]
 layout_mode = 2
 
-[node name="Opt1" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/HairOpt"]
+[node name="Opt1" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/MAdventureOpt"]
 layout_mode = 2
-text = "Hair 1"
+text = "Good Job!"
 
-[node name="Opt2" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/HairOpt"]
+[node name="Opt2" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/MAdventureOpt"]
 layout_mode = 2
-text = "Hair 2"
+text = "Keep Trying!"
 
-[node name="Opt3" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/HairOpt"]
+[node name="Opt3" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/MAdventureOpt"]
 layout_mode = 2
-text = "Hair 3"
+text = "Default"
 
-[node name="EyesOpt" type="VBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2"]
+[node name="FAdventureOpt" type="VBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2"]
 visible = false
 layout_mode = 2
 
-[node name="EyesOptionsLabel" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/EyesOpt"]
+[node name="Emotes" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/FAdventureOpt"]
 layout_mode = 2
 text = "Eyes Options: "
 
-[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/EyesOpt"]
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/FAdventureOpt"]
 layout_mode = 2
 
-[node name="Opt1" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/EyesOpt"]
+[node name="Opt1" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/FAdventureOpt"]
 layout_mode = 2
-text = "Eyes 1"
+text = "Good Job!"
 
-[node name="Opt2" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/EyesOpt"]
+[node name="Opt2" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/FAdventureOpt"]
 layout_mode = 2
-text = "Eyes 2"
+text = "Keep Trying!"
 
-[node name="Opt3" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/EyesOpt"]
+[node name="Opt3" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/FAdventureOpt"]
 layout_mode = 2
-text = "Eyes 3"
+text = "Default"
 
-[node name="ShirtOpt" type="VBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2"]
+[node name="MSkellyOpt" type="VBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2"]
 visible = false
 layout_mode = 2
 
-[node name="ShirtOptionsLabel" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/ShirtOpt"]
+[node name="Emotes" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/MSkellyOpt"]
 layout_mode = 2
-text = "Shirt Options: "
+text = "Eyes Options: "
 
-[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/ShirtOpt"]
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/MSkellyOpt"]
 layout_mode = 2
 
-[node name="Opt1" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/ShirtOpt"]
+[node name="Opt1" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/MSkellyOpt"]
 layout_mode = 2
-text = "Shirt 1"
+text = "Good Job!"
 
-[node name="Opt2" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/ShirtOpt"]
+[node name="Opt2" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/MSkellyOpt"]
 layout_mode = 2
-text = "Shirt 2"
+text = "Keep Trying!"
 
-[node name="Opt3" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/ShirtOpt"]
+[node name="Opt3" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/MSkellyOpt"]
 layout_mode = 2
-text = "Shirt 3"
+text = "Default"
 
-[node name="PantsOpt" type="VBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2"]
+[node name="FSkellyOpt" type="VBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2"]
 visible = false
 layout_mode = 2
 
-[node name="PantsOptionsLabel" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/PantsOpt"]
+[node name="Emotes" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/FSkellyOpt"]
 layout_mode = 2
-text = "Pants Options: "
+text = "Eyes Options: "
 
-[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/PantsOpt"]
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/FSkellyOpt"]
 layout_mode = 2
 
-[node name="Opt1" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/PantsOpt"]
+[node name="Opt1" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/FSkellyOpt"]
 layout_mode = 2
-text = "Pants 1"
+text = "Good Job!"
 
-[node name="Opt2" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/PantsOpt"]
+[node name="Opt2" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/FSkellyOpt"]
 layout_mode = 2
-text = "Pants 2"
+text = "Keep Trying!"
 
-[node name="Opt3" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/PantsOpt"]
+[node name="Opt3" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/FSkellyOpt"]
 layout_mode = 2
-text = "Pants 3"
+text = "Default"
 
-[node name="ShoesOpt" type="VBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2"]
+[node name="ElfOpt" type="VBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2"]
 visible = false
 layout_mode = 2
 
-[node name="ShoesOptionsLabel" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/ShoesOpt"]
+[node name="Emotes" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/ElfOpt"]
 layout_mode = 2
-text = "Shoes Options: "
+text = "Eyes Options: "
 
-[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/ShoesOpt"]
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/ElfOpt"]
 layout_mode = 2
 
-[node name="Opt1" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/ShoesOpt"]
+[node name="Opt1" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/ElfOpt"]
 layout_mode = 2
-text = "Shoes 1"
+text = "Good Job!"
 
-[node name="Opt2" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/ShoesOpt"]
+[node name="Opt2" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/ElfOpt"]
 layout_mode = 2
-text = "Shoes 2"
+text = "Keep Trying!"
 
-[node name="Opt3" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/ShoesOpt"]
+[node name="Opt3" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/ElfOpt"]
 layout_mode = 2
-text = "Shoes 3"
+text = "Default"
+
+[node name="PrincessOpt" type="VBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2"]
+visible = false
+layout_mode = 2
+
+[node name="Emotes" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/PrincessOpt"]
+layout_mode = 2
+text = "Eyes Options: "
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/PrincessOpt"]
+layout_mode = 2
+
+[node name="Opt1" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/PrincessOpt"]
+layout_mode = 2
+text = "Good Job!"
+
+[node name="Opt2" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/PrincessOpt"]
+layout_mode = 2
+text = "Keep Trying!"
+
+[node name="Opt3" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/PrincessOpt"]
+layout_mode = 2
+text = "Default"
 
 [node name="VSeparator3" type="VSeparator" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2"]
 custom_minimum_size = Vector2(10, 0)
@@ -217,13 +245,14 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Node2D" type="Node2D" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer3"]
-position = Vector2(-232, 0)
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer3"]
+layout_mode = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer3/Node2D"]
-position = Vector2(617, 260)
-region_enabled = true
-region_rect = Rect2(27, 36, 259, 363)
+[node name="Sprite" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer3/PanelContainer"]
+custom_minimum_size = Vector2(375, 500)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_ur2dp")
 
 [node name="VSeparator4" type="VSeparator" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2"]
 custom_minimum_size = Vector2(10, 0)
@@ -251,10 +280,11 @@ text = "Cancel"
 [node name="HSeparator4" type="HSeparator" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 
-[connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer1/Opts/Hair" to="." method="_on_hair_opts_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer1/Opts/Eyes" to="." method="_on_eyes_opt_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer1/Opts/Shirt" to="." method="_on_shirt_opts_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer1/Opts/Pants" to="." method="_on_pants_opts_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer1/Opts/Shoes" to="." method="_on_shoes_opts_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer1/Opts/MaleAdventure" to="." method="_on_male_adventure_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer1/Opts/FemaleAdventure" to="." method="_on_female_adventure_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer1/Opts/MaleSkeleton" to="." method="_on_male_skeleton_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer1/Opts/FemaleSkeleton" to="." method="_on_female_skeleton_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer1/Opts/Elf" to="." method="_on_elf_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer1/Opts/Princess" to="." method="_on_princess_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer3/HBoxContainer3/OK" to="." method="_on_ok_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer3/HBoxContainer3/Cancel" to="." method="_on_cancel_pressed"]

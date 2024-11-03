@@ -13,6 +13,7 @@ var cards_wrong: int = 0
 var lost: bool = false
 var lives_left: int = 0
 var deck_name: String = ""
+var spriteChosen: String = "MAdventure"
 
 signal write_successful
 
