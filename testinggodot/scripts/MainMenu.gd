@@ -15,29 +15,50 @@ func _ready() -> void:
 	if not dir:
 		MessageDisplayer.error_popup("Error reading path: " + dir_path, self)
 		return
-	
+	Global.write_user() #will update user changes only if not the first time this func is ran
 	# Get each json file in the direrctory
 	dir.list_dir_begin()
 	var file_name: String = dir.get_next()
 	while file_name != "":
 		if (not dir.current_is_dir()) and file_name.ends_with(".json"):
-			print("Found: " + file_name)
-			var deck_file = FileAccess.open(dir_path + "/" + file_name, FileAccess.READ)
-			var data_str: String = deck_file.get_as_text()
-			
-			var json = JSON.new()
-			var error = json.parse(data_str)
-			if error == OK:
-				var data: Dictionary = json.data
-				add_deck_button(file_name.substr(0, file_name.rfind(".")), data)
+			if(file_name.begins_with("studyDashUser")): #the user file only
+				print("Found user file: " + file_name)
+				var userFile = FileAccess.open(dir_path + "/" + file_name, FileAccess.READ)
+				var usrStr: String = userFile.get_as_text()
+				
+				var json = JSON.new()
+				var error = json.parse(usrStr)
+				if error == OK: #populate user data
+					var studyDashUser: Dictionary = json.data
+					Global.spriteChosen = studyDashUser["chosenStudybuddy"]
+					Global.brainPower = studyDashUser["brainPower"]
+					Global.unlockedSprites["MAdventurer"] = studyDashUser["unlockedStudyB"]["MAdventurer"]
+					Global.unlockedSprites["FAdventurer"] = studyDashUser["unlockedStudyB"]["FAdventurer"]
+					Global.unlockedSprites["MSkelly"] = studyDashUser["unlockedStudyB"]["MSkelly"]
+					Global.unlockedSprites["FSkelly"] = studyDashUser["unlockedStudyB"]["FSkelly"]
+					Global.unlockedSprites["Elf"] = studyDashUser["unlockedStudyB"]["Elf"]
+					Global.unlockedSprites["Princess"] = studyDashUser["unlockedStudyB"]["Princess"]
+				else:
+					MessageDisplayer.error_popup("JSON parse error: " + json.get_error_message() + "\nin file: " + file_name, self)
 			else:
-				MessageDisplayer.error_popup("JSON parse error: " + json.get_error_message() + "\nin file: " + file_name, self)
+				print("Found: " + file_name)
+				var deck_file = FileAccess.open(dir_path + "/" + file_name, FileAccess.READ)
+				var data_str: String = deck_file.get_as_text()
+				
+				var json = JSON.new()
+				var error = json.parse(data_str)
+				if error == OK:
+					var data: Dictionary = json.data
+					add_deck_button(file_name.substr(0, file_name.rfind(".")), data)
+				else:
+					MessageDisplayer.error_popup("JSON parse error: " + json.get_error_message() + "\nin file: " + file_name, self)
 		file_name = dir.get_next()
 	
 	# reset global vars
 	Global.ChosenDeck = ""
 	Global.deck_name = ""
 	Global.deck_data = {}
+	
 
 
 func add_deck_button(name: String, data: Dictionary):

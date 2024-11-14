@@ -13,7 +13,19 @@ var cards_wrong: int = 0
 var lost: bool = false
 var lives_left: int = 0
 var deck_name: String = ""
+
+#user var default?
 var spriteChosen: String = "MAdventure"
+var brainPower: int = 0
+var unlockedSprites: Dictionary = {
+			"MAdventurer": true,
+			"FAdventurer": true,
+			"MSkelly": false,
+			"FSkelly": false,
+			"Elf": false,
+			"Princess": false
+		}
+var userUpdated: bool = false #trying to get around some timing logic of when to write user
 
 signal write_successful
 
@@ -31,8 +43,7 @@ func add_and_save_xp_to_deck(xp: int):
 	deck_data["XP"] += xp
 	
 	# Save deck as json file in folder.
-	var json = JSON.new()
-	var json_string = json.stringify(deck_data)
+	var json_string = JSON.stringify(deck_data)
 	
 	# Create folder if it does not already exist
 	var dir = DirAccess.open(deck_save_directory)
@@ -103,3 +114,32 @@ func get_level_xp_bounds(lvl: int) -> Array:
 	var lower_bound: int = get_xp_from_level(lvl)
 	var upper_bound: int = get_xp_from_level(lvl + 1)
 	return [lower_bound, upper_bound]
+	
+func write_user(display_popup: bool = true) -> void:
+	if (userUpdated):
+		#should save user data so brain power and unlocked studdy buddies carry over on different sessions.
+		var studyDashUser: Dictionary = {
+			"chosenStudybuddy": spriteChosen,
+			"brainPower": brainPower,
+			"unlockedStudyB":{
+				"MAdventurer": unlockedSprites["MAdventurer"],
+				"FAdventurer": unlockedSprites["FAdventurer"],
+				"MSkelly": unlockedSprites["MSkelly"],
+				"FSkelly": unlockedSprites["FSkelly"],
+				"Elf": unlockedSprites["Elf"],
+				"Princess": unlockedSprites["Princess"]
+				}
+			}	
+		var jsonUserString = JSON.stringify(studyDashUser)
+		# Create or overrite json file
+		var path: String = str(OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP) + "/flash_cards/" + "studyDashUser" + ".json")
+		var file = FileAccess.open(path, FileAccess.WRITE)
+		if file == null:
+			print("Error writing json file.")
+			MessageDisplayer.error_popup("Error writing json file for user.")
+			return
+		file.store_line(jsonUserString)
+		file.close()
+	else:
+		userUpdated = true
+	
