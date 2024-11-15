@@ -8,7 +8,9 @@ custom_minimum_size = Vector2(250, 160)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("1_d1lse")
+theme_override_font_sizes/font_size = 25
 text_overrun_behavior = 3
+autowrap_mode = 2
 script = ExtResource("2_1xdfk")
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

@@ -16,7 +16,7 @@ extends Control
 @onready var costLabel: Label = get_node("PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/VBoxContainer/Label")
 @onready var buyButton: Button = get_node("PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/VBoxContainer/Button")
 @onready var lockedOrUnlockedLabel: Label = get_node("PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/VBoxContainer/locked_unlocked")
-@onready var BPCount: Label = get_node("PanelContainer/VBoxContainer/PanelContainer/HBoxContainer/BP_Count")
+@onready var BPCount: Label = get_node("PanelContainer/VBoxContainer/PanelContainer/HBoxContainer/MarginContainer2/BP_Count")
 
 var clickedSprite
 var spriteCost = 100

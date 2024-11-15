@@ -15,9 +15,9 @@ extends Node
 @onready var correct_sfx: Resource = preload("res://Assets/Audio/Buff 001.wav")
 @onready var wrong_sfx: Resource = preload("res://Assets/Audio/Debuff 001.wav")
 @onready var lives: Array = [
-	get_node("PanelContainer/VBoxContainer/PanelContainer4/MarginContainer/BoxContainer/CenterContainer/Heart1"),
-	get_node("PanelContainer/VBoxContainer/PanelContainer4/MarginContainer/BoxContainer/CenterContainer2/Heart2"),
-	get_node("PanelContainer/VBoxContainer/PanelContainer4/MarginContainer/BoxContainer/CenterContainer3/Heart3")
+	get_node("PanelContainer/VBoxContainer/PanelContainer4/MarginContainer/PanelContainer/BoxContainer/CenterContainer/Heart1"),
+	get_node("PanelContainer/VBoxContainer/PanelContainer4/MarginContainer/PanelContainer/BoxContainer/CenterContainer2/Heart2"),
+	get_node("PanelContainer/VBoxContainer/PanelContainer4/MarginContainer/PanelContainer/BoxContainer/CenterContainer3/Heart3")
 	]
 @onready var TrueFalseChoice: HBoxContainer = get_node("PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/TrueFalseChoice")
 @onready var MultipleChoice: VBoxContainer = get_node("PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MultipleChoice")

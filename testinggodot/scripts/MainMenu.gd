@@ -1,7 +1,7 @@
 extends Node
 
 @onready var deck_button: Resource = preload("res://Scenes/DeckButton.tscn")
-@onready var hflow: HFlowContainer = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HFlowContainer")
+@onready var hflow: HFlowContainer = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/PanelContainer/HFlowContainer")
 
 var loaded_decks: Dictionary
 
