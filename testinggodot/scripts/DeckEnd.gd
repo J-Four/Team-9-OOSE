@@ -25,9 +25,11 @@ func _ready() -> void:
 	var lvl: int = Global.get_level_from_xp(Global.deck_data["XP"])
 	var next_lvl_xp: int = Global.get_xp_from_level(lvl + 1)
 	var new_xp_val: int = Global.deck_data["XP"] + total_xp_earned
+	var brainPowerAdded = (Global.lives_left * 10) + 20 #where BP earned is determined
 	
+	Global.brainPower = Global.brainPower + brainPowerAdded
 	update_level_labels(lvl, total_xp_earned)
-	stats_label.text = "Total cards: \t" + str(Global.num_cards) + "\nCorrect: \t\t" + str(Global.cards_correct) + "\t +" + str(Global.cards_correct * xp_per_correct) + "xp\nIncorrect: \t" + str(Global.cards_wrong) + "\nLives left: \t" + str(Global.lives_left) + "\t +" + str(Global.lives_left * xp_per_heart) + "xp\nTotal XP gained: " + str(total_xp_earned) + "xp"
+	stats_label.text = "Total cards: \t" + str(Global.num_cards) + "\nCorrect: \t\t" + str(Global.cards_correct) + "\t +" + str(Global.cards_correct * xp_per_correct) + "xp\nIncorrect: \t" + str(Global.cards_wrong) + "\nLives left: \t" + str(Global.lives_left) + "\t +" + str(Global.lives_left * xp_per_heart) + "xp\nTotal XP gained: " + str(total_xp_earned) + "xp\nTotal BP gained: " + str(brainPowerAdded)
 	
 	tween_progress_bar(Global.get_xp_from_level(lvl), Global.get_xp_from_level(lvl + 1), Global.deck_data["XP"], new_xp_val, lvl)
 	

@@ -184,6 +184,7 @@ func answer_correct(isCorrect: bool) -> void:
 		progress_labels[current_card_idx].modulate = Color.GREEN
 		cards_correct += 1
 		
+		
 		# If this is the final card, go to end screen. Else go to next card
 		if current_card_idx == num_cards - 1:
 			deck_complete("Deck Complete!", 2)

@@ -13,104 +13,106 @@ extends Control
 @onready var FSkellyTheme: Resource = preload("res://Assets/Themes/SpriteFSkelly.tres")
 @onready var ElfTheme: Resource = preload("res://Assets/Themes/SpriteElf.tres")
 @onready var PrincessTheme: Resource = preload("res://Assets/Themes/SpritePrincess.tres")
+@onready var costLabel: Label = get_node("PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/VBoxContainer/Label")
+@onready var buyButton: Button = get_node("PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/VBoxContainer/Button")
+@onready var lockedOrUnlockedLabel: Label = get_node("PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/VBoxContainer/locked_unlocked")
+@onready var BPCount: Label = get_node("PanelContainer/VBoxContainer/PanelContainer/HBoxContainer/BP_Count")
 
+var clickedSprite
+var spriteCost = 100
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	update_sprite()
+	update_sprite(Global.spriteChosen)
 
+func update_label_lock(spriteCheck: String) -> void:
+	if (Global.unlockedSprites[spriteCheck]):
+		lockedOrUnlockedLabel.text = "Unlocked"
+		costLabel.text = ""
+	else: 
+		lockedOrUnlockedLabel.text = "Locked"
+		costLabel.text = str(spriteCost) + "BP to unlock."
+	BPCount.text = "Current Brain Power:  " + str(Global.brainPower)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
-func update_sprite() -> void:
-	if(Global.spriteChosen == "MAdventure"):
+func update_sprite(spriteCheck: String) -> void:
+	if(spriteCheck == "MAdventurer"):
 		spriteChar.theme = MAdventureTheme
-	if(Global.spriteChosen == "FAdventure"):
+	if(spriteCheck == "FAdventurer"):
 		spriteChar.theme = FAdventureTheme
-	if(Global.spriteChosen == "MSkelly"):
+	if(spriteCheck == "MSkelly"):
 		spriteChar.theme = MSkellyTheme
-	if(Global.spriteChosen == "FSkelly"):
+	if(spriteCheck == "FSkelly"):
 		spriteChar.theme = FSkellyTheme
-	if(Global.spriteChosen == "Elf"):
+	if(spriteCheck == "Elf"):
 		spriteChar.theme = ElfTheme
-	if(Global.spriteChosen == "Princess"):
+	if(spriteCheck == "Princess"):
 		spriteChar.theme = PrincessTheme
+	update_label_lock(spriteCheck)
+		
 
 func _on_cancel_pressed() -> void:
 	# TODO: go to main menu w/o saving
 	get_tree().change_scene_to_file("res://Scenes/MainSceneControl.tscn")
 
 
-func _on_ok_pressed() -> void:
+func _on_ok_pressed(display_popup: bool = true) -> void:
 	# TODO: go to main menu and save
-	get_tree().change_scene_to_file("res://Scenes/MainSceneControl.tscn")
+	if ( not (clickedSprite == null)):
+		if Global.unlockedSprites[clickedSprite]: #if sprite unlocked, then accept selection
+			Global.spriteChosen = clickedSprite
+			get_tree().change_scene_to_file("res://Scenes/MainSceneControl.tscn")
+		else:
+			print("buddy not unlocked")
+			#TODO add pop-up
+	else: 
+		_on_cancel_pressed()
+	
 
 
 
 
 func _on_male_adventure_pressed() -> void:
-	MAdventureOpts.set_visible(true)
-	FAdventureOpts.set_visible(false)
-	MSkellyOpts.set_visible(false)
-	FSkellyOpts.set_visible(false)
-	ElfOpts.set_visible(false)
-	PrincessOpts.set_visible(false)
-	Global.spriteChosen = "MAdventure"
-	update_sprite()
+	clickedSprite = "MAdventurer"
+	update_sprite(clickedSprite)
 	
 
 
 func _on_female_adventure_pressed() -> void:
-	MAdventureOpts.set_visible(false)
-	FAdventureOpts.set_visible(true)
-	MSkellyOpts.set_visible(false)
-	FSkellyOpts.set_visible(false)
-	ElfOpts.set_visible(false)
-	PrincessOpts.set_visible(false)
-	Global.spriteChosen = "FAdventure"
-	update_sprite()
+	clickedSprite = "FAdventurer"
+	update_sprite(clickedSprite)
 
 
 func _on_male_skeleton_pressed() -> void:
-	MAdventureOpts.set_visible(false)
-	FAdventureOpts.set_visible(false)
-	MSkellyOpts.set_visible(true)
-	FSkellyOpts.set_visible(false)
-	ElfOpts.set_visible(false)
-	PrincessOpts.set_visible(false)
-	Global.spriteChosen = "MSkelly"
-	update_sprite()
+	clickedSprite = "MSkelly"
+	update_sprite(clickedSprite)
 
 
 func _on_female_skeleton_pressed() -> void:
-	MAdventureOpts.set_visible(false)
-	FAdventureOpts.set_visible(false)
-	MSkellyOpts.set_visible(false)
-	FSkellyOpts.set_visible(true)
-	ElfOpts.set_visible(false)
-	PrincessOpts.set_visible(false)
-	Global.spriteChosen = "FSkelly"
-	update_sprite()
+	clickedSprite = "FSkelly"
+	update_sprite(clickedSprite)
 
 
 func _on_elf_pressed() -> void:
-	MAdventureOpts.set_visible(false)
-	FAdventureOpts.set_visible(false)
-	MSkellyOpts.set_visible(false)
-	FSkellyOpts.set_visible(false)
-	ElfOpts.set_visible(true)
-	PrincessOpts.set_visible(false)
-	Global.spriteChosen = "Elf"
-	update_sprite()
+	clickedSprite = "Elf"
+	update_sprite(clickedSprite)
 
 
 func _on_princess_pressed() -> void:
-	MAdventureOpts.set_visible(false)
-	FAdventureOpts.set_visible(false)
-	MSkellyOpts.set_visible(false)
-	FSkellyOpts.set_visible(false)
-	ElfOpts.set_visible(false)
-	PrincessOpts.set_visible(true)
-	Global.spriteChosen = "Princess"
-	update_sprite()
+	clickedSprite = "Princess"
+	update_sprite(clickedSprite)
+
+
+func _on_buy_button_pressed() -> void:
+	# verify enough BP, subtract BP, unlock sprite
+	if (not Global.unlockedSprites[clickedSprite]):
+		if (Global.brainPower >= spriteCost):
+			Global.brainPower = Global.brainPower - spriteCost
+			Global.unlockedSprites[clickedSprite] = true
+			update_label_lock(clickedSprite)
+		else:
+			print("Not enough brain power.")
+			#TODO: add popup?
+	#for all sprites, need to gray out locked ones

@@ -135,7 +135,7 @@ func write_user(display_popup: bool = true) -> void:
 		var path: String = str(OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP) + "/flash_cards/" + "studyDashUser" + ".json")
 		var file = FileAccess.open(path, FileAccess.WRITE)
 		if file == null:
-			print("Error writing json file.")
+			print("Error writing json file for user.")
 			MessageDisplayer.error_popup("Error writing json file for user.")
 			return
 		file.store_line(jsonUserString)

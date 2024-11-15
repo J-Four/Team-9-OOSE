@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://b22akfk23ehd3"]
+[gd_scene load_steps=4 format=3 uid="uid://b22akfk23ehd3"]
 
 [ext_resource type="Script" path="res://Scenes/player_customize.gd" id="1_6kuql"]
+[ext_resource type="Theme" uid="uid://d3pis5jvba6vf" path="res://Assets/Themes/GreenButton.tres" id="2_nw7nm"]
 [ext_resource type="Theme" uid="uid://bw57ena6l4loa" path="res://Assets/Themes/SpriteFAdventure.tres" id="2_ur2dp"]
 
 [node name="PlayerCustomize" type="Control"]
@@ -39,6 +40,12 @@ alignment = 1
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Choose Your Character!"
+
+[node name="VSeparator" type="VSeparator" parent="PanelContainer/VBoxContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="BP_Count" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
 
 [node name="HSeparator2" type="HSeparator" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
@@ -100,7 +107,28 @@ layout_mode = 2
 [node name="PanelContainer2" type="PanelContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2"]
 layout_mode = 2
 
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2"]
+layout_mode = 2
+alignment = 1
+
+[node name="locked_unlocked" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_nw7nm")
+text = "Buy"
+
 [node name="MAdventureOpt" type="VBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2"]
+visible = false
 layout_mode = 2
 
 [node name="Emotes" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/MAdventureOpt"]
@@ -286,5 +314,6 @@ layout_mode = 2
 [connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer1/Opts/FemaleSkeleton" to="." method="_on_female_skeleton_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer1/Opts/Elf" to="." method="_on_elf_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer1/Opts/Princess" to="." method="_on_princess_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/VBoxContainer/Button" to="." method="_on_buy_button_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer3/HBoxContainer3/OK" to="." method="_on_ok_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer3/HBoxContainer3/Cancel" to="." method="_on_cancel_pressed"]

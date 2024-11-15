@@ -32,12 +32,13 @@ func _ready() -> void:
 					var studyDashUser: Dictionary = json.data
 					Global.spriteChosen = studyDashUser["chosenStudybuddy"]
 					Global.brainPower = studyDashUser["brainPower"]
-					Global.unlockedSprites["MAdventurer"] = studyDashUser["unlockedStudyB"]["MAdventurer"]
-					Global.unlockedSprites["FAdventurer"] = studyDashUser["unlockedStudyB"]["FAdventurer"]
-					Global.unlockedSprites["MSkelly"] = studyDashUser["unlockedStudyB"]["MSkelly"]
-					Global.unlockedSprites["FSkelly"] = studyDashUser["unlockedStudyB"]["FSkelly"]
-					Global.unlockedSprites["Elf"] = studyDashUser["unlockedStudyB"]["Elf"]
-					Global.unlockedSprites["Princess"] = studyDashUser["unlockedStudyB"]["Princess"]
+					Global.unlockedSprites = studyDashUser["unlockedStudyB"]
+					#Global.unlockedSprites["MAdventurer"] = studyDashUser["unlockedStudyB"]["MAdventurer"]
+					#Global.unlockedSprites["FAdventurer"] = studyDashUser["unlockedStudyB"]["FAdventurer"]
+					#Global.unlockedSprites["MSkelly"] = studyDashUser["unlockedStudyB"]["MSkelly"]
+					#Global.unlockedSprites["FSkelly"] = studyDashUser["unlockedStudyB"]["FSkelly"]
+					#Global.unlockedSprites["Elf"] = studyDashUser["unlockedStudyB"]["Elf"]
+					#Global.unlockedSprites["Princess"] = studyDashUser["unlockedStudyB"]["Princess"]
 				else:
 					MessageDisplayer.error_popup("JSON parse error: " + json.get_error_message() + "\nin file: " + file_name, self)
 			else:
