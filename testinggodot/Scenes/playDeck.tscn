@@ -1,10 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://deafssq11jyu2"]
+[gd_scene load_steps=14 format=3 uid="uid://deafssq11jyu2"]
 
 [ext_resource type="Script" path="res://scripts/playScreen.gd" id="1_om22i"]
 [ext_resource type="Theme" uid="uid://cta3fyluiaeg0" path="res://Assets/Themes/OrangeButton.tres" id="2_o5kyd"]
 [ext_resource type="PackedScene" uid="uid://divht6dg4fur2" path="res://Scenes/CardProgressLabel.tscn" id="3_30y6a"]
 [ext_resource type="Theme" uid="uid://d11c37qf38urw" path="res://Assets/Themes/arrowButton.tres" id="3_wb6ev"]
 [ext_resource type="Theme" uid="uid://22467k66gk57" path="res://Assets/Themes/RedHeart.tres" id="4_8gpma"]
+[ext_resource type="Theme" uid="uid://dencokkv37j1" path="res://Assets/Themes/SpriteMAdventure.tres" id="4_chqsa"]
+[ext_resource type="Theme" uid="uid://ddqwrspjisa5n" path="res://Assets/Themes/speachBubbleTheme.tres" id="4_cs8nd"]
 [ext_resource type="Theme" uid="uid://d3pis5jvba6vf" path="res://Assets/Themes/GreenButton.tres" id="5_v6alf"]
 [ext_resource type="Texture2D" uid="uid://bx7pqymtd37xo" path="res://Assets/Images/RedHeart.png" id="6_n6s0q"]
 
@@ -27,11 +29,16 @@ gradient = SubResource("Gradient_pv2ao")
 
 [node name="PlayDeck" type="Control"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_right = 1.058
+anchor_bottom = 1.006
+offset_left = 70.0
+offset_top = 2.0
+offset_right = -136.816
+offset_bottom = -8.888
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("1_om22i")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
@@ -39,6 +46,9 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -33.0
+offset_right = 34.0
+offset_bottom = 4.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -52,6 +62,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="MenuBar" type="MenuBar" parent="PanelContainer/VBoxContainer/PanelContainer/HBoxContainer"]
+visible = false
 layout_mode = 2
 
 [node name="File" type="PopupMenu" parent="PanelContainer/VBoxContainer/PanelContainer/HBoxContainer/MenuBar"]
@@ -93,7 +104,6 @@ visible = false
 layout_mode = 2
 
 [node name="PanelContainer2" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 400)
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -108,6 +118,26 @@ theme_override_constants/margin_bottom = 17
 layout_mode = 2
 theme_override_constants/separation = 17
 alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 8
+alignment = 2
+
+[node name="studyMsg" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 130)
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("4_cs8nd")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="studyBuddy" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(150, 210)
+layout_mode = 2
+size_flags_vertical = 10
+theme = ExtResource("4_chqsa")
 
 [node name="PrevArrow" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
 visible = false
@@ -139,16 +169,19 @@ layout_mode = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="QLabel" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer"]
-custom_minimum_size = Vector2(900, 121)
+custom_minimum_size = Vector2(830, 121)
 layout_mode = 2
+size_flags_vertical = 1
 text = "Question Here"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="ATextEdit" type="TextEdit" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 visible = false
@@ -159,13 +192,14 @@ size_flags_vertical = 3
 placeholder_text = "Answer Here"
 
 [node name="AnswerLineEdit" type="LineEdit" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
-visible = false
+custom_minimum_size = Vector2(0, 270)
 layout_mode = 2
 size_flags_vertical = 3
 placeholder_text = "Type answer here..."
 
 [node name="TrueFalseChoice" type="HBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 visible = false
+custom_minimum_size = Vector2(0, 270)
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -185,6 +219,7 @@ text = "False"
 
 [node name="MultipleChoice" type="VBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 visible = false
+custom_minimum_size = Vector2(0, 270)
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -219,6 +254,7 @@ theme = ExtResource("5_v6alf")
 [node name="NextArrow" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(80, 100)
 layout_mode = 2
+size_flags_horizontal = 2
 size_flags_vertical = 4
 theme = ExtResource("3_wb6ev")
 text = ">"

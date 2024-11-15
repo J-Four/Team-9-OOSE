@@ -25,6 +25,15 @@ extends Node
 @onready var a2_button: Button = get_node("PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MultipleChoice/HBoxContainer/A2Button")
 @onready var a3_button: Button = get_node("PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MultipleChoice/HBoxContainer2/A3Button")
 @onready var a4_button: Button = get_node("PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MultipleChoice/HBoxContainer2/A4Button")
+@onready var MAdventureTheme: Resource = preload("res://Assets/Themes/SpriteMAdventure.tres")
+@onready var FAdventureTheme: Resource = preload("res://Assets/Themes/SpriteFAdventure.tres")
+@onready var MSkellyTheme: Resource = preload("res://Assets/Themes/SpriteMSkelly.tres")
+@onready var FSkellyTheme: Resource = preload("res://Assets/Themes/SpriteFSkelly.tres")
+@onready var ElfTheme: Resource = preload("res://Assets/Themes/SpriteElf.tres")
+@onready var PrincessTheme: Resource = preload("res://Assets/Themes/SpritePrincess.tres")
+@onready var studyBuddy: Label = get_node("PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/VBoxContainer/studyBuddy")
+@onready var studyMsg: Label = get_node("PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/VBoxContainer/studyMsg")
+
 
 var currentCard : int = 1
 var numCards: int = 1
@@ -77,6 +86,8 @@ func _ready() -> void:
 	# Set card index to the first card in the array to start with. 
 	# This will be increased one at a time when the user enters an answer.
 	current_card_idx = 0
+	update_buddy()
+	studyMsg.hide()
 	display_card(current_card_idx)
 
 
@@ -183,7 +194,8 @@ func answer_correct(isCorrect: bool) -> void:
 		AudioPlayer.play_sound_effect(correct_sfx, 0.25)
 		progress_labels[current_card_idx].modulate = Color.GREEN
 		cards_correct += 1
-		
+		studyMsg.text = "Great Job!"
+		studyMsg.show()
 		
 		# If this is the final card, go to end screen. Else go to next card
 		if current_card_idx == num_cards - 1:
@@ -196,6 +208,8 @@ func answer_correct(isCorrect: bool) -> void:
 		AudioPlayer.play_sound_effect(wrong_sfx, 0.25)
 		progress_labels[current_card_idx].modulate = Color.RED
 		cards_wrong += 1
+		studyMsg.text = "Keep trying!"
+		studyMsg.show()
 		
 		# If lives are left, subtract one life.
 		if lives_idx >= 0:
@@ -261,3 +275,18 @@ func _on_a4_button_pressed() -> void:
 		answer_correct(true)
 	else:
 		answer_correct(false)
+
+
+func update_buddy() -> void:
+	if (Global.spriteChosen == "MAdventurer"):
+		studyBuddy.theme = MAdventureTheme
+	if(Global.spriteChosen == "FAdventurer"):
+		studyBuddy.theme = FAdventureTheme
+	if(Global.spriteChosen == "MSkelly"):
+		studyBuddy.theme = MSkellyTheme
+	if(Global.spriteChosen == "FSkelly"):
+		studyBuddy.theme = FSkellyTheme
+	if(Global.spriteChosen == "Elf"):
+		studyBuddy.theme = ElfTheme
+	if(Global.spriteChosen == "Princess"):
+		studyBuddy.theme = PrincessTheme
