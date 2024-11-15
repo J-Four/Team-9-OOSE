@@ -26,11 +26,13 @@ func _ready() -> void:
 
 func update_label_lock(spriteCheck: String) -> void:
 	if (Global.unlockedSprites[spriteCheck]):
-		lockedOrUnlockedLabel.text = "Unlocked"
+		lockedOrUnlockedLabel.text = " Unlocked "
 		costLabel.text = ""
+		buyButton.visible = false
 	else: 
-		lockedOrUnlockedLabel.text = "Locked"
+		lockedOrUnlockedLabel.text = " Locked "
 		costLabel.text = str(spriteCost) + "BP to unlock."
+		buyButton.visible = true
 	BPCount.text = "Current Brain Power:  " + str(Global.brainPower)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

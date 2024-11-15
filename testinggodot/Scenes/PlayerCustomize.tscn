@@ -113,6 +113,7 @@ alignment = 1
 
 [node name="locked_unlocked" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 20
 
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer2/HBoxContainer2/PanelContainer2/VBoxContainer"]
 layout_mode = 2
