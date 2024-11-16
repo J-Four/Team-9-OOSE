@@ -229,7 +229,7 @@ custom_minimum_size = Vector2(0, 23)
 layout_mode = 2
 
 [node name="AddCardButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2"]
-custom_minimum_size = Vector2(200, 55)
+custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("5_67e2e")
@@ -238,7 +238,7 @@ text = "Add Card"
 script = ExtResource("5_nyipo")
 
 [node name="RemoveCardButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2"]
-custom_minimum_size = Vector2(200, 55)
+custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4

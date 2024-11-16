@@ -25,7 +25,7 @@ func _ready() -> void:
 	var lvl: int = Global.get_level_from_xp(Global.deck_data["XP"])
 	var next_lvl_xp: int = Global.get_xp_from_level(lvl + 1)
 	var new_xp_val: int = Global.deck_data["XP"] + total_xp_earned
-	var brainPowerAdded = (Global.lives_left * 10) + 20 #where BP earned is determined
+	var brainPowerAdded = (Global.lives_left) + 5 #where BP earned is determined
 	
 	Global.brainPower = Global.brainPower + brainPowerAdded
 	update_level_labels(lvl, total_xp_earned)

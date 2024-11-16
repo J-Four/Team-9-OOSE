@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://deafssq11jyu2"]
+[gd_scene load_steps=17 format=3 uid="uid://deafssq11jyu2"]
 
 [ext_resource type="Script" path="res://scripts/playScreen.gd" id="1_om22i"]
 [ext_resource type="Theme" uid="uid://djamegob8hxxb" path="res://Assets/Themes/PanelB.tres" id="2_ud75q"]
 [ext_resource type="PackedScene" uid="uid://divht6dg4fur2" path="res://Scenes/CardProgressLabel.tscn" id="3_30y6a"]
 [ext_resource type="Theme" uid="uid://d11c37qf38urw" path="res://Assets/Themes/arrowButton.tres" id="3_wb6ev"]
+[ext_resource type="Theme" uid="uid://bx813hlugnxk4" path="res://Assets/Themes/buttonMargin.tres" id="4_84txx"]
 [ext_resource type="Theme" uid="uid://dencokkv37j1" path="res://Assets/Themes/SpriteMAdventure.tres" id="4_chqsa"]
 [ext_resource type="Theme" uid="uid://ddqwrspjisa5n" path="res://Assets/Themes/speachBubbleTheme.tres" id="4_cs8nd"]
 [ext_resource type="Theme" uid="uid://cbjdc0ugsxcns" path="res://Assets/Themes/PanelA.tres" id="4_gq4ub"]
@@ -28,6 +29,7 @@ colors = PackedColorArray(1.15514e-06, 0.376315, 0.184347, 1, 0.209471, 0.696311
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_a0eps"]
 gradient = SubResource("Gradient_pv2ao")
+width = 200
 
 [node name="PlayDeck" type="Control"]
 layout_mode = 3
@@ -63,7 +65,7 @@ color = Color(0.556863, 0.541176, 0.490196, 1)
 layout_mode = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 40)
+custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
 theme = ExtResource("2_ud75q")
 
@@ -81,7 +83,11 @@ auto_translate_mode = 1
 [node name="Edit" type="PopupMenu" parent="PanelContainer/VBoxContainer/PanelContainer/HBoxContainer/MenuBar"]
 auto_translate_mode = 1
 
-[node name="ExitButton" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_84txx")
+
+[node name="ExitButton" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer/HBoxContainer/MarginContainer"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme = ExtResource("4_y65ys")
@@ -180,7 +186,7 @@ color = Color(0.556863, 0.541176, 0.490196, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 10
+theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
@@ -197,7 +203,7 @@ layout_mode = 2
 color = Color(0.556863, 0.541176, 0.490196, 1)
 
 [node name="QLabel" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer"]
-custom_minimum_size = Vector2(830, 121)
+custom_minimum_size = Vector2(830, 115)
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -219,8 +225,7 @@ size_flags_vertical = 3
 placeholder_text = "Answer Here"
 
 [node name="AnswerLineEdit" type="LineEdit" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
-visible = false
-custom_minimum_size = Vector2(0, 260)
+custom_minimum_size = Vector2(0, 255)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -228,6 +233,7 @@ theme_override_font_sizes/font_size = 25
 placeholder_text = "Type answer here..."
 
 [node name="TrueFalseChoice" type="HBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(0, 260)
 layout_mode = 2
 size_flags_vertical = 3
@@ -408,7 +414,7 @@ text = "Time Here"
 
 [node name="Timer" type="Timer" parent="PanelContainer/VBoxContainer/PanelContainer3/MarginContainer/HBoxContainer/TimerLabel"]
 
-[connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer/HBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer/HBoxContainer/MarginContainer/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PrevArrow" to="." method="_on_prev_arrow_pressed"]
 [connection signal="text_submitted" from="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/AnswerLineEdit" to="." method="_on_answer_line_edit_text_submitted"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/TrueFalseChoice/TrueButton" to="." method="_on_true_button_pressed"]
