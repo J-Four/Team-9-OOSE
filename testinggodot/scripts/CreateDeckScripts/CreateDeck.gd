@@ -23,7 +23,10 @@ extends Node
 @onready var a2_line_edit: LineEdit = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer2/A2Edit")
 @onready var a3_line_edit: LineEdit = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer3/A3Edit")
 @onready var a4_line_edit: LineEdit = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer4/A4Edit")
-
+@onready var themeOriginal: Button = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/HBoxContainer2/originalThemeButton")
+@onready var themeGreen: Button = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/HBoxContainer2/greenThemeButton")
+@onready var themeRed: Button = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/HBoxContainer2/redThemeButton")
+@onready var themeOrange: Button = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/HBoxContainer2/orangeThemeButton")
 
 
 # Dictionary is a struct with key : value. Each of the 'Cards' part of a deck dictionary is an array
@@ -34,6 +37,7 @@ var new_deck: Dictionary = {
 	"Scale difficulty": true,
 	"Random order": true,
 	"XP": 0,
+	"Theme": "Original",
 	"Cards": empty_array.duplicate(true) # Makes another array of Dict to save cards
 }
 var current_card: int = -1
@@ -41,12 +45,35 @@ var deck_name: String = "Default Deck Name"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	update_theme_button()
 	nav_label.text = "0 / 0" # The label in the bottoms that shows num of cards
 	add_answer_options() #fill option box for answer formats
 	#update_answer_format()
 	add_new_card_to_deck() # Run this func
 
-
+func update_theme_button() -> void:
+	match new_deck["Theme"]:
+		"Original":
+			themeOriginal.text = "X"
+			themeGreen.text = ""
+			themeOrange.text = ""
+			themeRed.text = ""
+		"Green":
+			themeOriginal.text = ""
+			themeGreen.text = "X"
+			themeOrange.text = ""
+			themeRed.text = ""
+		"Red":
+			themeOriginal.text = ""
+			themeGreen.text = ""
+			themeOrange.text = ""
+			themeRed.text = "X"
+		"Orange":
+			themeOriginal.text = ""
+			themeGreen.text = ""
+			themeOrange.text = "X"
+			themeRed.text = ""
+			
 
 
 func add_answer_options() -> void:
@@ -350,3 +377,23 @@ func _on_a4_checkbox_toggled(toggled_on: bool) -> void:
 		a2_checkbox.button_pressed = false
 		a3_checkbox.button_pressed = false
 		new_deck["Cards"][current_card]["Answer"] = "4" #assigning answer
+
+
+func _on_green_theme_button_pressed() -> void:
+	new_deck["Theme"] = "Green"
+	update_theme_button()
+
+
+func _on_orange_theme_button_pressed() -> void:
+	new_deck["Theme"] = "Orange"
+	update_theme_button()
+
+
+func _on_red_theme_button_pressed() -> void:
+	new_deck["Theme"] = "Red"
+	update_theme_button()
+
+
+func _on_original_theme_button_pressed() -> void:
+	new_deck["Theme"] = "Original"
+	update_theme_button()

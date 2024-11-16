@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://co0i5ikiascpo"]
+[gd_scene load_steps=10 format=3 uid="uid://co0i5ikiascpo"]
 
 [ext_resource type="Script" path="res://scripts/EditDeck.gd" id="1_m72y3"]
 [ext_resource type="Theme" uid="uid://bx813hlugnxk4" path="res://Assets/Themes/buttonMargin.tres" id="2_xuu3q"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scripts/CreateDeckScripts/QEdit.gd" id="3_nbrfr"]
 [ext_resource type="Theme" uid="uid://bqqaoqmfnthc1" path="res://Assets/Themes/greenButtonNew.tres" id="5_67e2e"]
 [ext_resource type="Script" path="res://scripts/CreateDeckScripts/add_card_button.gd" id="5_nyipo"]
+[ext_resource type="Theme" uid="uid://cd6tf0umvtdl0" path="res://Assets/Themes/whiteButtonNew.tres" id="7_odxq4"]
 [ext_resource type="Theme" uid="uid://bj6sljcu2sr8b" path="res://Assets/Themes/redButtonNew.tres" id="7_r3bg3"]
 [ext_resource type="Theme" uid="uid://dheyuhbsygb2a" path="res://Assets/Themes/LabelA.tres" id="8_n3g54"]
 
@@ -75,9 +76,9 @@ text = "Back"
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ColorRect" type="ColorRect" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2"]
+[node name="ColorRect2" type="ColorRect" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2"]
 layout_mode = 2
-color = Color(0.556863, 0.541176, 0.490196, 1)
+color = Color(0.67451, 0.658824, 0.607843, 1)
 
 [node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2"]
 layout_mode = 2
@@ -106,7 +107,7 @@ script = ExtResource("3_nbrfr")
 
 [node name="AnswerEdit" type="TextEdit" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer"]
 clip_contents = false
-custom_minimum_size = Vector2(0, 300)
+custom_minimum_size = Vector2(0, 290)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 20
@@ -200,12 +201,43 @@ layout_mode = 2
 button_pressed = true
 text = "Random order"
 
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/HBoxContainer2"]
+layout_mode = 2
+text = "Card Theme: "
+
+[node name="greenThemeButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/HBoxContainer2"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme = ExtResource("5_67e2e")
+theme_override_font_sizes/font_size = 15
+text = "X"
+
+[node name="orangeThemeButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/HBoxContainer2"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme = ExtResource("3_j3a67")
+theme_override_font_sizes/font_size = 15
+
+[node name="redThemeButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/HBoxContainer2"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme = ExtResource("7_r3bg3")
+theme_override_font_sizes/font_size = 15
+
+[node name="originalThemeButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/HBoxContainer2"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme = ExtResource("7_odxq4")
+theme_override_font_sizes/font_size = 15
+
 [node name="HSeparator2" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(0, 23)
 layout_mode = 2
 
 [node name="OptionsLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2"]
-custom_minimum_size = Vector2(0, 46)
 layout_mode = 2
 text = "Card Options"
 
@@ -229,7 +261,7 @@ custom_minimum_size = Vector2(0, 23)
 layout_mode = 2
 
 [node name="AddCardButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2"]
-custom_minimum_size = Vector2(200, 50)
+custom_minimum_size = Vector2(200, 45)
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("5_67e2e")
@@ -238,7 +270,7 @@ text = "Add Card"
 script = ExtResource("5_nyipo")
 
 [node name="RemoveCardButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2"]
-custom_minimum_size = Vector2(200, 50)
+custom_minimum_size = Vector2(200, 45)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -317,6 +349,10 @@ text = "Save Deck"
 [connection signal="text_changed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/HBoxContainer/DeckNameLineEdit" to="." method="_on_deck_name_line_edit_text_changed"]
 [connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/ScaleDifficultyCheckBox" to="." method="_on_scale_difficulty_check_box_toggled"]
 [connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/RandomOrderCheckBox2" to="." method="_on_random_order_check_box_2_toggled"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/HBoxContainer2/greenThemeButton" to="." method="_on_green_theme_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/HBoxContainer2/orangeThemeButton" to="." method="_on_orange_theme_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/HBoxContainer2/redThemeButton" to="." method="_on_red_theme_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/HBoxContainer2/originalThemeButton" to="." method="_on_original_theme_button_pressed"]
 [connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/CaseCheckBox" to="." method="_on_case_check_box_toggled"]
 [connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/SpaceCheckBox" to="." method="_on_space_check_box_toggled"]
 [connection signal="item_selected" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/AnswerOption" to="." method="_on_answer_option_item_selected"]

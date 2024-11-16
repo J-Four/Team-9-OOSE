@@ -25,6 +25,10 @@ extends Node
 @onready var a4_line_edit: LineEdit = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer4/A4Edit")
 @onready var deck_name_edit: LineEdit = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/HBoxContainer/DeckNameLineEdit")
 @onready var random_order_checkbox: CheckBox = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/RandomOrderCheckBox2")
+@onready var themeOriginal: Button = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/HBoxContainer2/originalThemeButton")
+@onready var themeGreen: Button = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/HBoxContainer2/greenThemeButton")
+@onready var themeRed: Button = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/HBoxContainer2/redThemeButton")
+@onready var themeOrange: Button = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/HBoxContainer2/orangeThemeButton")
 
 
 # Dictionary is a struct with key : value. Each of the 'Cards' part of a deck dictionary is an array
@@ -52,7 +56,29 @@ func _ready() -> void:
 	deck_name_edit.text = Global.deck_name
 	originalDeckName = Global.deck_name
 
-
+func update_theme_button() -> void:
+	match new_deck["Theme"]:
+		"Original":
+			themeOriginal.text = "X"
+			themeGreen.text = ""
+			themeOrange.text = ""
+			themeRed.text = ""
+		"Green":
+			themeOriginal.text = ""
+			themeGreen.text = "X"
+			themeOrange.text = ""
+			themeRed.text = ""
+		"Red":
+			themeOriginal.text = ""
+			themeGreen.text = ""
+			themeOrange.text = ""
+			themeRed.text = "X"
+		"Orange":
+			themeOriginal.text = ""
+			themeGreen.text = ""
+			themeOrange.text = "X"
+			themeRed.text = ""
+			
 
 
 func add_answer_options() -> void:
@@ -223,7 +249,6 @@ func _on_finish_deck_button_pressed() -> void:
 		Global.write_deck(json_string, deck_name)"""
 	Global.delete_deck(originalDeckName) #prevents duplicates when changing name
 	Global.write_deck(json_string, deck_name)
-	# This would change scenes before letting the user see a popup including the one about overwriting an existing deck
 	
 
 
@@ -364,3 +389,23 @@ func _on_delete_deck_button_pressed() -> void:
 	Global.delete_deck(originalDeckName)
 	#maybe add a are you sure pop up?
 	get_tree().change_scene_to_file("res://Scenes/MainSceneControl.tscn")
+
+
+func _on_green_theme_button_pressed() -> void:
+	new_deck["Theme"] = "Green"
+	update_theme_button()
+
+
+func _on_orange_theme_button_pressed() -> void:
+	new_deck["Theme"] = "Orange"
+	update_theme_button()
+
+
+func _on_red_theme_button_pressed() -> void:
+	new_deck["Theme"] = "Red"
+	update_theme_button()
+
+
+func _on_original_theme_button_pressed() -> void:
+	new_deck["Theme"] = "Original"
+	update_theme_button()

@@ -27,6 +27,11 @@ var unlockedSprites: Dictionary = {
 		}
 var userUpdated: bool = false #trying to get around some timing logic of when to write user
 
+var greenTheme = Color("75ac73")
+var orangeTheme = Color("ca8b5c")
+var redTheme = Color("7c3346")
+var originalTheme = Color("ffffff")
+
 signal write_successful
 
 
