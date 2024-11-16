@@ -69,15 +69,19 @@ func add_deck_button(name: String, data: Dictionary):
 	new_deck.pressed.connect(_deck_pressed.bind(name)) #new button will run deck pressed func now
 	new_deck.name = name
 	new_deck.tooltip_text = name
-	match data["Theme"]:
-		"Original":
-			new_deck.self_modulate = Global.originalTheme
-		"Green":
-			new_deck.self_modulate = Global.greenTheme
-		"Red":
-			new_deck.self_modulate = Global.redTheme
-		"Orange":
-			new_deck.self_modulate = Global.orangeTheme
+	
+	if data.has("Theme"):
+		match data["Theme"]:
+			"Original":
+				new_deck.self_modulate = Global.originalTheme
+			"Green":
+				new_deck.self_modulate = Global.greenTheme
+			"Red":
+				new_deck.self_modulate = Global.redTheme
+			"Orange":
+				new_deck.self_modulate = Global.orangeTheme
+	else:
+		new_deck.self_modulate = Global.originalTheme
 	
 	if "XP" in data.keys():
 		new_deck.text = name + "\nLvl " + str(Global.get_level_from_xp(data["XP"]))

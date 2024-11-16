@@ -55,6 +55,11 @@ func _ready() -> void:
 	deck_name = Global.deck_name
 	deck_name_edit.text = Global.deck_name
 	originalDeckName = Global.deck_name
+	if new_deck.has("Theme"):
+		update_theme_button()
+	else:
+		new_deck["Theme"] = "Original"
+		update_theme_button()
 
 func update_theme_button() -> void:
 	match new_deck["Theme"]:
