@@ -262,6 +262,13 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
+[node name="DeleteButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer3/MarginContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+theme = ExtResource("7_r3bg3")
+text = "Delete Deck"
+
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer3/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -291,7 +298,7 @@ custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 size_flags_horizontal = 8
 theme = ExtResource("5_67e2e")
-text = "Finish Deck"
+text = "Save Deck"
 
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/MarginContainer/BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/MarginContainer/BackButton" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/MarginContainer/BackButton" method="_on_pressed"]
@@ -319,6 +326,7 @@ text = "Finish Deck"
 [connection signal="get_Card" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/RemoveCardButton" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/QuestionLineEdit" method="_on_add_card_button_get_card"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/RemoveCardButton" to="." method="_on_remove_card_button_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/RemoveCardButton" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/RemoveCardButton" method="_on_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer3/MarginContainer/DeleteButton" to="." method="_on_delete_deck_button_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer3/MarginContainer/HBoxContainer/NavLeftButton" to="." method="_on_nav_left_button_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer3/MarginContainer/HBoxContainer/NavRightButton" to="." method="_on_nav_right_button_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer3/MarginContainer/FinishDeckButton" to="." method="_on_finish_deck_button_pressed"]

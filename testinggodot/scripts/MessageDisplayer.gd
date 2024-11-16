@@ -2,6 +2,7 @@ extends Node
 
 @onready var popup: Resource = preload("res://Scenes/ErrorPopup.tscn")
 
+var dismissed: bool = false
 
 func display_message(msg: String):
 	pass
@@ -20,6 +21,8 @@ func green_popup(msg: String, node: Node = get_tree().root.get_child(get_tree().
 	p.okay_button.show()
 	p.okay_button.pressed.connect(p.free_self)
 	p.show()
+	
+
 
 
 # Creates a popup with red text.

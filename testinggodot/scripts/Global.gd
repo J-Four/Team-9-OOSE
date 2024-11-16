@@ -69,6 +69,9 @@ func add_and_save_xp_to_deck(xp: int):
 	else:
 		write_deck(json_string, deck_name, false)
 
+func delete_deck(d_name: String) -> void:
+	var path: String = str(OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP) + "/flash_cards/" + d_name + ".json")
+	DirAccess.remove_absolute(path)
 
 func write_deck(json_string: String, d_name: String, display_popup: bool = true) -> void:
 	# Create or overrite json file
@@ -84,6 +87,8 @@ func write_deck(json_string: String, d_name: String, display_popup: bool = true)
 	
 	if display_popup:
 		MessageDisplayer.green_popup("Successfully saved deck to:\n" + path)
+		
+	
 	
 	write_successful_emit()
 

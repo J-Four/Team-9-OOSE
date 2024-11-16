@@ -35,6 +35,8 @@ var new_deck: Dictionary
 var current_card: int = -1
 var deck_name: String = "Default Deck Name"
 
+var originalDeckName: String = ""
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	nav_label.text = "0 / 0" # The label in the bottoms that shows num of cards
@@ -48,6 +50,7 @@ func _ready() -> void:
 	random_order_checkbox.button_pressed = new_deck["Random order"]
 	deck_name = Global.deck_name
 	deck_name_edit.text = Global.deck_name
+	originalDeckName = Global.deck_name
 
 
 
@@ -204,7 +207,8 @@ func _on_finish_deck_button_pressed() -> void:
 	# Check if file with deck name aleady exists
 	print("name " + deck_name)
 	var file_exists = FileAccess.open(OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP) + "/flash_cards/" + deck_name + ".json", FileAccess.READ)
-	if file_exists:
+	#doesnt need to check if file already exits if they are editing, just overwrite
+	"""if file_exists:
 		print("A deck with the name '" + deck_name + "' already exists.")
 		# Create popup to inform the user
 		var p = popup.instantiate()
@@ -216,10 +220,11 @@ func _on_finish_deck_button_pressed() -> void:
 		p.cancel_button.pressed.connect(p.free_self)
 		p.show()
 	else:
-		Global.write_deck(json_string, deck_name)
-	
+		Global.write_deck(json_string, deck_name)"""
+	Global.delete_deck(originalDeckName) #prevents duplicates when changing name
+	Global.write_deck(json_string, deck_name)
 	# This would change scenes before letting the user see a popup including the one about overwriting an existing deck
-	# get_tree().change_scene_to_file("res://Scenes/MainSceneControl.tscn")
+	
 
 
 # Update deck name when the user changes the deck name line edit
@@ -353,3 +358,9 @@ func _on_a4_checkbox_toggled(toggled_on: bool) -> void:
 		a2_checkbox.button_pressed = false
 		a3_checkbox.button_pressed = false
 		new_deck["Cards"][current_card]["Answer"] = "4" #assigning answer
+
+
+func _on_delete_deck_button_pressed() -> void:
+	Global.delete_deck(originalDeckName)
+	#maybe add a are you sure pop up?
+	get_tree().change_scene_to_file("res://Scenes/MainSceneControl.tscn")
