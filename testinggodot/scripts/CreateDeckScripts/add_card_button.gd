@@ -12,5 +12,5 @@ func _process(_delta: float) -> void:
 
 
 func _on_pressed() -> void:
-	emit_signal("get_Card")
+	#emit_signal("get_Card")
 	pass # Replace with function body.

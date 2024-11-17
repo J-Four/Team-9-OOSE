@@ -1,0 +1,21 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://ddqwrspjisa5n"]
+
+[ext_resource type="FontFile" uid="uid://cjny1ac6ljuky" path="res://Assets/Fonts/ink-free.ttf" id="1_m41o4"]
+[ext_resource type="Texture2D" uid="uid://cmoliuqnu8hig" path="res://Assets/Images/speachBubble.png" id="2_f7g58"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7p3p2"]
+texture = ExtResource("2_f7g58")
+region_rect = Rect2(493, 375, 1249, 801)
+
+[resource]
+Label/colors/font_color = Color(0, 0, 0, 1)
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/colors/font_shadow_color = Color(0, 0, 0, 0)
+Label/constants/line_spacing = 3
+Label/constants/outline_size = 0
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
+Label/constants/shadow_outline_size = 1
+Label/font_sizes/font_size = 26
+Label/fonts/font = ExtResource("1_m41o4")
+Label/styles/normal = SubResource("StyleBoxTexture_7p3p2")

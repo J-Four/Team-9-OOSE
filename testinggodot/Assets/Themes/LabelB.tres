@@ -1,0 +1,21 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://dpm018wcxw7d2"]
+
+[ext_resource type="FontFile" uid="uid://cjny1ac6ljuky" path="res://Assets/Fonts/ink-free.ttf" id="1_odbgl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_10800"]
+bg_color = Color(0.629506, 0.613857, 0.562899, 1)
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+
+[resource]
+Label/colors/font_color = Color(0.281747, 0.587069, 0.336195, 1)
+Label/colors/font_outline_color = Color(0.170124, 0.376409, 0.23239, 1)
+Label/colors/font_shadow_color = Color(0, 0, 0, 0)
+Label/constants/line_spacing = 3
+Label/constants/outline_size = 2
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
+Label/constants/shadow_outline_size = 1
+Label/font_sizes/font_size = 20
+Label/fonts/font = ExtResource("1_odbgl")
+Label/styles/normal = SubResource("StyleBoxFlat_10800")

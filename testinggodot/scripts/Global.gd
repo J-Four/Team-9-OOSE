@@ -14,6 +14,34 @@ var lost: bool = false
 var lives_left: int = 0
 var deck_name: String = ""
 
+#user var default?
+var spriteChosen: String = "MAdventurer"
+var brainPower: int = 0
+var unlockedSprites: Dictionary = {
+			"MAdventurer": true,
+			"FAdventurer": true,
+			"MSkelly": false,
+			"FSkelly": false,
+			"Elf": false,
+			"Princess": false
+		}
+var userUpdated: bool = false #trying to get around some timing logic of when to write user
+
+var userAchievements: Dictionary = {
+	"100_Correct": {"Achieved": false,"needed_to_complete": 100},
+	"100_wrong": {"Achieved": false,"needed_to_complete": 100},
+	"20_study_sessions": {"Achieved": false,"needed_to_complete": 20},
+	"100_BP": {"Achieved": false,"needed_to_complete": 100},
+	"first_buddy_unlocked": {"Achieved": false,"needed_to_complete": 1}
+}
+
+
+var greenTheme = Color("75ac73")
+var orangeTheme = Color("ca8b5c")
+var redTheme = Color("7c3346")
+var originalTheme = Color("ffffff")
+var grayedOut = Color("7f7f7f")
+
 signal write_successful
 
 
@@ -30,8 +58,7 @@ func add_and_save_xp_to_deck(xp: int):
 	deck_data["XP"] += xp
 	
 	# Save deck as json file in folder.
-	var json = JSON.new()
-	var json_string = json.stringify(deck_data)
+	var json_string = JSON.stringify(deck_data)
 	
 	# Create folder if it does not already exist
 	var dir = DirAccess.open(deck_save_directory)
@@ -57,6 +84,9 @@ func add_and_save_xp_to_deck(xp: int):
 	else:
 		write_deck(json_string, deck_name, false)
 
+func delete_deck(d_name: String) -> void:
+	var path: String = str(OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP) + "/flash_cards/" + d_name + ".json")
+	DirAccess.remove_absolute(path)
 
 func write_deck(json_string: String, d_name: String, display_popup: bool = true) -> void:
 	# Create or overrite json file
@@ -71,7 +101,7 @@ func write_deck(json_string: String, d_name: String, display_popup: bool = true)
 	file.close()
 	
 	if display_popup:
-		MessageDisplayer.green_popup("Successfully saved deck to:\n" + path)
+		MessageDisplayer.green_popup_and_change_scene("Successfully saved deck to:\n" + path)
 	
 	write_successful_emit()
 
@@ -102,3 +132,49 @@ func get_level_xp_bounds(lvl: int) -> Array:
 	var lower_bound: int = get_xp_from_level(lvl)
 	var upper_bound: int = get_xp_from_level(lvl + 1)
 	return [lower_bound, upper_bound]
+	
+func write_user(display_popup: bool = true) -> void:
+	if (userUpdated):
+		#should save user data so brain power and unlocked studdy buddies carry over on different sessions.
+		var studyDashUser: Dictionary = {
+			"chosenStudybuddy": spriteChosen,
+			"brainPower": brainPower,
+			"unlockedStudyB":{
+				"MAdventurer": unlockedSprites["MAdventurer"],
+				"FAdventurer": unlockedSprites["FAdventurer"],
+				"MSkelly": unlockedSprites["MSkelly"],
+				"FSkelly": unlockedSprites["FSkelly"],
+				"Elf": unlockedSprites["Elf"],
+				"Princess": unlockedSprites["Princess"]
+				},
+			"userAchievements":{
+				"100_Correct": {"Achieved": userAchievements["100_Correct"]["Achieved"],"needed_to_complete": userAchievements["100_Correct"]["needed_to_complete"]},
+				"100_wrong": {"Achieved": userAchievements["100_wrong"]["Achieved"],"needed_to_complete": userAchievements["100_wrong"]["needed_to_complete"]},
+				"20_study_sessions": {"Achieved": userAchievements["20_study_sessions"]["Achieved"],"needed_to_complete": userAchievements["20_study_sessions"]["needed_to_complete"]},
+				"100_BP": {"Achieved": userAchievements["100_BP"]["Achieved"],"needed_to_complete": userAchievements["100_BP"]["needed_to_complete"]},
+				"first_buddy_unlocked": {"Achieved": userAchievements["first_buddy_unlocked"]["Achieved"],"needed_to_complete": userAchievements["first_buddy_unlocked"]["needed_to_complete"]}
+				}
+			}
+		var jsonUserString = JSON.stringify(studyDashUser)
+		# Create or overrite json file
+		var path: String = str(OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP) + "/flash_cards/" + "studyDashUser" + ".json")
+		var file = FileAccess.open(path, FileAccess.WRITE)
+		if file == null:
+			print("Error writing json file for user.")
+			MessageDisplayer.error_popup("Error writing json file for user.")
+			return
+		file.store_line(jsonUserString)
+		file.close()
+	else:
+		userUpdated = true
+	
+
+func update_achievements() -> void:
+	if (userAchievements["100_Correct"]["needed_to_complete"] <= 0):
+		userAchievements["100_Correct"]["Achieved"] = true
+	if (userAchievements["100_wrong"]["needed_to_complete"] <= 0):
+		userAchievements["100_wrong"]["Achieved"] = true
+	if (userAchievements["20_study_sessions"]["needed_to_complete"] <= 0):
+		userAchievements["20_study_sessions"]["Achieved"] = true
+	if (userAchievements["100_BP"]["needed_to_complete"] <= 0):
+		userAchievements["100_BP"]["Achieved"] = true

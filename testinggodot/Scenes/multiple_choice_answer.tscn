@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://c4jd7au60usw1"]
+
+[node name="answer1" type="HBoxContainer"]
+
+[node name="A1Checkbox" type="CheckBox" parent="."]
+layout_mode = 2
+
+[node name="A1Edit" type="LineEdit" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Enter Answer Here"

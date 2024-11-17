@@ -1,0 +1,368 @@
+[gd_scene load_steps=10 format=3 uid="uid://co0i5ikiascpo"]
+
+[ext_resource type="Script" path="res://scripts/EditDeck.gd" id="1_m72y3"]
+[ext_resource type="Theme" uid="uid://bx813hlugnxk4" path="res://Assets/Themes/buttonMargin.tres" id="2_xuu3q"]
+[ext_resource type="Theme" uid="uid://r2vpf15phgil" path="res://Assets/Themes/orangeButtonNew.tres" id="3_j3a67"]
+[ext_resource type="Script" path="res://scripts/CreateDeckScripts/QEdit.gd" id="3_nbrfr"]
+[ext_resource type="Theme" uid="uid://bqqaoqmfnthc1" path="res://Assets/Themes/greenButtonNew.tres" id="5_67e2e"]
+[ext_resource type="Script" path="res://scripts/CreateDeckScripts/add_card_button.gd" id="5_nyipo"]
+[ext_resource type="Theme" uid="uid://cd6tf0umvtdl0" path="res://Assets/Themes/whiteButtonNew.tres" id="7_odxq4"]
+[ext_resource type="Theme" uid="uid://bj6sljcu2sr8b" path="res://Assets/Themes/redButtonNew.tres" id="7_r3bg3"]
+[ext_resource type="Theme" uid="uid://dheyuhbsygb2a" path="res://Assets/Themes/LabelA.tres" id="8_n3g54"]
+
+[node name="EditDeck" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_m72y3")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="PanelContainer"]
+layout_mode = 2
+color = Color(0.556863, 0.541176, 0.490196, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+color = Color(0.752941, 0.784314, 0.768627, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="MenuBar" type="MenuBar" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="File" type="PopupMenu" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/MenuBar"]
+auto_translate_mode = 1
+
+[node name="Edit" type="PopupMenu" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/MenuBar"]
+auto_translate_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_xuu3q")
+
+[node name="BackButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(125, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme = ExtResource("3_j3a67")
+text = "Back"
+
+[node name="PanelContainer2" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ColorRect2" type="ColorRect" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2"]
+layout_mode = 2
+color = Color(0.67451, 0.658824, 0.607843, 1)
+
+[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 17
+theme_override_constants/margin_top = 23
+theme_override_constants/margin_right = 17
+theme_override_constants/margin_bottom = 23
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 17
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 23
+
+[node name="QuestionLineEdit" type="LineEdit" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+placeholder_text = "Enter Question Here"
+alignment = 1
+script = ExtResource("3_nbrfr")
+
+[node name="AnswerEdit" type="TextEdit" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 290)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 20
+placeholder_text = "Enter Answer Here"
+
+[node name="MultiChoiceFormat" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Answer1" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat"]
+layout_mode = 2
+
+[node name="A1Checkbox" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer1"]
+layout_mode = 2
+
+[node name="A1Edit" type="LineEdit" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer1"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Answer2" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat"]
+layout_mode = 2
+
+[node name="A2Checkbox" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer2"]
+layout_mode = 2
+
+[node name="A2Edit" type="LineEdit" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Answer3" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat"]
+layout_mode = 2
+
+[node name="A3Checkbox" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer3"]
+layout_mode = 2
+
+[node name="A3Edit" type="LineEdit" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Answer4" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat"]
+layout_mode = 2
+
+[node name="A4Checkbox" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer4"]
+layout_mode = 2
+
+[node name="A4Edit" type="LineEdit" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TFAnswerFormat" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="TrueBox" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/TFAnswerFormat"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "True"
+
+[node name="FalseBox" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/TFAnswerFormat"]
+layout_mode = 2
+text = "False"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+
+[node name="OptionsLabel2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+text = "Deck Options"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+text = "Name: "
+
+[node name="DeckNameLineEdit" type="LineEdit" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Default Deck Name"
+
+[node name="ScaleDifficultyCheckBox" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+button_pressed = true
+text = "Scale difficulty with level"
+
+[node name="RandomOrderCheckBox2" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+button_pressed = true
+text = "Random order"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/HBoxContainer2"]
+layout_mode = 2
+text = "Card Theme: "
+
+[node name="greenThemeButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/HBoxContainer2"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme = ExtResource("5_67e2e")
+theme_override_font_sizes/font_size = 15
+text = "X"
+
+[node name="orangeThemeButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/HBoxContainer2"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme = ExtResource("3_j3a67")
+theme_override_font_sizes/font_size = 15
+
+[node name="redThemeButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/HBoxContainer2"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme = ExtResource("7_r3bg3")
+theme_override_font_sizes/font_size = 15
+
+[node name="originalThemeButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/HBoxContainer2"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme = ExtResource("7_odxq4")
+theme_override_font_sizes/font_size = 15
+
+[node name="HSeparator2" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 23)
+layout_mode = 2
+
+[node name="OptionsLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Card Options"
+
+[node name="CaseCheckBox" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Case sensitive"
+
+[node name="SpaceCheckBox" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Space sensitive"
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Answer Format:"
+
+[node name="AnswerOption" type="OptionButton" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 23)
+layout_mode = 2
+
+[node name="AddCardButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(200, 45)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("5_67e2e")
+theme_override_font_sizes/font_size = 25
+text = "Add Card"
+script = ExtResource("5_nyipo")
+
+[node name="RemoveCardButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(200, 45)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("7_r3bg3")
+theme_override_font_sizes/font_size = 25
+text = "Remove Card"
+script = ExtResource("5_nyipo")
+
+[node name="PanelContainer3" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 55)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer3"]
+layout_mode = 2
+color = Color(0.752941, 0.784314, 0.768627, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer3"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="DeleteButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer3/MarginContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+theme = ExtResource("7_r3bg3")
+text = "Delete Deck"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer3/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="NavLeftButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer3/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme = ExtResource("3_j3a67")
+text = "<"
+
+[node name="NavigationLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer3/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+theme = ExtResource("8_n3g54")
+text = "7 / 32"
+horizontal_alignment = 1
+
+[node name="NavRightButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer3/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme = ExtResource("3_j3a67")
+text = ">"
+
+[node name="FinishDeckButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer3/MarginContainer"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+size_flags_horizontal = 8
+theme = ExtResource("5_67e2e")
+text = "Save Deck"
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/MarginContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/MarginContainer/BackButton" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/MarginContainer/BackButton" method="_on_pressed"]
+[connection signal="text_changed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/QuestionLineEdit" to="." method="_on_question_line_edit_text_changed"]
+[connection signal="text_changed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/AnswerEdit" to="." method="_on_answer_edit_text_changed"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer1/A1Checkbox" to="." method="_on_a1_checkbox_toggled"]
+[connection signal="text_changed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer1/A1Edit" to="." method="_on_a1_edit_text_changed"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer2/A2Checkbox" to="." method="_on_a2_checkbox_toggled"]
+[connection signal="text_changed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer2/A2Edit" to="." method="_on_a2_edit_text_changed"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer3/A3Checkbox" to="." method="_on_a3_checkbox_toggled"]
+[connection signal="text_changed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer3/A3Edit" to="." method="_on_a3_edit_text_changed"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer4/A4Checkbox" to="." method="_on_a4_checkbox_toggled"]
+[connection signal="text_changed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer4/A4Edit" to="." method="_on_a4_edit_text_changed"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/TFAnswerFormat/TrueBox" to="." method="_on_true_box_toggled"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/TFAnswerFormat/FalseBox" to="." method="_on_false_box_toggled"]
+[connection signal="text_changed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/HBoxContainer/DeckNameLineEdit" to="." method="_on_deck_name_line_edit_text_changed"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/ScaleDifficultyCheckBox" to="." method="_on_scale_difficulty_check_box_toggled"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/RandomOrderCheckBox2" to="." method="_on_random_order_check_box_2_toggled"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/HBoxContainer2/greenThemeButton" to="." method="_on_green_theme_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/HBoxContainer2/orangeThemeButton" to="." method="_on_orange_theme_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/HBoxContainer2/redThemeButton" to="." method="_on_red_theme_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/HBoxContainer2/originalThemeButton" to="." method="_on_original_theme_button_pressed"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/CaseCheckBox" to="." method="_on_case_check_box_toggled"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/SpaceCheckBox" to="." method="_on_space_check_box_toggled"]
+[connection signal="item_selected" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/AnswerOption" to="." method="_on_answer_option_item_selected"]
+[connection signal="get_Card" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/AddCardButton" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/QuestionLineEdit" method="_on_add_card_button_get_card"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/AddCardButton" to="." method="_on_add_card_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/AddCardButton" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/AddCardButton" method="_on_pressed"]
+[connection signal="get_Card" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/RemoveCardButton" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/QuestionLineEdit" method="_on_add_card_button_get_card"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/RemoveCardButton" to="." method="_on_remove_card_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/RemoveCardButton" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/RemoveCardButton" method="_on_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer3/MarginContainer/DeleteButton" to="." method="_on_delete_deck_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer3/MarginContainer/HBoxContainer/NavLeftButton" to="." method="_on_nav_left_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer3/MarginContainer/HBoxContainer/NavRightButton" to="." method="_on_nav_right_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer3/MarginContainer/FinishDeckButton" to="." method="_on_finish_deck_button_pressed"]

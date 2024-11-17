@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b7ye42i4ak6c6"
+path="res://.godot/imported/Sarcastic Clap.wav-d634c27a8e44997f3042e9c699cb9127.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/Sarcastic Clap.wav"
+dest_files=["res://.godot/imported/Sarcastic Clap.wav-d634c27a8e44997f3042e9c699cb9127.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

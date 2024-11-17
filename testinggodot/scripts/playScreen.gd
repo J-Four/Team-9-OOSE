@@ -15,11 +15,28 @@ extends Node
 @onready var correct_sfx: Resource = preload("res://Assets/Audio/Buff 001.wav")
 @onready var wrong_sfx: Resource = preload("res://Assets/Audio/Debuff 001.wav")
 @onready var lives: Array = [
-	get_node("PanelContainer/VBoxContainer/PanelContainer4/MarginContainer/BoxContainer/CenterContainer/Heart1"),
-	get_node("PanelContainer/VBoxContainer/PanelContainer4/MarginContainer/BoxContainer/CenterContainer2/Heart2"),
-	get_node("PanelContainer/VBoxContainer/PanelContainer4/MarginContainer/BoxContainer/CenterContainer3/Heart3")
+	get_node("PanelContainer/VBoxContainer/PanelContainer4/MarginContainer/PanelContainer/BoxContainer/CenterContainer/Heart1"),
+	get_node("PanelContainer/VBoxContainer/PanelContainer4/MarginContainer/PanelContainer/BoxContainer/CenterContainer2/Heart2"),
+	get_node("PanelContainer/VBoxContainer/PanelContainer4/MarginContainer/PanelContainer/BoxContainer/CenterContainer3/Heart3")
 	]
-	
+@onready var TrueFalseChoice: HBoxContainer = get_node("PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/TrueFalseChoice")
+@onready var MultipleChoice: VBoxContainer = get_node("PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MultipleChoice")
+@onready var a1_button: Button = get_node("PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MultipleChoice/HBoxContainer/A1Button")
+@onready var a2_button: Button = get_node("PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MultipleChoice/HBoxContainer/A2Button")
+@onready var a3_button: Button = get_node("PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MultipleChoice/HBoxContainer2/A3Button")
+@onready var a4_button: Button = get_node("PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MultipleChoice/HBoxContainer2/A4Button")
+@onready var MAdventureTheme: Resource = preload("res://Assets/Themes/SpriteMAdventure.tres")
+@onready var FAdventureTheme: Resource = preload("res://Assets/Themes/SpriteFAdventure.tres")
+@onready var MSkellyTheme: Resource = preload("res://Assets/Themes/SpriteMSkelly.tres")
+@onready var FSkellyTheme: Resource = preload("res://Assets/Themes/SpriteFSkelly.tres")
+@onready var ElfTheme: Resource = preload("res://Assets/Themes/SpriteElf.tres")
+@onready var PrincessTheme: Resource = preload("res://Assets/Themes/SpritePrincess.tres")
+@onready var studyBuddy: Label = get_node("PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/VBoxContainer/studyBuddy")
+@onready var studyMsg: Label = get_node("PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/VBoxContainer/studyMsg")
+@onready var correct_click_particles = preload("res://Scenes/confetti_click_particles.tscn")
+@onready var wrong_click_particles = preload("res://Scenes/bad_click_particles.tscn")
+
+
 var currentCard : int = 1
 var numCards: int = 1
 var currentDeck : Dictionary
@@ -71,6 +88,8 @@ func _ready() -> void:
 	# Set card index to the first card in the array to start with. 
 	# This will be increased one at a time when the user enters an answer.
 	current_card_idx = 0
+	update_buddy()
+	studyMsg.hide()
 	display_card(current_card_idx)
 
 
@@ -93,7 +112,23 @@ func _process(delta: float) -> void:
 # the passed index value, and resets the answer line edit to be empty.
 func display_card(card_idx: int):
 	QLabel.text = cards[card_idx]["Question"]
-	answer_line_edit.text = ""
+	if(cards[card_idx]["Free Response"] == true):
+		answer_line_edit.set_visible(true)
+		MultipleChoice.set_visible(false)
+		TrueFalseChoice.set_visible(false)
+		answer_line_edit.text = ""
+	if(cards[card_idx]["Multiple Choice"] == true):
+		answer_line_edit.set_visible(false)
+		MultipleChoice.set_visible(true)
+		TrueFalseChoice.set_visible(false)
+		a1_button.text = cards[card_idx]["Multiple Answers"]["answer1"]
+		a2_button.text = cards[card_idx]["Multiple Answers"]["answer2"]
+		a3_button.text = cards[card_idx]["Multiple Answers"]["answer3"]
+		a4_button.text = cards[card_idx]["Multiple Answers"]["answer4"]
+	if(cards[card_idx]["T/F Choice"] == true):
+		answer_line_edit.set_visible(false)
+		MultipleChoice.set_visible(false)
+		TrueFalseChoice.set_visible(true)
 
 
 # This function is called when the user clicks on the next arrow button.
@@ -115,6 +150,9 @@ func _on_exit_button_pressed() -> void:
 
 
 func deck_complete(msg: String, wait_time: int = 1):
+	if cards_correct == 0:
+		Global.lost = true
+	
 	# Set 'game_over' to true and 'count_down_timer' to false to stop the timer from counting down.
 	game_over = true
 	count_down_timer = false
@@ -151,9 +189,29 @@ func _on_answer_line_edit_text_submitted(new_text: String) -> void:
 	
 	# Check if user has correct answer
 	if user_str == answer_str:
+		answer_correct(true)
+	else:
+		answer_correct(false)
+
+func answer_correct(isCorrect: bool) -> void:
+	if not count_down_timer:
+		return
+	if isCorrect:
 		# TODO: Some visual and audio effect for correct answer
 		AudioPlayer.play_sound_effect(correct_sfx, 0.25)
 		progress_labels[current_card_idx].modulate = Color.GREEN
+		studyMsg.text = "Great Job!"
+		studyMsg.show()
+		var particles: CPUParticles2D = correct_click_particles.instantiate()
+		add_child(particles)
+		particles.show()
+		particles.position = get_viewport().get_mouse_position()
+		particles.emitting = true
+		count_down_timer = false
+		await get_tree().create_timer(1).timeout
+		count_down_timer = true
+		particles.queue_free()
+		
 		cards_correct += 1
 		
 		# If this is the final card, go to end screen. Else go to next card
@@ -166,6 +224,19 @@ func _on_answer_line_edit_text_submitted(new_text: String) -> void:
 		# TODO: Some visual and audio effect for wrong answer
 		AudioPlayer.play_sound_effect(wrong_sfx, 0.25)
 		progress_labels[current_card_idx].modulate = Color.RED
+		studyMsg.text = "Keep trying!"
+		studyMsg.show()
+		var particles: CPUParticles2D = wrong_click_particles.instantiate()
+		add_child(particles)
+		particles.show()
+		particles.position = get_viewport().get_mouse_position()
+		print(particles.position)
+		particles.emitting = true
+		count_down_timer = false
+		await get_tree().create_timer(1).timeout
+		count_down_timer = true
+		particles.queue_free()
+		
 		cards_wrong += 1
 		
 		# If lives are left, subtract one life.
@@ -191,3 +262,59 @@ func _on_answer_line_edit_text_submitted(new_text: String) -> void:
 		else:
 			current_card_idx += 1
 			display_card(current_card_idx)
+
+func _on_true_button_pressed() -> void:
+	if (cards[current_card_idx]["Answer"] == "True"):
+		answer_correct(true)
+	else:
+		answer_correct(false)
+
+
+func _on_false_button_pressed() -> void:
+	if (cards[current_card_idx]["Answer"] == "False"):
+		answer_correct(true)
+	else:
+		answer_correct(false)
+
+
+func _on_a1_button_pressed() -> void:
+	if (cards[current_card_idx]["Answer"] == "1"):
+		answer_correct(true)
+	else:
+		answer_correct(false)
+
+
+func _on_a2_button_pressed() -> void:
+	if (cards[current_card_idx]["Answer"] == "2"):
+		answer_correct(true)
+	else:
+		answer_correct(false)
+
+
+func _on_a3_button_pressed() -> void:
+	if (cards[current_card_idx]["Answer"] == "3"):
+		answer_correct(true)
+	else:
+		answer_correct(false)
+
+
+func _on_a4_button_pressed() -> void:
+	if (cards[current_card_idx]["Answer"] == "4"):
+		answer_correct(true)
+	else:
+		answer_correct(false)
+
+
+func update_buddy() -> void:
+	if (Global.spriteChosen == "MAdventurer"):
+		studyBuddy.theme = MAdventureTheme
+	if(Global.spriteChosen == "FAdventurer"):
+		studyBuddy.theme = FAdventureTheme
+	if(Global.spriteChosen == "MSkelly"):
+		studyBuddy.theme = MSkellyTheme
+	if(Global.spriteChosen == "FSkelly"):
+		studyBuddy.theme = FSkellyTheme
+	if(Global.spriteChosen == "Elf"):
+		studyBuddy.theme = ElfTheme
+	if(Global.spriteChosen == "Princess"):
+		studyBuddy.theme = PrincessTheme

@@ -1,0 +1,312 @@
+[gd_scene load_steps=8 format=3 uid="uid://1r1bg5oxd0q4"]
+
+[ext_resource type="Script" path="res://view_achievements.gd" id="1_kuifl"]
+[ext_resource type="Theme" uid="uid://cbjdc0ugsxcns" path="res://Assets/Themes/PanelA.tres" id="2_4fh23"]
+[ext_resource type="Theme" uid="uid://bx813hlugnxk4" path="res://Assets/Themes/buttonMargin.tres" id="3_l2rsf"]
+[ext_resource type="Theme" uid="uid://dheyuhbsygb2a" path="res://Assets/Themes/LabelA.tres" id="4_jnwgj"]
+[ext_resource type="Theme" uid="uid://cv8rrvs81uqq" path="res://Assets/Themes/trophyLabel.tres" id="5_ognbh"]
+[ext_resource type="Theme" uid="uid://dpm018wcxw7d2" path="res://Assets/Themes/LabelB.tres" id="6_oc1al"]
+[ext_resource type="Theme" uid="uid://bqqaoqmfnthc1" path="res://Assets/Themes/greenButtonNew.tres" id="7_47mip"]
+
+[node name="viewAchievements" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kuifl")
+
+[node name="PanelContainer2" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_4fh23")
+
+[node name="ColorRect" type="ColorRect" parent="PanelContainer2"]
+layout_mode = 2
+color = Color(0.556863, 0.541176, 0.490196, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer2"]
+layout_mode = 2
+alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="ColorRect2" type="ColorRect" parent="PanelContainer2/VBoxContainer/PanelContainer"]
+layout_mode = 2
+color = Color(0.752941, 0.784314, 0.768627, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer2/VBoxContainer/PanelContainer"]
+layout_direction = 1
+layout_mode = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer2/VBoxContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_l2rsf")
+
+[node name="Label" type="Label" parent="PanelContainer2/VBoxContainer/PanelContainer/HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme = ExtResource("4_jnwgj")
+theme_override_font_sizes/font_size = 25
+text = "Achievements"
+horizontal_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="PanelContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="PanelContainer2" type="PanelContainer" parent="PanelContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ColorRect" type="ColorRect" parent="PanelContainer2/VBoxContainer/PanelContainer2"]
+layout_mode = 2
+color = Color(0.556863, 0.541176, 0.490196, 1)
+
+[node name="HFlowContainer" type="HFlowContainer" parent="PanelContainer2/VBoxContainer/PanelContainer2"]
+layout_mode = 2
+alignment = 1
+
+[node name="100Correct" type="MarginContainer" parent="PanelContainer2/VBoxContainer/PanelContainer2/HFlowContainer"]
+layout_mode = 2
+theme = ExtResource("3_l2rsf")
+
+[node name="Label" type="Label" parent="PanelContainer2/VBoxContainer/PanelContainer2/HFlowContainer/100Correct"]
+custom_minimum_size = Vector2(210, 110)
+layout_mode = 2
+theme = ExtResource("4_jnwgj")
+theme_override_font_sizes/font_size = 25
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer2/VBoxContainer/PanelContainer2/HFlowContainer/100Correct/Label"]
+custom_minimum_size = Vector2(210, 110)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer2/VBoxContainer/PanelContainer2/HFlowContainer/100Correct/Label/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_l2rsf")
+
+[node name="Label" type="Label" parent="PanelContainer2/VBoxContainer/PanelContainer2/HFlowContainer/100Correct/Label/HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+size_flags_horizontal = 6
+theme = ExtResource("5_ognbh")
+
+[node name="Label2" type="Label" parent="PanelContainer2/VBoxContainer/PanelContainer2/HFlowContainer/100Correct/Label/HBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme = ExtResource("6_oc1al")
+text = "100 Correct Answers"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="100Wrong" type="MarginContainer" parent="PanelContainer2/VBoxContainer/PanelContainer2/HFlowContainer"]
+layout_mode = 2
+theme = ExtResource("3_l2rsf")
+
+[node name="Label" type="Label" parent="PanelContainer2/VBoxContainer/PanelContainer2/HFlowContainer/100Wrong"]
+custom_minimum_size = Vector2(210, 110)
+layout_mode = 2
+theme = ExtResource("4_jnwgj")
+theme_override_font_sizes/font_size = 25
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer2/VBoxContainer/PanelContainer2/HFlowContainer/100Wrong/Label"]
+custom_minimum_size = Vector2(210, 110)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer2/VBoxContainer/PanelContainer2/HFlowContainer/100Wrong/Label/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_l2rsf")
+
+[node name="Label" type="Label" parent="PanelContainer2/VBoxContainer/PanelContainer2/HFlowContainer/100Wrong/Label/HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+size_flags_horizontal = 6
+theme = ExtResource("5_ognbh")
+
+[node name="Label2" type="Label" parent="PanelContainer2/VBoxContainer/PanelContainer2/HFlowContainer/100Wrong/Label/HBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme = ExtResource("6_oc1al")
+text = "100 Incorrect Answers"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="20Sessions" type="MarginContainer" parent="PanelContainer2/VBoxContainer/PanelContainer2/HFlowContainer"]
+layout_mode = 2
+theme = ExtResource("3_l2rsf")
+
+[node name="Label" type="Label" parent="PanelContainer2/VBoxContainer/PanelContainer2/HFlowContainer/20Sessions"]
+custom_minimum_size = Vector2(210, 110)
+layout_mode = 2
+theme = ExtResource("4_jnwgj")
+theme_override_font_sizes/font_size = 25
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer2/VBoxContainer/PanelContainer2/HFlowContainer/20Sessions/Label"]
+custom_minimum_size = Vector2(210, 110)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer2/VBoxContainer/PanelContainer2/HFlowContainer/20Sessions/Label/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_l2rsf")
+
+[node name="Label" type="Label" parent="PanelContainer2/VBoxContainer/PanelContainer2/HFlowContainer/20Sessions/Label/HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+size_flags_horizontal = 6
+theme = ExtResource("5_ognbh")
+
+[node name="Label2" type="Label" parent="PanelContainer2/VBoxContainer/PanelContainer2/HFlowContainer/20Sessions/Label/HBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme = ExtResource("6_oc1al")
+text = "20 Study Sessions"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="100BP" type="MarginContainer" parent="PanelContainer2/VBoxContainer/PanelContainer2/HFlowContainer"]
+layout_mode = 2
+theme = ExtResource("3_l2rsf")
+
+[node name="Label" type="Label" parent="PanelContainer2/VBoxContainer/PanelContainer2/HFlowContainer/100BP"]
+custom_minimum_size = Vector2(210, 110)
+layout_mode = 2
+theme = ExtResource("4_jnwgj")
+theme_override_font_sizes/font_size = 25
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer2/VBoxContainer/PanelContainer2/HFlowContainer/100BP/Label"]
+custom_minimum_size = Vector2(210, 110)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer2/VBoxContainer/PanelContainer2/HFlowContainer/100BP/Label/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_l2rsf")
+
+[node name="Label" type="Label" parent="PanelContainer2/VBoxContainer/PanelContainer2/HFlowContainer/100BP/Label/HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+size_flags_horizontal = 6
+theme = ExtResource("5_ognbh")
+
+[node name="Label2" type="Label" parent="PanelContainer2/VBoxContainer/PanelContainer2/HFlowContainer/100BP/Label/HBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme = ExtResource("6_oc1al")
+text = "100 Brain Power Earned"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="buddyUnlocked" type="MarginContainer" parent="PanelContainer2/VBoxContainer/PanelContainer2/HFlowContainer"]
+layout_mode = 2
+theme = ExtResource("3_l2rsf")
+
+[node name="Label" type="Label" parent="PanelContainer2/VBoxContainer/PanelContainer2/HFlowContainer/buddyUnlocked"]
+custom_minimum_size = Vector2(210, 110)
+layout_mode = 2
+theme = ExtResource("4_jnwgj")
+theme_override_font_sizes/font_size = 25
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer2/VBoxContainer/PanelContainer2/HFlowContainer/buddyUnlocked/Label"]
+custom_minimum_size = Vector2(210, 110)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer2/VBoxContainer/PanelContainer2/HFlowContainer/buddyUnlocked/Label/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_l2rsf")
+
+[node name="Label" type="Label" parent="PanelContainer2/VBoxContainer/PanelContainer2/HFlowContainer/buddyUnlocked/Label/HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+size_flags_horizontal = 6
+theme = ExtResource("5_ognbh")
+
+[node name="Label2" type="Label" parent="PanelContainer2/VBoxContainer/PanelContainer2/HFlowContainer/buddyUnlocked/Label/HBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme = ExtResource("6_oc1al")
+text = "First Study Buddy Unlocked"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="HSeparator3" type="HSeparator" parent="PanelContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="PanelContainer3" type="PanelContainer" parent="PanelContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="PanelContainer2/VBoxContainer/PanelContainer3"]
+layout_mode = 2
+color = Color(0.752941, 0.784314, 0.768627, 1)
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer2/VBoxContainer/PanelContainer3"]
+layout_direction = 1
+layout_mode = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer3"]
+layout_mode = 2
+theme = ExtResource("3_l2rsf")
+
+[node name="OK" type="Button" parent="PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer3/MarginContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("7_47mip")
+text = "OK"
+
+[node name="HSeparator4" type="HSeparator" parent="PanelContainer2/VBoxContainer"]
+layout_mode = 2
+
+[connection signal="pressed" from="PanelContainer2/VBoxContainer/PanelContainer3/HBoxContainer3/MarginContainer/OK" to="." method="_on_ok_pressed"]

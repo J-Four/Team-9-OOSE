@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://ba5dlq0diu2or"]
+
+[ext_resource type="Script" path="res://scripts/node2d_screen_position.gd" id="1_47mer"]
+
+[sub_resource type="Curve" id="Curve_73q7n"]
+_data = [Vector2(0, 0), 0.0, -0.264331, 0, 0, Vector2(0.0280899, 1), 0.632838, 0.632838, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="BadClickParticles" type="CPUParticles2D"]
+z_index = 5
+emitting = false
+amount = 1
+one_shot = true
+explosiveness = 1.0
+lifetime_randomness = 0.1
+spread = 180.0
+gravity = Vector2(0, 0)
+angle_min = -90.0
+angle_max = 90.0
+scale_amount_min = 50.0
+scale_amount_max = 60.0
+scale_amount_curve = SubResource("Curve_73q7n")
+color = Color(1, 0, 0, 0.513726)
+script = ExtResource("1_47mer")

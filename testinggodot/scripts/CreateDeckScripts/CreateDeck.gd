@@ -6,6 +6,28 @@ extends Node
 @onready var case_checkbox: CheckBox = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/CaseCheckBox")
 @onready var space_checkbox: CheckBox = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/SpaceCheckBox")
 @onready var popup: Resource = preload("res://Scenes/ErrorPopup.tscn")
+@onready var answer_options: OptionButton = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/AnswerOption")
+@onready var multiple_choice_format: VBoxContainer = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat")
+@onready var answer_1: HBoxContainer = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer1")
+@onready var answer_2: HBoxContainer = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer2")
+@onready var answer_3: HBoxContainer = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer3")
+@onready var answer_4: HBoxContainer = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer4")
+@onready var tf_choice_format: VBoxContainer = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/TFAnswerFormat")
+@onready var answer_true: CheckBox = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/TFAnswerFormat/TrueBox")
+@onready var answer_false: CheckBox = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/TFAnswerFormat/FalseBox")
+@onready var a1_checkbox: CheckBox = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer1/A1Checkbox")
+@onready var a2_checkbox: CheckBox = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer2/A2Checkbox")
+@onready var a3_checkbox: CheckBox = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer3/A3Checkbox")
+@onready var a4_checkbox: CheckBox = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer4/A4Checkbox")
+@onready var a1_line_edit: LineEdit = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer1/A1Edit")
+@onready var a2_line_edit: LineEdit = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer2/A2Edit")
+@onready var a3_line_edit: LineEdit = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer3/A3Edit")
+@onready var a4_line_edit: LineEdit = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer/MultiChoiceFormat/Answer4/A4Edit")
+@onready var themeOriginal: Button = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/HBoxContainer2/originalThemeButton")
+@onready var themeGreen: Button = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/HBoxContainer2/greenThemeButton")
+@onready var themeRed: Button = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/HBoxContainer2/redThemeButton")
+@onready var themeOrange: Button = get_node("PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer2/HBoxContainer/VBoxContainer2/HBoxContainer2/orangeThemeButton")
+
 
 # Dictionary is a struct with key : value. Each of the 'Cards' part of a deck dictionary is an array
 # of dictionaries.
@@ -15,6 +37,7 @@ var new_deck: Dictionary = {
 	"Scale difficulty": true,
 	"Random order": true,
 	"XP": 0,
+	"Theme": "Original",
 	"Cards": empty_array.duplicate(true) # Makes another array of Dict to save cards
 }
 var current_card: int = -1
@@ -22,17 +45,58 @@ var deck_name: String = "Default Deck Name"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	update_theme_button()
 	nav_label.text = "0 / 0" # The label in the bottoms that shows num of cards
+	add_answer_options() #fill option box for answer formats
+	#update_answer_format()
 	add_new_card_to_deck() # Run this func
 
+func update_theme_button() -> void:
+	match new_deck["Theme"]:
+		"Original":
+			themeOriginal.text = "X"
+			themeGreen.text = ""
+			themeOrange.text = ""
+			themeRed.text = ""
+		"Green":
+			themeOriginal.text = ""
+			themeGreen.text = "X"
+			themeOrange.text = ""
+			themeRed.text = ""
+		"Red":
+			themeOriginal.text = ""
+			themeGreen.text = ""
+			themeOrange.text = ""
+			themeRed.text = "X"
+		"Orange":
+			themeOriginal.text = ""
+			themeGreen.text = ""
+			themeOrange.text = "X"
+			themeRed.text = ""
+			
+
+
+func add_answer_options() -> void:
+	answer_options.add_item("Free Response", 1)
+	answer_options.add_item("Multiple Choice", 2)
+	answer_options.add_item("T/F Choice", 3)
 
 func add_new_card_to_deck() -> void:
 	# Temp Dict var to hold empty card
 	var tmp: Dictionary = { 
 		"Question": "",
 		"Answer": "",
+		"Free Response": true,
+		"T/F Choice": false,
+		"Multiple Choice": false,
 		"Case sensitive": false,
-		"Space sensitive": false
+		"Space sensitive": false,
+		"Multiple Answers": {
+			"answer1": "",
+			"answer2": "",
+			"answer3": "",
+			"answer4": ""
+		} #a dictionary to hold multi answers
 		}
 	# Add the empty card to "cards" array
 	new_deck["Cards"].append(tmp.duplicate(true)) 
@@ -50,13 +114,46 @@ func update_nav_label() -> void:
 
 # Using int index to change card displayed
 func update_display_to_card(card_idx: int) -> void:
+	answer_true.set_pressed_no_signal(false)
+	answer_false.set_pressed_no_signal(false)
 	# Loading in what is saved to "cards"
 	question_line_edit.text = new_deck["Cards"][card_idx]["Question"] 
-	answer_edit.text = new_deck["Cards"][card_idx]["Answer"]
+	if(new_deck["Cards"][card_idx]["Multiple Choice"]):
+		_on_answer_option_item_selected(1)
+		answer_options.selected = 1
+		update_multiple_choice()
+	if(new_deck["Cards"][card_idx]["Free Response"]):
+		_on_answer_option_item_selected(0)
+		answer_options.selected = 0
+		answer_edit.text = new_deck["Cards"][card_idx]["Answer"]
+	if(new_deck["Cards"][card_idx]["T/F Choice"]):
+		_on_answer_option_item_selected(2)
+		if new_deck["Cards"][card_idx]["Answer"] == "True":
+			answer_true.set_pressed_no_signal(true)
+		else:
+			answer_false.set_pressed_no_signal(true)
+		answer_options.selected = 2
 	case_checkbox.set_pressed_no_signal(new_deck["Cards"][card_idx]["Case sensitive"])
 	space_checkbox.set_pressed_no_signal(new_deck["Cards"][card_idx]["Space sensitive"])
 	update_nav_label()
 
+func update_multiple_choice() -> void:
+	a1_line_edit.text = new_deck["Cards"][current_card]["Multiple Answers"]["answer1"]
+	a2_line_edit.text = new_deck["Cards"][current_card]["Multiple Answers"]["answer2"]
+	a3_line_edit.text = new_deck["Cards"][current_card]["Multiple Answers"]["answer3"]
+	a4_line_edit.text = new_deck["Cards"][current_card]["Multiple Answers"]["answer4"]
+	a1_checkbox.button_pressed = false
+	a2_checkbox.button_pressed = false
+	a3_checkbox.button_pressed = false
+	a4_checkbox.button_pressed = false
+	if(new_deck["Cards"][current_card]["Answer"] == "1"):
+		a1_checkbox.button_pressed = true
+	if(new_deck["Cards"][current_card]["Answer"] == "2"):
+		a2_checkbox.button_pressed = true
+	if(new_deck["Cards"][current_card]["Answer"] == "3"):
+		a3_checkbox.button_pressed = true
+	if(new_deck["Cards"][current_card]["Answer"] == "4"):
+		a4_checkbox.button_pressed = true
 
 # Changes the current_card index to passed int and updates display.
 func change_card(card_idx: int) -> void:
@@ -80,7 +177,12 @@ func _on_nav_right_button_pressed() -> void:
 
 # Add a new blank card and change to it
 func _on_add_card_button_pressed() -> void:
-	add_new_card_to_deck()
+	add_new_card_to_deck() # Allow a user to make a blank card if they wish?
+	#if(new_deck["Cards"][current_card]["Answer"] != "" && new_deck["Cards"][current_card]["Question"] != ""): #check if Q and A is not empty
+		#add_new_card_to_deck()
+	#else:
+		## Add pop up to ask user to fill Q and choose answer
+		#MessageDisplayer.error_popup("Please make sure to have an answer and question before adding a new card.")
 
 
 # Update the question in the deck data when the user changes text in the question line edit
@@ -111,8 +213,8 @@ func _on_scale_difficulty_check_box_toggled(toggled_on: bool) -> void:
 # Save the deck data to a json file
 func _on_finish_deck_button_pressed() -> void:
 	# Save deck as json file in folder on desktop. For now at least
-	var json = JSON.new()
-	var json_string = json.stringify(new_deck)
+	# var json = JSON.new() fixing a warning
+	var json_string = JSON.stringify(new_deck)
 	
 	# Create folder on desktop if it does not already exist
 	var dir = DirAccess.open(OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP))
@@ -140,6 +242,9 @@ func _on_finish_deck_button_pressed() -> void:
 		p.show()
 	else:
 		Global.write_deck(json_string, deck_name)
+	
+	# This would change scenes before letting the user see a popup including the one about overwriting an existing deck
+	# get_tree().change_scene_to_file("res://Scenes/MainSceneControl.tscn")
 
 
 # Update deck name when the user changes the deck name line edit
@@ -175,3 +280,121 @@ func _on_back_button_pressed() -> void:
 	p.no_button.pressed.connect(p.free_self)
 	p.cancel_button.pressed.connect(p.free_self)
 	p.show()
+
+
+func _on_answer_option_item_selected(index: int) -> void:
+	if(index == 0): #free responce becomes visible
+		answer_edit.set_visible(true)
+		multiple_choice_format.set_visible(false)
+		tf_choice_format.set_visible(false)
+		new_deck["Cards"][current_card]["Free Response"] = true
+		new_deck["Cards"][current_card]["Multiple Choice"] = false
+		new_deck["Cards"][current_card]["T/F Choice"] = false
+		case_checkbox.disabled = false
+		space_checkbox.disabled = false
+	if(index == 1): #multi responce becomes visible
+		answer_edit.set_visible(false)
+		multiple_choice_format.set_visible(true)
+		tf_choice_format.set_visible(false)
+		new_deck["Cards"][current_card]["Free Response"] = false
+		new_deck["Cards"][current_card]["Multiple Choice"] = true
+		new_deck["Cards"][current_card]["T/F Choice"] = false
+		update_multiple_choice()
+		case_checkbox.disabled = true
+		space_checkbox.disabled = true
+	if(index == 2): #t/f responce becomes visible
+		answer_edit.set_visible(false)
+		multiple_choice_format.set_visible(false)
+		tf_choice_format.set_visible(true)
+		new_deck["Cards"][current_card]["Free Response"] = false
+		new_deck["Cards"][current_card]["Multiple Choice"] = false
+		new_deck["Cards"][current_card]["T/F Choice"] = true
+		case_checkbox.disabled = true
+		space_checkbox.disabled = true
+
+
+func _on_true_box_toggled(toggled_on: bool) -> void:
+	if (toggled_on): #if toggled on then other answer is not
+		answer_false.button_pressed = false
+		new_deck["Cards"][current_card]["Answer"] = "True" #assigning answer
+	else:
+		answer_false.button_pressed = true
+		new_deck["Cards"][current_card]["Answer"] = "False"
+	
+
+
+func _on_false_box_toggled(toggled_on: bool) -> void:
+	if (toggled_on): #if toggled on then other answer is not
+		answer_true.button_pressed = false
+		new_deck["Cards"][current_card]["Answer"] = "False" #assigning answer
+	else:
+		answer_true.button_pressed = true
+		new_deck["Cards"][current_card]["Answer"] = "True"
+
+
+func _on_a1_edit_text_changed(new_text: String) -> void:
+	new_deck["Cards"][current_card]["Multiple Answers"]["answer1"] = new_text
+
+
+func _on_a2_edit_text_changed(new_text: String) -> void:
+	new_deck["Cards"][current_card]["Multiple Answers"]["answer2"] = new_text
+
+
+func _on_a3_edit_text_changed(new_text: String) -> void:
+	new_deck["Cards"][current_card]["Multiple Answers"]["answer3"] = new_text
+
+
+func _on_a4_edit_text_changed(new_text: String) -> void:
+	new_deck["Cards"][current_card]["Multiple Answers"]["answer4"] = new_text
+
+
+func _on_a1_checkbox_toggled(toggled_on: bool) -> void:
+	if (toggled_on): #if toggled on then other answers are not
+		a2_checkbox.button_pressed = false
+		a3_checkbox.button_pressed = false
+		a4_checkbox.button_pressed = false
+		new_deck["Cards"][current_card]["Answer"] = "1" #assigning answer
+
+
+func _on_a2_checkbox_toggled(toggled_on: bool) -> void:
+	if (toggled_on): #if toggled on then other answers are not
+		a1_checkbox.button_pressed = false
+		a3_checkbox.button_pressed = false
+		a4_checkbox.button_pressed = false
+		new_deck["Cards"][current_card]["Answer"] = "2" #assigning answer
+
+
+func _on_a3_checkbox_toggled(toggled_on: bool) -> void:
+	if (toggled_on): #if toggled on then other answers are not
+		a1_checkbox.button_pressed = false
+		a2_checkbox.button_pressed = false
+		a4_checkbox.button_pressed = false
+		new_deck["Cards"][current_card]["Answer"] = "3" #assigning answer
+
+
+func _on_a4_checkbox_toggled(toggled_on: bool) -> void:
+	if (toggled_on): #if toggled on then other answers are not
+		a1_checkbox.button_pressed = false
+		a2_checkbox.button_pressed = false
+		a3_checkbox.button_pressed = false
+		new_deck["Cards"][current_card]["Answer"] = "4" #assigning answer
+
+
+func _on_green_theme_button_pressed() -> void:
+	new_deck["Theme"] = "Green"
+	update_theme_button()
+
+
+func _on_orange_theme_button_pressed() -> void:
+	new_deck["Theme"] = "Orange"
+	update_theme_button()
+
+
+func _on_red_theme_button_pressed() -> void:
+	new_deck["Theme"] = "Red"
+	update_theme_button()
+
+
+func _on_original_theme_button_pressed() -> void:
+	new_deck["Theme"] = "Original"
+	update_theme_button()
