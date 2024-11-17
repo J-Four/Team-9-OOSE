@@ -65,7 +65,7 @@ func _on_ok_pressed(display_popup: bool = true) -> void:
 			SceneTransitioner.transition_in_from_right_cubic("res://Scenes/MainSceneControl.tscn")
 		else:
 			print("buddy not unlocked")
-			#TODO add pop-up
+			MessageDisplayer.error_popup("This study buddy has not been unlocked!")
 	else: 
 		_on_cancel_pressed()
 	
@@ -114,5 +114,5 @@ func _on_buy_button_pressed() -> void:
 			Global.userAchievements["first_buddy_unlocked"]["Achieved"] = true
 		else:
 			print("Not enough brain power.")
-			#TODO: add popup?
+			MessageDisplayer.error_popup("Not enough Brain Power to buy!")
 	#for all sprites, need to gray out locked ones
