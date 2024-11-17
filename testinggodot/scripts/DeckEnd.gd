@@ -10,6 +10,11 @@ extends Node
 @onready var confetti_particles_1: CPUParticles2D = get_node("CPUParticles2D")
 @onready var confetti_particles_2: CPUParticles2D = get_node("CPUParticles2D2")
 @onready var lvl_up_particles: CPUParticles2D = get_node("LvlUpParticles")
+@onready var win_sound_1: AudioStream = preload("res://Assets/Audio/Quick Cheer B.wav")
+@onready var win_sound_2: AudioStream = preload("res://Assets/Audio/Polite Clap.wav")
+@onready var lose_sound_1: AudioStream = preload("res://Assets/Audio/Sarcastic Clap.wav")
+@onready var lvl_up_sound: AudioStream = preload("res://Assets/Audio/boom2.wav")
+@onready var lvl_up_sound_2: AudioStream = preload("res://Assets/Audio/Mobile Compound 004.wav")
 var xp_per_correct: int = 10
 var xp_per_heart: int = 25
 
@@ -19,8 +24,14 @@ func _ready() -> void:
 		title_label.text = "You ran out of lives! D="
 		confetti_particles_1.hide()
 		confetti_particles_2.hide()
+		AudioPlayer.play_sound_effect(lose_sound_1)
+	else:
+		AudioPlayer.play_sound_effect_2(win_sound_2)
+		AudioPlayer.play_sound_effect(win_sound_1)
 	
 	# TODO: Maybe change way xp is earned from per card to percent correct.
+	if Global.cards_correct == 0:
+		xp_per_heart = 0
 	var total_xp_earned: int = (Global.cards_correct * xp_per_correct) + (xp_per_heart * Global.lives_left)
 	var lvl: int = Global.get_level_from_xp(Global.deck_data["XP"])
 	var next_lvl_xp: int = Global.get_xp_from_level(lvl + 1)
@@ -56,6 +67,7 @@ func level_up(lvl: int):
 	lvl += 1
 	update_level_labels(lvl)
 	lvl_up_particles.restart()
+	AudioPlayer.play_sound_effect_3(lvl_up_sound)
 	# TODO: Do other effects and stuff here
 
 

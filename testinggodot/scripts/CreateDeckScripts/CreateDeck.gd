@@ -177,11 +177,12 @@ func _on_nav_right_button_pressed() -> void:
 
 # Add a new blank card and change to it
 func _on_add_card_button_pressed() -> void:
-	if(new_deck["Cards"][current_card]["Answer"] != "" && new_deck["Cards"][current_card]["Question"] != ""): #check if Q and A is not empty
-		add_new_card_to_deck()
-	else:
-		# Add pop up to ask user to fill Q and choose answer
-		MessageDisplayer.error_popup("Please make sure to have an answer and question before adding a new card.")
+	add_new_card_to_deck() # Allow a user to make a blank card if they wish?
+	#if(new_deck["Cards"][current_card]["Answer"] != "" && new_deck["Cards"][current_card]["Question"] != ""): #check if Q and A is not empty
+		#add_new_card_to_deck()
+	#else:
+		## Add pop up to ask user to fill Q and choose answer
+		#MessageDisplayer.error_popup("Please make sure to have an answer and question before adding a new card.")
 
 
 # Update the question in the deck data when the user changes text in the question line edit

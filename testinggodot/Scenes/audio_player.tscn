@@ -11,3 +11,9 @@ current = true
 
 [node name="AudioPlayerEffect" type="AudioStreamPlayer2D" parent="."]
 bus = &"Effects"
+
+[node name="AudioPlayerEffect2" type="AudioStreamPlayer2D" parent="."]
+bus = &"Effects"
+
+[node name="AudioPlayerEffect3" type="AudioStreamPlayer2D" parent="."]
+bus = &"Effects"

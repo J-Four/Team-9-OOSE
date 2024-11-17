@@ -33,6 +33,8 @@ extends Node
 @onready var PrincessTheme: Resource = preload("res://Assets/Themes/SpritePrincess.tres")
 @onready var studyBuddy: Label = get_node("PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/VBoxContainer/studyBuddy")
 @onready var studyMsg: Label = get_node("PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/VBoxContainer/studyMsg")
+@onready var correct_click_particles = preload("res://Scenes/confetti_click_particles.tscn")
+@onready var wrong_click_particles = preload("res://Scenes/bad_click_particles.tscn")
 
 
 var currentCard : int = 1
@@ -148,6 +150,9 @@ func _on_exit_button_pressed() -> void:
 
 
 func deck_complete(msg: String, wait_time: int = 1):
+	if cards_correct == 0:
+		Global.lost = true
+	
 	# Set 'game_over' to true and 'count_down_timer' to false to stop the timer from counting down.
 	game_over = true
 	count_down_timer = false
@@ -189,13 +194,25 @@ func _on_answer_line_edit_text_submitted(new_text: String) -> void:
 		answer_correct(false)
 
 func answer_correct(isCorrect: bool) -> void:
+	if not count_down_timer:
+		return
 	if isCorrect:
 		# TODO: Some visual and audio effect for correct answer
 		AudioPlayer.play_sound_effect(correct_sfx, 0.25)
 		progress_labels[current_card_idx].modulate = Color.GREEN
-		cards_correct += 1
 		studyMsg.text = "Great Job!"
 		studyMsg.show()
+		var particles: CPUParticles2D = correct_click_particles.instantiate()
+		add_child(particles)
+		particles.show()
+		particles.position = get_viewport().get_mouse_position()
+		particles.emitting = true
+		count_down_timer = false
+		await get_tree().create_timer(1).timeout
+		count_down_timer = true
+		particles.queue_free()
+		
+		cards_correct += 1
 		
 		# If this is the final card, go to end screen. Else go to next card
 		if current_card_idx == num_cards - 1:
@@ -207,9 +224,20 @@ func answer_correct(isCorrect: bool) -> void:
 		# TODO: Some visual and audio effect for wrong answer
 		AudioPlayer.play_sound_effect(wrong_sfx, 0.25)
 		progress_labels[current_card_idx].modulate = Color.RED
-		cards_wrong += 1
 		studyMsg.text = "Keep trying!"
 		studyMsg.show()
+		var particles: CPUParticles2D = wrong_click_particles.instantiate()
+		add_child(particles)
+		particles.show()
+		particles.position = get_viewport().get_mouse_position()
+		print(particles.position)
+		particles.emitting = true
+		count_down_timer = false
+		await get_tree().create_timer(1).timeout
+		count_down_timer = true
+		particles.queue_free()
+		
+		cards_wrong += 1
 		
 		# If lives are left, subtract one life.
 		if lives_idx >= 0:

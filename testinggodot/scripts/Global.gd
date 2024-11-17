@@ -15,7 +15,7 @@ var lives_left: int = 0
 var deck_name: String = ""
 
 #user var default?
-var spriteChosen: String = "MAdventure"
+var spriteChosen: String = "MAdventurer"
 var brainPower: int = 0
 var unlockedSprites: Dictionary = {
 			"MAdventurer": true,
@@ -91,9 +91,7 @@ func write_deck(json_string: String, d_name: String, display_popup: bool = true)
 	file.close()
 	
 	if display_popup:
-		MessageDisplayer.green_popup("Successfully saved deck to:\n" + path)
-		
-	
+		MessageDisplayer.green_popup_and_change_scene("Successfully saved deck to:\n" + path)
 	
 	write_successful_emit()
 

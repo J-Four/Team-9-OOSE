@@ -13,4 +13,6 @@ func free_self():
 
 
 func _on_okay_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://Scenes/MainSceneControl.tscn")
+	pass
+	# Want to be able to use the popup without always going back to the main scene
+	#get_tree().change_scene_to_file("res://Scenes/MainSceneControl.tscn")

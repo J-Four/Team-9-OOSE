@@ -1,7 +1,37 @@
-[gd_scene load_steps=3 format=3 uid="uid://b545iy5qcvnn"]
+[gd_scene load_steps=15 format=3 uid="uid://b545iy5qcvnn"]
 
 [ext_resource type="Theme" uid="uid://4xs2hn1w2or8" path="res://Assets/Themes/FlashCardTheme.tres" id="1_d1lse"]
 [ext_resource type="Script" path="res://scripts/button_hover_size_changer.gd" id="2_1xdfk"]
+[ext_resource type="Script" path="res://scripts/node2d_screen_position.gd" id="3_ti1eg"]
+[ext_resource type="Texture2D" uid="uid://cov76lc3ovq3h" path="res://Assets/Images/fx_Flare6.png" id="3_w25ol"]
+[ext_resource type="Texture2D" uid="uid://bin7h7sl1sxa7" path="res://Assets/Images/fx_Glow6.png" id="5_6jbow"]
+[ext_resource type="Texture2D" uid="uid://377fwi741uvn" path="res://Assets/Images/fx_Lightning7.png" id="6_12f13"]
+[ext_resource type="Texture2D" uid="uid://c51yhjbvqv3wr" path="res://Assets/Images/fx_Flare7.png" id="6_opkmh"]
+[ext_resource type="Texture2D" uid="uid://j0pg8fgfl641" path="res://Assets/Images/fx_Mist2.png" id="7_4a4ry"]
+
+[sub_resource type="Curve" id="Curve_8bwpd"]
+_data = [Vector2(0, 0), 0.0, -0.264331, 0, 0, Vector2(0.0842697, 1), 0.632838, 0.632838, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_5l414"]
+_data = [Vector2(0, 0), 0.0, 1.4, 0, 0, Vector2(0.0730337, 1), -0.628729, -0.628729, 0, 0, Vector2(0.516854, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_48vxa"]
+_data = [Vector2(0, 0), 0.0, 1.4, 0, 0, Vector2(0.0730337, 1), -0.628729, -0.628729, 0, 0, Vector2(0.269663, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_auvex"]
+offsets = PackedFloat32Array(0, 0.0533333)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Curve" id="Curve_p1n62"]
+_data = [Vector2(0, 0), 0.0, -0.264331, 0, 0, Vector2(0.0505618, 0.384615), 0.632838, 0.632838, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_e8038"]
+offsets = PackedFloat32Array(0, 0.2, 0.333333, 0.893333)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [node name="Deck1" type="Button"]
 custom_minimum_size = Vector2(250, 160)
@@ -12,6 +42,89 @@ theme_override_font_sizes/font_size = 25
 text_overrun_behavior = 3
 autowrap_mode = 2
 script = ExtResource("2_1xdfk")
+
+[node name="RisingParticles" type="CPUParticles2D" parent="."]
+visible = false
+position = Vector2(125, 80)
+lifetime = 0.35
+lifetime_randomness = 0.1
+texture = ExtResource("5_6jbow")
+emission_shape = 3
+emission_rect_extents = Vector2(100, 40)
+gravity = Vector2(0, -1960)
+angle_min = -90.0
+angle_max = 90.0
+scale_amount_min = 0.1
+scale_amount_max = 0.35
+scale_amount_curve = SubResource("Curve_8bwpd")
+color = Color(0.494118, 1, 0.74902, 0.588235)
+script = ExtResource("3_ti1eg")
+
+[node name="SparkleParticles" type="CPUParticles2D" parent="."]
+visible = false
+position = Vector2(125, 80)
+amount = 2
+texture = ExtResource("3_w25ol")
+emission_shape = 3
+emission_rect_extents = Vector2(125, 80)
+gravity = Vector2(0, 0)
+angle_min = -90.0
+angle_max = 90.0
+scale_amount_min = 0.5
+scale_amount_max = 0.75
+scale_amount_curve = SubResource("Curve_5l414")
+script = ExtResource("3_ti1eg")
+
+[node name="SparkleParticles2" type="CPUParticles2D" parent="."]
+visible = false
+position = Vector2(125, 80)
+amount = 1
+lifetime = 2.0
+texture = ExtResource("6_opkmh")
+emission_shape = 3
+emission_rect_extents = Vector2(125, 80)
+gravity = Vector2(0, 0)
+angular_velocity_min = -50.0
+angular_velocity_max = 50.0
+angle_min = -90.0
+angle_max = 90.0
+scale_amount_min = 0.75
+scale_amount_curve = SubResource("Curve_48vxa")
+script = ExtResource("3_ti1eg")
+
+[node name="LightningParticles" type="CPUParticles2D" parent="."]
+visible = false
+position = Vector2(125, 80)
+amount = 2
+lifetime = 3.0
+randomness = 1.0
+lifetime_randomness = 0.1
+texture = ExtResource("6_12f13")
+emission_shape = 3
+emission_rect_extents = Vector2(105, 60)
+gravity = Vector2(0, 0)
+angle_min = -90.0
+angle_max = 90.0
+scale_amount_min = 0.5
+color = Color(1, 1, 0.537255, 1)
+color_ramp = SubResource("Gradient_auvex")
+script = ExtResource("3_ti1eg")
+
+[node name="SmokeParticles" type="CPUParticles2D" parent="."]
+visible = false
+position = Vector2(123, 131)
+lifetime = 5.0
+texture = ExtResource("7_4a4ry")
+emission_shape = 3
+emission_rect_extents = Vector2(125, 5)
+gravity = Vector2(0, 0)
+angle_min = -90.0
+angle_max = 90.0
+scale_amount_min = 1.5
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_p1n62")
+color_ramp = SubResource("Gradient_e8038")
+script = ExtResource("3_ti1eg")
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

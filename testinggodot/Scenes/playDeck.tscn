@@ -33,12 +33,9 @@ width = 200
 
 [node name="PlayDeck" type="Control"]
 layout_mode = 3
-anchor_right = 1.058
-anchor_bottom = 1.006
-offset_left = 70.0
-offset_top = 2.0
-offset_right = -136.816
-offset_bottom = -8.888
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -50,9 +47,6 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -33.0
-offset_right = 34.0
-offset_bottom = 4.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("4_gq4ub")
@@ -143,7 +137,7 @@ alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 4
 size_flags_vertical = 8
 alignment = 2
 
@@ -176,13 +170,14 @@ layout_mode = 2
 size_flags_vertical = 4
 
 [node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(830, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_gq4ub")
 
 [node name="ColorRect" type="ColorRect" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer"]
 layout_mode = 2
-color = Color(0.556863, 0.541176, 0.490196, 1)
+color = Color(0.752941, 0.784314, 0.768627, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer"]
 layout_mode = 2
@@ -196,16 +191,15 @@ layout_mode = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_vertical = 0
 
 [node name="ColorRect" type="ColorRect" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer"]
 layout_mode = 2
 color = Color(0.556863, 0.541176, 0.490196, 1)
 
 [node name="QLabel" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer"]
-custom_minimum_size = Vector2(830, 115)
+custom_minimum_size = Vector2(0, 115)
 layout_mode = 2
-size_flags_vertical = 1
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 25
 text = "Question Here"
@@ -213,8 +207,9 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_vertical = 4
 
 [node name="ATextEdit" type="TextEdit" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 visible = false
@@ -225,7 +220,6 @@ size_flags_vertical = 3
 placeholder_text = "Answer Here"
 
 [node name="AnswerLineEdit" type="LineEdit" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 255)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -234,7 +228,6 @@ placeholder_text = "Type answer here..."
 
 [node name="TrueFalseChoice" type="HBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 visible = false
-custom_minimum_size = Vector2(0, 260)
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -289,7 +282,7 @@ theme = ExtResource("12_jmsvf")
 [node name="NextArrow" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(80, 100)
 layout_mode = 2
-size_flags_horizontal = 2
+size_flags_horizontal = 0
 size_flags_vertical = 4
 theme = ExtResource("12_jmsvf")
 theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)

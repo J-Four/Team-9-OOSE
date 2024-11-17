@@ -4,7 +4,8 @@
 [ext_resource type="Script" path="res://scripts/scene_transitioner.gd" id="1_thfs1"]
 
 [sub_resource type="Gradient" id="Gradient_sy0cb"]
-colors = PackedColorArray(3.03224e-06, 0.691512, 0.343087, 1, 0, 0.687759, 0.401153, 1)
+offsets = PackedFloat32Array(0.37013, 1)
+colors = PackedColorArray(0.345098, 0.513726, 0.337255, 1, 0, 0.687759, 0.401153, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_3aib4"]
 gradient = SubResource("Gradient_sy0cb")

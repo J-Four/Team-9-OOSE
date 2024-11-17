@@ -17,13 +17,12 @@ corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xfveo"]
 
-[sub_resource type="Gradient" id="Gradient_x07c0"]
+[sub_resource type="Gradient" id="Gradient_sod2o"]
 interpolation_mode = 2
-offsets = PackedFloat32Array(0, 0.489583, 1)
-colors = PackedColorArray(0.335345, 0.892098, 0.190316, 1, 0.636709, 0.839304, 0.377849, 1, 0.240735, 0.860643, 0.177379, 1)
+colors = PackedColorArray(1.15514e-06, 0.376315, 0.184347, 1, 0.209471, 0.696311, 0.479194, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_gjmxx"]
-gradient = SubResource("Gradient_x07c0")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_c7b7b"]
+gradient = SubResource("Gradient_sod2o")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hf6p2"]
 draw_center = false
@@ -94,7 +93,7 @@ theme = ExtResource("2_tcgpr")
 
 [node name="ColorRect" type="ColorRect" parent="PanelContainer/VBoxContainer/PanelContainer2"]
 layout_mode = 2
-color = Color(0.556863, 0.541176, 0.490196, 1)
+color = Color(0.345098, 0.513726, 0.337255, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/PanelContainer2"]
 layout_mode = 2
@@ -111,19 +110,17 @@ theme = ExtResource("2_tcgpr")
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/PanelContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 17
-theme_override_constants/margin_top = 0
+theme_override_constants/margin_top = 17
 theme_override_constants/margin_right = 17
-theme_override_constants/margin_bottom = 0
+theme_override_constants/margin_bottom = 17
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
-alignment = 1
 
 [node name="TitleLabel" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(800, 100)
 layout_mode = 2
-size_flags_horizontal = 4
 theme = ExtResource("4_x8u5b")
 theme_override_font_sizes/font_size = 38
 text = "Deck Completed!"
@@ -177,12 +174,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("GradientTexture1D_gjmxx")
+texture = SubResource("GradientTexture1D_c7b7b")
 
 [node name="StatsLabel" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(800, 300)
+custom_minimum_size = Vector2(350, 300)
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 1
 theme = ExtResource("4_x8u5b")
 theme_override_font_sizes/font_size = 30
 horizontal_alignment = 1

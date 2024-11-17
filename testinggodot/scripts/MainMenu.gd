@@ -7,7 +7,6 @@ var loaded_decks: Dictionary
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	# TODO: Probably should not load all decks everytime the main menu is loaded. Especially if we end up adding support for images in the future. Maybe add a reload or refresh button under 'file'.
 	# Open the directory that decks are saved at
 	# TODO: change this from hard code to variable set by the user
 	var dir_path: String = Global.deck_save_directory
@@ -84,8 +83,21 @@ func add_deck_button(name: String, data: Dictionary):
 		new_deck.self_modulate = Global.originalTheme
 	
 	if "XP" in data.keys():
-		new_deck.text = name + "\nLvl " + str(Global.get_level_from_xp(data["XP"]))
+		var lvl = Global.get_level_from_xp(data["XP"])
+		new_deck.text = name + "\nLvl " + str(lvl)
 		loaded_decks[name] = data
+		
+		if lvl >= 5 and lvl < 10:
+			new_deck.get_child(1).show()
+		elif lvl >= 10 and lvl < 30:
+			new_deck.get_child(1).show()
+			new_deck.get_child(2).show()
+			new_deck.get_child(4).show()
+		elif lvl >= 30:
+			new_deck.get_child(1).show()
+			new_deck.get_child(2).show()
+			new_deck.get_child(3).show()
+			new_deck.get_child(4).show()
 	else:
 		new_deck.text = "Error"
 		MessageDisplayer.error_popup("Error getting xp data from json file: " + name, self) # get_tree().root.get_child(1)
