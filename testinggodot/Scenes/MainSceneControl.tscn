@@ -206,6 +206,16 @@ layout_mode = 2
 theme = ExtResource("4_xrf3x")
 text = "Edit Player"
 
+[node name="MarginContainer4" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer3/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_yjm2e")
+
+[node name="viewAchievementsButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer3/HBoxContainer/MarginContainer4"]
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
+theme = ExtResource("4_xrf3x")
+text = " View Achievements "
+
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/MarginContainer/CreateDeckButton" to="." method="_on_create_deck_button_pressed"]
 [connection signal="mouse_entered" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/PanelContainer/HFlowContainer/Deck2" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/PanelContainer/HFlowContainer/Deck2" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/PanelContainer/HFlowContainer/Deck2" to="PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/PanelContainer/HFlowContainer/Deck2" method="_on_mouse_exited"]
@@ -225,3 +235,4 @@ text = "Edit Player"
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer3/HBoxContainer/MarginContainer3/StudyButton" to="." method="_study_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer3/HBoxContainer/MarginContainer2/EditButton" to="." method="_on_edit_button_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer3/HBoxContainer/MarginContainer/EditPlayerButton" to="." method="_on_edit_player_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PanelContainer3/HBoxContainer/MarginContainer4/viewAchievementsButton" to="." method="_on_view_achievements_button_pressed"]

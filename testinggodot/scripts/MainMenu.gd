@@ -15,6 +15,7 @@ func _ready() -> void:
 		MessageDisplayer.error_popup("Error reading path: " + dir_path, self)
 		return
 	Global.write_user() #will update user changes only if not the first time this func is ran
+	Global.update_achievements()
 	# Get each json file in the direrctory
 	dir.list_dir_begin()
 	var file_name: String = dir.get_next()
@@ -32,12 +33,7 @@ func _ready() -> void:
 					Global.spriteChosen = studyDashUser["chosenStudybuddy"]
 					Global.brainPower = studyDashUser["brainPower"]
 					Global.unlockedSprites = studyDashUser["unlockedStudyB"]
-					#Global.unlockedSprites["MAdventurer"] = studyDashUser["unlockedStudyB"]["MAdventurer"]
-					#Global.unlockedSprites["FAdventurer"] = studyDashUser["unlockedStudyB"]["FAdventurer"]
-					#Global.unlockedSprites["MSkelly"] = studyDashUser["unlockedStudyB"]["MSkelly"]
-					#Global.unlockedSprites["FSkelly"] = studyDashUser["unlockedStudyB"]["FSkelly"]
-					#Global.unlockedSprites["Elf"] = studyDashUser["unlockedStudyB"]["Elf"]
-					#Global.unlockedSprites["Princess"] = studyDashUser["unlockedStudyB"]["Princess"]
+					Global.userAchievements = studyDashUser["userAchievements"]
 				else:
 					MessageDisplayer.error_popup("JSON parse error: " + json.get_error_message() + "\nin file: " + file_name, self)
 			else:
@@ -138,4 +134,8 @@ func _on_create_deck_button_pressed() -> void:
 
 
 func _on_edit_player_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://Scenes/PlayerCustomize.tscn")
+	SceneTransitioner.transition_in_from_right_cubic("res://Scenes/PlayerCustomize.tscn")
+
+
+func _on_view_achievements_button_pressed() -> void:
+	SceneTransitioner.transition_in_from_right_cubic("res://Scenes/view_achievements.tscn")

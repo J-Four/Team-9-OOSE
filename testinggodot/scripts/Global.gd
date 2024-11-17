@@ -27,10 +27,20 @@ var unlockedSprites: Dictionary = {
 		}
 var userUpdated: bool = false #trying to get around some timing logic of when to write user
 
+var userAchievements: Dictionary = {
+	"100_Correct": {"Achieved": false,"needed_to_complete": 100},
+	"100_wrong": {"Achieved": false,"needed_to_complete": 100},
+	"20_study_sessions": {"Achieved": false,"needed_to_complete": 20},
+	"100_BP": {"Achieved": false,"needed_to_complete": 100},
+	"first_buddy_unlocked": {"Achieved": false,"needed_to_complete": 1}
+}
+
+
 var greenTheme = Color("75ac73")
 var orangeTheme = Color("ca8b5c")
 var redTheme = Color("7c3346")
 var originalTheme = Color("ffffff")
+var grayedOut = Color("7f7f7f")
 
 signal write_successful
 
@@ -136,8 +146,15 @@ func write_user(display_popup: bool = true) -> void:
 				"FSkelly": unlockedSprites["FSkelly"],
 				"Elf": unlockedSprites["Elf"],
 				"Princess": unlockedSprites["Princess"]
+				},
+			"userAchievements":{
+				"100_Correct": {"Achieved": userAchievements["100_Correct"]["Achieved"],"needed_to_complete": userAchievements["100_Correct"]["needed_to_complete"]},
+				"100_wrong": {"Achieved": userAchievements["100_wrong"]["Achieved"],"needed_to_complete": userAchievements["100_wrong"]["needed_to_complete"]},
+				"20_study_sessions": {"Achieved": userAchievements["20_study_sessions"]["Achieved"],"needed_to_complete": userAchievements["20_study_sessions"]["needed_to_complete"]},
+				"100_BP": {"Achieved": userAchievements["100_BP"]["Achieved"],"needed_to_complete": userAchievements["100_BP"]["needed_to_complete"]},
+				"first_buddy_unlocked": {"Achieved": userAchievements["first_buddy_unlocked"]["Achieved"],"needed_to_complete": userAchievements["first_buddy_unlocked"]["needed_to_complete"]}
 				}
-			}	
+			}
 		var jsonUserString = JSON.stringify(studyDashUser)
 		# Create or overrite json file
 		var path: String = str(OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP) + "/flash_cards/" + "studyDashUser" + ".json")
@@ -151,3 +168,13 @@ func write_user(display_popup: bool = true) -> void:
 	else:
 		userUpdated = true
 	
+
+func update_achievements() -> void:
+	if (userAchievements["100_Correct"]["needed_to_complete"] <= 0):
+		userAchievements["100_Correct"]["Achieved"] = true
+	if (userAchievements["100_wrong"]["needed_to_complete"] <= 0):
+		userAchievements["100_wrong"]["Achieved"] = true
+	if (userAchievements["20_study_sessions"]["needed_to_complete"] <= 0):
+		userAchievements["20_study_sessions"]["Achieved"] = true
+	if (userAchievements["100_BP"]["needed_to_complete"] <= 0):
+		userAchievements["100_BP"]["Achieved"] = true
