@@ -34,9 +34,9 @@ func _ready() -> void:
 					Global.brainPower = studyDashUser["brainPower"]
 					Global.unlockedSprites = studyDashUser["unlockedStudyB"]
 					Global.userAchievements = studyDashUser["userAchievements"]
-				else:
+				else: # error handling
 					MessageDisplayer.error_popup("JSON parse error: " + json.get_error_message() + "\nin file: " + file_name, self)
-			else:
+			else: # all other files in this dir should be desk.json files, this will populate the main menu
 				print("Found: " + file_name)
 				var deck_file = FileAccess.open(dir_path + "/" + file_name, FileAccess.READ)
 				var data_str: String = deck_file.get_as_text()
@@ -45,10 +45,10 @@ func _ready() -> void:
 				var error = json.parse(data_str)
 				if error == OK:
 					var data: Dictionary = json.data
-					add_deck_button(file_name.substr(0, file_name.rfind(".")), data)
+					add_deck_button(file_name.substr(0, file_name.rfind(".")), data) #using pre set deck button, use data to add button
 				else:
 					MessageDisplayer.error_popup("JSON parse error: " + json.get_error_message() + "\nin file: " + file_name, self)
-		file_name = dir.get_next()
+		file_name = dir.get_next() #next file
 	
 	# reset global vars
 	Global.ChosenDeck = ""
@@ -58,13 +58,14 @@ func _ready() -> void:
 
 
 func add_deck_button(name: String, data: Dictionary):
-
+	#add new button using deck name and data stored
 	var new_deck = deck_button.instantiate()
 	hflow.add_child(new_deck)
 	new_deck.pressed.connect(_deck_pressed.bind(name)) #new button will run deck pressed func now
 	new_deck.name = name
 	new_deck.tooltip_text = name
 	
+	#set the theme for this deck using previously chosen theme, if deck is old version orignial theme is chosen
 	if data.has("Theme"):
 		match data["Theme"]:
 			"Original":
@@ -78,6 +79,7 @@ func add_deck_button(name: String, data: Dictionary):
 	else:
 		new_deck.self_modulate = Global.originalTheme
 	
+	#usee XP saved in data to calculate lvl to display on button
 	if "XP" in data.keys():
 		var lvl = Global.get_level_from_xp(data["XP"])
 		new_deck.text = name + "\nLvl " + str(lvl)
@@ -108,20 +110,20 @@ func _process(_delta: float) -> void:
 func _on_pressed() -> void:
 	get_tree().change_scene_to_file("res://Scenes/CreateDeck.tscn")
 
-
+#selects the deck for either study or edit
 func _deck_pressed(deck_name: String) -> void:
 	Global.ChosenDeck = deck_name
 	Global.deck_name = deck_name
 	Global.deck_data = loaded_decks[deck_name]
 
-
+#selected deck is used for study mode
 func _study_pressed() -> void:
 	if Global.deck_name != "":
 		SceneTransitioner.transition_in_from_top_bounce("res://Scenes/playDeck.tscn")
 	else:
 		MessageDisplayer.error_popup("Please select the deck you want to study first.")
 
-
+#selected deck is used for edit mode
 func _on_edit_button_pressed() -> void:
 	if Global.deck_name != "":
 		SceneTransitioner.transition_in_from_right_cubic("res://Scenes/EditDeck.tscn")

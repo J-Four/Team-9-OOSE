@@ -53,12 +53,12 @@ func update_sprite(spriteCheck: String) -> void:
 		
 
 func _on_cancel_pressed() -> void:
-	# TODO: go to main menu w/o saving
+	#go to main menu w/o saving
 	SceneTransitioner.transition_in_from_right_cubic("res://Scenes/MainSceneControl.tscn")
 
 
 func _on_ok_pressed(display_popup: bool = true) -> void:
-	# TODO: go to main menu and save
+	#go to main menu and save 
 	if ( not (clickedSprite == null)):
 		if Global.unlockedSprites[clickedSprite]: #if sprite unlocked, then accept selection
 			Global.spriteChosen = clickedSprite
@@ -115,4 +115,4 @@ func _on_buy_button_pressed() -> void:
 		else:
 			print("Not enough brain power.")
 			MessageDisplayer.error_popup("Not enough Brain Power to buy!")
-	#for all sprites, need to gray out locked ones
+	#TODO: for all sprites, need to gray out locked ones

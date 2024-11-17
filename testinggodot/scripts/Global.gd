@@ -14,7 +14,7 @@ var lost: bool = false
 var lives_left: int = 0
 var deck_name: String = ""
 
-#user var default?
+#user var default
 var spriteChosen: String = "MAdventurer"
 var brainPower: int = 0
 var unlockedSprites: Dictionary = {
@@ -84,6 +84,7 @@ func add_and_save_xp_to_deck(xp: int):
 	else:
 		write_deck(json_string, deck_name, false)
 
+#delete deck, so duplicates are not made when changing deck name in edit, plus for clean up
 func delete_deck(d_name: String) -> void:
 	var path: String = str(OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP) + "/flash_cards/" + d_name + ".json")
 	DirAccess.remove_absolute(path)
@@ -134,8 +135,8 @@ func get_level_xp_bounds(lvl: int) -> Array:
 	return [lower_bound, upper_bound]
 	
 func write_user(display_popup: bool = true) -> void:
-	if (userUpdated):
-		#should save user data so brain power and unlocked studdy buddies carry over on different sessions.
+	if (userUpdated):#wont do it one the first time this is called when first opening app, so to not override existing user file with newuser
+		#should save user data so BP, achievements, and unlocked studdy buddies carry over on different sessions.
 		var studyDashUser: Dictionary = {
 			"chosenStudybuddy": spriteChosen,
 			"brainPower": brainPower,
@@ -169,7 +170,7 @@ func write_user(display_popup: bool = true) -> void:
 		userUpdated = true
 	
 
-func update_achievements() -> void:
+func update_achievements() -> void: #will check if an achievement has been completed and update bool value
 	if (userAchievements["100_Correct"]["needed_to_complete"] <= 0):
 		userAchievements["100_Correct"]["Achieved"] = true
 	if (userAchievements["100_wrong"]["needed_to_complete"] <= 0):

@@ -25,14 +25,14 @@ var brainPowerAdded: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if Global.lost:
+	if Global.lost: #effects if player lost
 		title_label.text = "You ran out of lives! D="
 		confetti_particles_1.hide()
 		confetti_particles_2.hide()
 		AudioPlayer.play_sound_effect(lose_sound_1)
 		screenColorLose.visible = true
 		screenColorWin.visible = false
-	else:
+	else: #effects if player won
 		AudioPlayer.play_sound_effect_2(win_sound_2)
 		AudioPlayer.play_sound_effect(win_sound_1)
 		screenColorLose.visible = false
@@ -47,7 +47,8 @@ func _ready() -> void:
 	var new_xp_val: int = Global.deck_data["XP"] + total_xp_earned
 	brainPowerAdded = (Global.lives_left * bp_per_heart) + bp_per_session #where BP earned is determined
 	
-	Global.brainPower = Global.brainPower + brainPowerAdded
+	#updating relevant values
+	Global.brainPower = Global.brainPower + brainPowerAdded 
 	update_level_labels(lvl, total_xp_earned)
 	stats_label.text = "Total cards: \t" + str(Global.num_cards) + "\nCorrect: \t\t" + str(Global.cards_correct) + "\t +" + str(Global.cards_correct * xp_per_correct) + "xp\nIncorrect: \t" + str(Global.cards_wrong) + "\nLives left: \t" + str(Global.lives_left) + "\t +" + str(Global.lives_left * xp_per_heart) + "xp\nTotal XP gained: " + str(total_xp_earned) + "xp\nTotal BP gained: " + str(brainPowerAdded)
 	
@@ -58,7 +59,7 @@ func _ready() -> void:
 	Global.add_and_save_xp_to_deck(total_xp_earned)
 
 
-func update_achievements() -> void:
+func update_achievements() -> void: #update achievements with new data
 	Global.userAchievements["100_Correct"]["needed_to_complete"] = Global.userAchievements["100_Correct"]["needed_to_complete"] - Global.cards_correct
 	Global.userAchievements["100_wrong"]["needed_to_complete"] = Global.userAchievements["100_wrong"]["needed_to_complete"] - Global.cards_wrong
 	Global.userAchievements["20_study_sessions"]["needed_to_complete"] = Global.userAchievements["20_study_sessions"]["needed_to_complete"] - 1
@@ -80,7 +81,7 @@ func tween_progress_bar(min: int, max: int, current_xp: int, to_xp: int, lvl: in
 		tween.tween_property(progress_bar, "value", to_xp, 2.0)
 
 
-func level_up(lvl: int):
+func level_up(lvl: int): #ran only when user has earned enough to level up
 	lvl += 1
 	update_level_labels(lvl)
 	lvl_up_particles.restart()
